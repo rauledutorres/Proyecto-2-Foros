@@ -1,0 +1,124 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    width: 100%;
+    overflow: hidden;
+    background: linear-gradient(150deg,#019a6b,#02ba85,#46f2d0,#8ef4ed,#4ecdc4,#00a8c5,#4ca4cd,#3a91cf,#6b81c6,#7771ca,#6367a6,#556270,#464a72,#3e374a);
+    background-size: 400%;
+    background-repeat: no-repeat;
+    animation: fanimado 7s infinite;
+
+}
+ @keyframes fanimado{
+    0%{
+        background-position: 0% 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100%{
+        background-position: 0% 50%;
+    }
+} 
+body .container{
+    max-width: 950px ;
+    width: 100%;
+    height: 500px;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: space-between;
+   
+}
+.container .cont{
+    width: 50%;
+    border-radius: 20px;
+
+}
+/* _________________________estilos slider caja izquierda */
+.container .present{
+    width: 100%;
+    height: 500px;
+    background-color: white;
+    margin-right:15px ;
+}
+/* __________________________estilos del formulario_____________________________ */
+.container .form{
+    width: 100%;
+    height: 500px;
+    background-image: url("img/invierno.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-left: 15px;
+}
+.container .form .caja_trasera{
+    position: relative;
+}
+.container .form .caja{
+    position: absolute;
+    width: 100%;
+    height: 300px;
+    /* display: none; */
+}
+.caja_trasera .form_header{
+    position: absolute;
+    width: 155px;
+    top: 4rem;
+    border:1px solid white;
+    padding: 15px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 30px;
+}
+.btn_left{
+    left: 5rem;
+
+}
+.btn_rigth{
+    left: 15rem;
+}
+.btn_left:hover{
+    background: linear-gradient(150deg,#4ac1b0bd,#ffffff81);
+}
+.btn_rigth:hover{
+    background: linear-gradient(150deg,#4ac1b0bd,#ffffff81);
+}
+.caja_trasera .login{
+    background-color: #ffffff45;
+    top: 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    display: none;  
+}
+.caja_trasera .registro{
+    background-color: rgba(255, 255, 255, 0.272);
+    top: 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* display: none ; */
+}
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+input{
+    width: 80%;
+    margin: 5px;
+    padding: 5px;
+    font-size: 16px;
+    border: none;
+    border-style: none;
+    color: #ffffffcc;
+    background-color: #ffffff96;
+    
+}
