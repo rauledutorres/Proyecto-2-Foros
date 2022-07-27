@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
   `com_user` int(11) NOT NULL,
   PRIMARY KEY (`com_id`),
   KEY `com_user` (`com_user`),
-  CONSTRAINT `FK_comentarios_usuarios` FOREIGN KEY (`com_user`) REFERENCES `usuarios` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `FK_comentarios_usuarios` FOREIGN KEY (`com_user`) REFERENCES `usuarios` (`user_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `publicaciones` (
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `publicaciones` (
   KEY `publi_user` (`publi_user`),
   CONSTRAINT `FK_publicaciones_comentarios` FOREIGN KEY (`publi_com`) REFERENCES `comentarios` (`com_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_publicaciones_temas` FOREIGN KEY (`publi_tema`) REFERENCES `temas` (`tema_ID`) ON UPDATE CASCADE,
-  CONSTRAINT `FK_publicaciones_usuarios` FOREIGN KEY (`publi_user`) REFERENCES `usuarios` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `FK_publicaciones_usuarios` FOREIGN KEY (`publi_user`) REFERENCES `usuarios` (`user_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `temas` (
