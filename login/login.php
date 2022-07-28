@@ -1,3 +1,4 @@
+´
 <?php
 
 $dbhost ="localhost";
@@ -14,7 +15,8 @@ if (!$conn)
 $nombre = $_POST["txtusuario"];
 $pass = $_POST["txtpassword"];
 
-$query = mysqli_query($conn,"SELECT * FROM login WHERE usuario = '".$nombre."' and password = '".$pass."'");
+$query = mysqli_query($conn,"SELECT * FROM login WHERE usuario = '".$ç."' and password = '".$pass."'");
+
 $nr = mysqli_num_rows($query);
 
 if($nr == 1)
