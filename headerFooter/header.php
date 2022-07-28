@@ -17,6 +17,9 @@
         h1{
           font-family: 'Roboto', sans-serif;
         }
+        div{
+          font-family: 'Roboto', sans-serif;
+        }
     </style>
   </head>
   <body>
