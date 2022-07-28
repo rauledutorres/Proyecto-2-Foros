@@ -14,11 +14,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
     <style>
-        h1{
-          font-family: 'Roboto', sans-serif;
-        }
         div{
           font-family: 'Roboto', sans-serif;
+          font-weight: bold;
         }
     </style>
   </head>
