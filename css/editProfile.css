@@ -1,0 +1,63 @@
+:root {
+    --text: #333533;
+    --contrast-text: #808080;
+    --light-background: #cfdbd5cb;
+    --input-background: #E8EDDF;
+    --btn: #F5CB5C;
+    --btn-hover: #F9E19F;
+}
+
+
+#userProfile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
+}
+
+.profilePic {
+
+    width: 150px;
+    border-radius: 50%;
+    border: white solid 2px;
+}
+
+form { 
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-upload{
+    margin-bottom: 3vh;
+}
+
+.image-upload>input {
+    display: none;
+}
+
+.image-upload img{
+    width: 80px;
+    cursor: pointer;
+}
+
+.image-upload label { 
+    position: absolute;
+    margin-top: -20px;
+    margin-left: -40px;
+    
+}
+
+form input {
+    margin-bottom: 2vh;
+    text-align: center;
+    background-color: var(--input-background);
+    color: var(--contrast-text);
+    border: none;
+    height: 4vh;
+    width: 25vw;
+}
+
+.button { 
+    
+}
