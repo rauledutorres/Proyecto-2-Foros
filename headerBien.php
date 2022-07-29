@@ -1,5 +1,5 @@
 <?php
-//http://localhost/proyecto2_foros/Proyecto-2-Foros/headerFooter/headerBien.php
+//localhost/proyecto2_foros/Proyecto-2-Foros/headerBien.php
 ?>
 
 
