@@ -23,7 +23,7 @@
         <div class="header">
 
             <div class="header_logo">
-                <img src="img/logo.png" alt="" srcset="">
+                <img src="img/logo.png" alt="foro" srcset="">
                 <h3>foro</h3>
             </div>
 
