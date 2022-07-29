@@ -36,7 +36,7 @@
     flex-direction: column;
     align-items: center;
     width: 25%;
-    padding-top: 10%;
+    padding-top: 5%;
     padding-left: 10%;
     padding-right: 10%;
 }
@@ -94,9 +94,6 @@ form input {
     min-width: 20vw;
 }
 
-#passcontainer {
-    display: none;
-}
 
 @media only screen and (max-width: 768px){
     form input {
@@ -104,12 +101,15 @@ form input {
     }
 }
 
-/* @media only screen and (min-width: 420px){
+@media only screen and (max-width: 420px){
     form input {
         width: 50vw;
-        font-size: 2em;
     }
-} */
+
+    /* .editIcon {
+        margin-left: 82%;
+    } */
+}
 
 
 
@@ -160,8 +160,9 @@ form input {
     margin-left: 88%;
 }
 
+
 #userThread {
-    width: 49vw;
+    width: 50vw;
     height: 77vh;
     background-color: var(--input-background);
     overflow-y: auto;
@@ -169,6 +170,18 @@ form input {
     border-radius: 2%;
 }
 
+@media only screen and (max-width: 768px) {
+    #userThread {
+        width: 90vw;
+    }
+}
+
+@media only screen and (max-width: 1000px){
+    .editIcon {
+        margin-left: 82%;
+    }
+
+}
 #threadContent p {
     color: var(--contrast-text);
     font-weight: 500;
@@ -197,7 +210,7 @@ h2 {
     margin-left: 8%;   
 }
 
-@media only screen and (max-width: 768px){
+@media only screen and (max-width: 920px){
     #threadContent {
         height: 50vh;
     }
@@ -212,3 +225,19 @@ h2 {
     }
     
 }
+
+/* @media only screen and (max-width: 768px){
+    #threadContent {
+        height: 50vh;
+    }
+
+    #threadContent img {
+        margin-top: 20%;
+        width: 70%;
+    }
+
+    h2 {
+        margin-left: 16%;
+    }
+    
+} */

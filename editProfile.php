@@ -1,11 +1,18 @@
-<link rel="stylesheet" href="./css/editProfile.css">
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/editProfile.css">
+    <title>Document</title>
+</head>
 <body>
 
     <div id="container">
         <div id="userProfile">
             <img class="profilePic" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" width="150px" alt="profile picture">
-            <form>
+            <form method="POST">
                 <div class="image-upload">
                     <label for="profilePic">
                         <img src="./img/icons/camera.svg" width="35px" height="35px">
@@ -20,12 +27,12 @@
                 <div class="inputBox">
                     <img src="./img/icons/lock.svg" class="icon" id="passIcon">
                     <img src="./img/icons/edit.svg" class="icon editIcon" id="editPass">
-                    <input type="password" id="actualPass" placeholder="Contraseña actual" value="holaque" readonly>
+                    <input type="password" id="actualPass" placeholder="Contraseña actual" value="prueba" readonly>
                 </div>
-                <div id="passContainer">
+                <div id="passContainer" style="display:none">
                     <div class="inputBox">
                         <img src="./img/icons/lock.svg" class="icon" id="passIcon">
-                        <input type="password" placeholder="Nueva contraseña">
+                        <input type="password" name="password" placeholder="Nueva contraseña">
                     </div>
                     <div class="inputBox">
                         <img src="./img/icons/lock.svg" class="icon" id="passConfirmIcon">
@@ -50,6 +57,8 @@
         </div>
     </div>
 </body>
+</html>
+
 <script>
     var editUser = document.getElementById('editUser');
     editUser.onclick = function() {
