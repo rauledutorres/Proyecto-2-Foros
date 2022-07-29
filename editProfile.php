@@ -1,5 +1,7 @@
-<link rel="stylesheet" href="./css/editProfile.css">
-
+<?php
+$title = "Mi perfil";
+include('components/header.php');
+?>
 
 <section id="userProfile">
     <div class="boxProfile">
@@ -18,3 +20,7 @@
         <button class="button">Guardar</button>
     </form>
 </section>
+
+<?php
+include("components/footer.php");
+?>
