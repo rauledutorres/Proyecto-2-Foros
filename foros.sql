@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `publicaciones` (
   `publi_tema` int(11) NOT NULL,
   `publi_user` int(11) NOT NULL,
   `publi_com` int(11) NOT NULL,
+  `publi_est` enum('Abierto','Cerrado') NOT NULL,
   PRIMARY KEY (`publi_id`) USING BTREE,
   KEY `publi_tema` (`publi_tema`),
   KEY `publi_com` (`publi_com`),
@@ -40,6 +41,8 @@ CREATE TABLE IF NOT EXISTS `publicaciones` (
 CREATE TABLE IF NOT EXISTS `temas` (
   `tema_id` int(11) NOT NULL AUTO_INCREMENT,
   `tema_nombre` varchar(255) NOT NULL,
+  `tema_desc` varchar(500) NOT NULL,
+  `tema_img` mediumblob NOT NULL,
   PRIMARY KEY (`tema_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -49,6 +52,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `user_correo` varchar(50) NOT NULL,
   `user_cont` varchar(50) NOT NULL,
   `user_img` mediumblob DEFAULT NULL,
+  `user_time` datetime NOT NULL,
   PRIMARY KEY (`user_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
