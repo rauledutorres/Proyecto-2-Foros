@@ -1,8 +1,8 @@
 <?php 
 $title = "Mi perfil";
+$css = "css/editProfile.css";
 include ("components/header.php");
 ?>
-<link rel="stylesheet" href="css/editProfile.css">
     <div id="container">
         <div id="userProfile">
             <img class="profilePic" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" width="150px" alt="profile picture">
