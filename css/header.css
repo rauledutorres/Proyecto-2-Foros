@@ -1,7 +1,14 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+:root {
+    --text: #333533;
+    --contrast-text: #808080;
+    --light-background: #cfdbd5;
+    --input-background: #E8EDDF;
+    --btn: #F5CB5C;
+    --btn-hover: #F9E19F;
 }
 
 header{
@@ -96,3 +103,30 @@ header{
     margin-right: 5px;
 }
 
+.button {
+    background-color: var(--btn);
+    width: 10vw;
+    height: 3em;
+    border: none;
+    border-radius: 1em;
+    font-weight: 600;
+    color: var(--text);
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: var(--btn-hover);
+}
+
+.icon {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    padding: 10px;
+    margin-top: 1%;
+    margin-left: 1%;
+}
+
+body{
+    margin: 0;
+}
