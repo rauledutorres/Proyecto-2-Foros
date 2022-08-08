@@ -71,11 +71,11 @@ header{
     align-content: flex-start;
     position: absolute;
     z-index: 1;
-    background-color: #cfcbbf72;
+    background-color: #fff;
     width: 8vw;
     height: 5em;
     border-radius: 10px;
-    box-shadow: 0px 8px 16px 8px rgba(0,0,0,0.2);
+    box-shadow: 0px 2px 4px 2px rgba(0,0,0,0.2);
     margin-left: -25px;
     margin-top: 5px;
 }
