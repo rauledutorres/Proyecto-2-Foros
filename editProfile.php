@@ -1,15 +1,8 @@
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/editProfile.css">
-    <title>Document</title>
-</head>
-<body>
-
+<?php 
+$title = "Mi perfil";
+include ("components/header.php");
+?>
+<link rel="stylesheet" href="css/editProfile.css">
     <div id="container">
         <div id="userProfile">
             <img class="profilePic" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" width="150px" alt="profile picture">
@@ -57,8 +50,10 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+
+<?php
+include 'components/footer.php';
+?>
 
 <script>
     var editUser = document.getElementById('editUser');
@@ -88,31 +83,3 @@
         document.getElementById('buttonContainer').style.display = "none";
     }
 </script>
-=======
-<?php
-$title = "Mi perfil";
-include('components/header.php');
-?>
-
-<section id="userProfile">
-    <div class="boxProfile">
-        <img class="profilePic" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" width="150px" alt="profile picture">
-    </div>
-    <form>
-        <div class="image-upload">
-            <label for="profilePic">
-                <img src="./img/icons/camera.svg" width="35px" height="35px"></object>
-            </label>
-            <input type="file" id="profilePic" name="profilePic">
-        </div>
-        <input type="text" name="nombre" placeholder="Nombre">
-        <input type="password" placeholder="Nueva contraseña">
-        <input type="password" placeholder="Confirma la contraseña">
-        <button class="button">Guardar</button>
-    </form>
-</section>
-
-<?php
-include("components/footer.php");
-?>
->>>>>>> master
