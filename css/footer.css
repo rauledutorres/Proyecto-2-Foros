@@ -20,12 +20,19 @@
     justify-content: space-evenly;
   }
 
-  a {
+  @media only screen and (max-width: 768px){
+    ul {
+        width: 80%;
+        justify-content: space-around;
+    }
+    }
+
+  .container a {
     color: #bebebe;
     text-decoration: none;
   }
 
-  a:hover {
+  .container a:hover {
     color: #a3a1a1;
     text-decoration: underline;
   }

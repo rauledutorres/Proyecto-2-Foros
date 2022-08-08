@@ -8,30 +8,25 @@
   <title><?php echo $title; ?></title>
   <link rel="stylesheet" href="css/header.css">
   <link rel="stylesheet" href="css/footer.css">
-  <link rel="stylesheet" href=<?php echo $css?>>
+  <link rel="stylesheet" href=<?php echo $css ?>>
 </head>
 
 <body>
 
   <header>
 
-    <div class="header">
-
-      <div>
+    <div class="header" id="logoContainer">
         <a href="" class="header_logo">
-        <img src="img/icons/logo.svg" alt="foro">
-          <h2>foro</h2>
+          <img src="img/icons/logo.svg" alt="foro">
+          <h1>foro</h1>
         </a>
-      </div>
-
-    </div>
-    <div class="header">
-      <div class="header_search">
-        <input type="search" placeholder="buscar">
-      </div>
-
     </div>
     <div class="header perfil_hilo">
+      <div class="header_search">
+        <img src="img/icons/search.svg" class="icon" id="searchIcon">
+        <input type="search" placeholder="Buscar">
+        <button id="searchButton" class="button">search</button>
+      </div>
       <div class="nuevoHilo">
         <img src="img/icons/post.svg" class="icon" id="postIcon">
         <button class="button">Nuevo Hilo</button>
