@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="footer">
   <ul>
     <li><a href="#">Ayuda</a></li>
     <li><a href="#">FAQs</a></li>

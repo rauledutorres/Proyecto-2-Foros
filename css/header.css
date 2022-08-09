@@ -1,7 +1,3 @@
-* {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
 :root {
     --text: #333533;
     --contrast-text: #808080;
@@ -11,31 +7,82 @@
     --btn-hover: #F9E19F;
 }
 
-header{
-    height: 100px;
+* {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    box-sizing: border-box;
+
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+
+header {
+    height: 5em;
     width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    box-shadow: 5px 5px 10px #cfcbbf;
+    box-shadow: 0 0 10px #cfcbbf;
     position: sticky;
 }
 
-.header .header_logo{
+#logoContainer {
+    margin-right: 30%;
+}
+
+@media only screen and (max-width: 920px) {
+    #logoContainer {
+        margin-right: 10%;
+    }
+
+
+}
+
+
+
+h1 {
+    color: var(--text);
+    margin-left: 10px;
+}
+
+@media only screen and (max-width: 426px) {
+    #logoContainer {
+        margin-right: 0;
+    }
+
+    h1 {
+        font-size: 0;
+    }
+
+
+}
+
+
+
+.header .header_logo {
     display: flex;
     align-items: center;
 }
 
-.header_logo img{
+.header_logo img {
     width: 65px;
 }
 
-.header .header_perfil{
+.header_logo {
+    text-decoration: none;
+}
+
+.header .header_perfil {
     display: flex;
     align-items: center;
 }
 
-.headerProfile{
+.headerProfile {
     width: 50px;
     border-radius: 50%;
     border: white solid 2px;
@@ -44,34 +91,90 @@ header{
 .perfil_hilo {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 20%;
+    justify-content: space-evenly;
+    width: 50%;
 }
 
-.header .header_search input{
-    width: 400px;
-    height: 50px;
-    background-color: #E8EDDF;
+@media only screen and (max-width: 426px) {
+    .perfil_hilo {
+        width: 60%;
+        justify-content: space-between;
+    }
+}
+
+.input{
+    height: 4em;
     border: none;
-    border-radius: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
+    border-radius: 1em;
+    background-color: var(--input-background);
+    color: var(--contrast-text);
 }
 
-#profileMore{
+
+.header_search input {
+    width: 30vw;
+    padding-left: 50px;
+    padding-right: 20px;
+    font-weight: 500;
+
+}
+
+/* @media only screen and (max-width: 920px) {
+    .header_search {
+        width: 60%;
+    }
+} */
+
+#searchIcon {
+    margin-left: 0.5%;
+    margin-top: 0.5%;
+}
+
+@media only screen and (max-width: 426px) {
+    #searchIcon {
+        margin-left: 2.5%;
+    }
+}
+
+
+#searchButton {
+    color: transparent;
+}
+
+#searchButton {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+    .header_search input {
+        display: none;
+    }
+
+    #searchButton {
+        display: block;
+        background-color: var(--input-background);
+    }
+}
+
+#profileMore {
     margin-left: -3px;
     margin-top: 10px;
-    width: 20px;
 }
 
-#profileIcon{
+@media only screen and (max-width: 426px) {
+    #profileMore {
+        display: none
+    }
+}
+
+#profileIcon {
     position: relative;
     cursor: pointer;
 }
 
 
-#profileMenu{
-    display:none;
+#profileMenu {
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
@@ -79,29 +182,81 @@ header{
     position: absolute;
     z-index: 1;
     background-color: #fff;
-    width: 8vw;
-    height: 5em;
+    width: 15vw;
+    height: 7em;
     border-radius: 10px;
-    box-shadow: 0px 2px 4px 2px rgba(0,0,0,0.2);
-    margin-left: -25px;
-    margin-top: 5px;
+    box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.2);
+    right: 0;
 }
 
-#profileMenu span{
-   display:block;
-   width:100%;/*or whatever width you want the effect of <hr>*/
-   border-top: 1px solid #ccc;
+#profileMenu a {
+    color: var(--text);
+    text-decoration: none;
+}
+
+#profileMenu a:hover {
+    text-decoration: underline;
+}
+
+@media only screen and (max-width: 768px) {
+    #profileMenu {
+        width: 20vw;
+    }
+}
+
+@media only screen and (max-width: 426px) {
+    #profileMenu {
+        width: 30vw;
+        right: 0%;
+    }
 }
 
 
-.nuevoHilo{
+
+
+#profileMenu span {
+    display: block;
+    width: 100%;
+    border-top: 1px solid #ccc;
+}
+
+
+.nuevoHilo {
     text-align: right;
 }
-#postIcon{
+
+.icon {
+    height: 40px;
+    position: absolute;
+    padding: 10px;
+    margin-top: 1%;
+    margin-left: 1%;
+}
+
+#postIcon {
     margin-top: 0%;
     margin-left: 0%;
     margin-right: 5px;
 }
+
+@media only screen and (max-width: 920px) {
+    #postIcon {
+        margin-top: 0.2%;
+        margin-left: 2.5%;
+        margin-right: 5px;
+    }
+}
+
+
+
+
+@media only screen and (max-width: 768px) {
+    #postIcon {
+        margin-top: 0.5%;
+        margin-left: 2.5%;
+    }
+}
+
 
 .button {
     background-color: var(--btn);
@@ -118,15 +273,116 @@ header{
     background-color: var(--btn-hover);
 }
 
-.icon {
-    width: 25px;
-    height: 25px;
-    position: absolute;
-    padding: 10px;
-    margin-top: 1%;
-    margin-left: 1%;
+@media only screen and (max-width: 920px) {
+    .header .button {
+        color: transparent;
+    }
 }
 
-body{
-    margin: 0;
+@media only screen and (max-width: 426px) {
+    .button {
+        width: 16vw
+    }
 }
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 50;
+    padding-top: 3%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);  
+}
+
+#newPost{
+    background-color:var(--input-background);
+    width: 70%;
+    height: auto;
+    margin: 1% auto;
+    border-radius: 1em;
+    padding: 1% 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+@media only screen and (max-width: 768px) {
+    #newPost{
+        width: 85%;
+        margin-top: 5%;
+    }
+
+}
+
+@media only screen and (max-width: 426px) {
+    #newPost{
+        width: 90%;
+        margin-top: 20%;
+    }
+}
+
+#postForm {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 80%;
+    margin-top: 5%;
+}
+
+
+#postForm input {
+    background-color: #fff;
+    margin-bottom: 2%;
+    padding-left: 3%;
+    color: var(--text);
+    font-size: 1em;
+    font-weight: 500;
+}
+
+#postForm select{
+    margin-bottom: 2%;
+    padding: 2%;
+    border-radius: 1em;
+}
+
+@media only screen and (max-width: 768px) {
+    #postForm{
+        width: 90%;
+    }
+
+}
+
+
+
+@media only screen and (max-width: 426px) {
+    #postForm{
+        width: 90%;
+    }
+
+    #postForm input {
+        margin-bottom: 7%; 
+    }
+
+    #postForm select{
+        margin-bottom: 5%;
+    }
+}
+
+
+#postButtons{
+    margin: 2% auto;
+}
+
+@media only screen and (max-width: 426px) {
+    #postButtons button{
+        margin-right: 5px;
+    }
+}
+
