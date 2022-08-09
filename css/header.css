@@ -13,14 +13,16 @@
 
 }
 
-body{
+body {
     margin: 0;
     width: 100%;
+    height: 100vh;
+    position: relative;
 }
 
 
-header{
-    height: 80px;
+header {
+    height: 5em;
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -29,27 +31,45 @@ header{
     position: sticky;
 }
 
+#logoContainer {
+    margin-right: 30%;
+}
+
+@media only screen and (max-width: 920px) {
+    #logoContainer {
+        margin-right: 10%;
+    }
+
+
+}
+
+
+
 h1 {
     color: var(--text);
     margin-left: 10px;
 }
 
-@media only screen and (max-width: 420px){
+@media only screen and (max-width: 426px) {
+    #logoContainer {
+        margin-right: 0;
+    }
+
     h1 {
         font-size: 0;
     }
+
+
 }
 
-#logoContainer {
-    margin-right: 30%;
-}
 
-.header .header_logo{
+
+.header .header_logo {
     display: flex;
     align-items: center;
 }
 
-.header_logo img{
+.header_logo img {
     width: 65px;
 }
 
@@ -57,12 +77,12 @@ h1 {
     text-decoration: none;
 }
 
-.header .header_perfil{
+.header .header_perfil {
     display: flex;
     align-items: center;
 }
 
-.headerProfile{
+.headerProfile {
     width: 50px;
     border-radius: 50%;
     border: white solid 2px;
@@ -75,43 +95,58 @@ h1 {
     width: 50%;
 }
 
-@media only screen and (max-width: 420px){
-    .perfil_hilo{
-        width: 40%;
+@media only screen and (max-width: 426px) {
+    .perfil_hilo {
+        width: 60%;
         justify-content: space-between;
     }
 }
 
-
-
-.header_search input{
-    width: 400px;
-    height: 50px;
-    background-color: var(--input-background);
+.input{
+    height: 4em;
     border: none;
-    border-radius: 10px;
+    border-radius: 1em;
+    background-color: var(--input-background);
+    color: var(--contrast-text);
+}
+
+
+.header_search input {
+    width: 30vw;
     padding-left: 50px;
     padding-right: 20px;
     font-weight: 500;
-    color: var(--contrast-text);
 
 }
 
-#searchIcon{
+/* @media only screen and (max-width: 920px) {
+    .header_search {
+        width: 60%;
+    }
+} */
+
+#searchIcon {
     margin-left: 0.5%;
     margin-top: 0.5%;
 }
 
-#searchButton {
-    color:transparent;
+@media only screen and (max-width: 426px) {
+    #searchIcon {
+        margin-left: 2.5%;
+    }
 }
 
-#searchButton{
+
+#searchButton {
+    color: transparent;
+}
+
+#searchButton {
     display: none;
 }
 
 @media only screen and (max-width: 768px) {
-    .header_search input{
+    .header_search input {
         display: none;
     }
 
@@ -121,25 +156,25 @@ h1 {
     }
 }
 
-#profileMore{
+#profileMore {
     margin-left: -3px;
     margin-top: 10px;
 }
 
-@media only screen and (max-width: 420px){
-    #profileMore{
+@media only screen and (max-width: 426px) {
+    #profileMore {
         display: none
     }
 }
 
-#profileIcon{
+#profileIcon {
     position: relative;
     cursor: pointer;
 }
 
 
-#profileMenu{
-    display:none;
+#profileMenu {
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
@@ -150,7 +185,7 @@ h1 {
     width: 8vw;
     height: 5em;
     border-radius: 10px;
-    box-shadow: 0px 2px 4px 2px rgba(0,0,0,0.2);
+    box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.2);
     margin-left: -25px;
     margin-top: 5px;
 }
@@ -165,13 +200,13 @@ h1 {
 }
 
 @media only screen and (max-width: 768px) {
-    #profileMenu{
+    #profileMenu {
         width: 10vw;
     }
 }
 
-@media only screen and (max-width: 420px){
-    #profileMenu{
+@media only screen and (max-width: 426px) {
+    #profileMenu {
         width: 30vw;
         right: 0%;
     }
@@ -180,16 +215,17 @@ h1 {
 
 
 
-#profileMenu span{
-   display:block;
-   width:100%;/*or whatever width you want the effect of <hr>*/
-   border-top: 1px solid #ccc;
+#profileMenu span {
+    display: block;
+    width: 100%;
+    border-top: 1px solid #ccc;
 }
 
 
-.nuevoHilo{
+.nuevoHilo {
     text-align: right;
 }
+
 .icon {
     height: 40px;
     position: absolute;
@@ -198,16 +234,27 @@ h1 {
     margin-left: 1%;
 }
 
-#postIcon{
+#postIcon {
     margin-top: 0%;
     margin-left: 0%;
     margin-right: 5px;
 }
 
+@media only screen and (max-width: 920px) {
+    #postIcon {
+        margin-top: 0.2%;
+        margin-left: 2.5%;
+        margin-right: 5px;
+    }
+}
+
+
+
 
 @media only screen and (max-width: 768px) {
-    #postIcon{
-        margin-left:2%;
+    #postIcon {
+        margin-top: 0.5%;
+        margin-left: 2.5%;
     }
 }
 
@@ -227,15 +274,116 @@ h1 {
     background-color: var(--btn-hover);
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 920px) {
     .header .button {
-    color: transparent;
-}
+        color: transparent;
+    }
 }
 
-@media only screen and (max-width: 420px){
+@media only screen and (max-width: 426px) {
     .button {
         width: 16vw
+    }
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 50;
+    padding-top: 3%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);  
+}
+
+#newPost{
+    background-color:var(--input-background);
+    width: 70%;
+    height: auto;
+    margin: 1% auto;
+    border-radius: 1em;
+    padding: 1% 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+@media only screen and (max-width: 768px) {
+    #newPost{
+        width: 85%;
+        margin-top: 5%;
+    }
+
+}
+
+@media only screen and (max-width: 426px) {
+    #newPost{
+        width: 90%;
+        margin-top: 20%;
+    }
+}
+
+#postForm {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 80%;
+    margin-top: 5%;
+}
+
+
+#postForm input {
+    background-color: #fff;
+    margin-bottom: 2%;
+    padding-left: 3%;
+    color: var(--text);
+    font-size: 1em;
+    font-weight: 500;
+}
+
+#postForm select{
+    margin-bottom: 2%;
+    padding: 2%;
+    border-radius: 1em;
+}
+
+@media only screen and (max-width: 768px) {
+    #postForm{
+        width: 90%;
+    }
+
+}
+
+
+
+@media only screen and (max-width: 426px) {
+    #postForm{
+        width: 90%;
+    }
+
+    #postForm input {
+        margin-bottom: 7%; 
+    }
+
+    #postForm select{
+        margin-bottom: 5%;
+    }
+}
+
+
+#postButtons{
+    margin: 2% auto;
+}
+
+@media only screen and (max-width: 426px) {
+    #postButtons button{
+        margin-right: 5px;
     }
 }
 

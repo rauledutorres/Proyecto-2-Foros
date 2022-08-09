@@ -45,7 +45,7 @@
     border: white solid 2px;
 }
 
-form {
+#updateProfile {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
@@ -71,28 +71,23 @@ form {
 
 }
 
-form input {
+#updateProfile input {
+    width: 25vw;
+    min-width: 20vw;
     margin-bottom: 2em;
     text-align: left;
     padding-left: 50px;
-    background-color: var(--input-background);
-    color: var(--contrast-text);
-    border: none;
-    border-radius: 1em;
-    height: 4em;
-    width: 25vw;
-    min-width: 20vw;
 }
 
 
 @media only screen and (max-width: 768px){
-    form input {
+    #updateProfile input {
         width: 40vw;
     }
 }
 
 @media only screen and (max-width: 420px){
-    form input {
+    #updateProfile input {
         width: 50vw;
     }
 }
@@ -124,10 +119,10 @@ form input {
 
 #userThread {
     width: 50vw;
-    height: 77vh;
+    height: 75vh;
     background-color: var(--input-background);
     overflow-y: auto;
-    margin-top: 5%;
+    margin-top: 2%;
     border-radius: 2%;
 }
 
@@ -186,19 +181,3 @@ h2 {
     }
     
 }
-
-/* @media only screen and (max-width: 768px){
-    #threadContent {
-        height: 50vh;
-    }
-
-    #threadContent img {
-        margin-top: 20%;
-        width: 70%;
-    }
-
-    h2 {
-        margin-left: 16%;
-    }
-    
-} */
