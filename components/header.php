@@ -1,18 +1,44 @@
 <?php
+session_start();
+$_SESSION['signed_in'] = true; // Variable de prueba, cambiar a true cuando un usuario inicie sesión
+$_SESSION['user'] = 1; // Variable inventada, a user_id cuando haya usuario con sesión iniciada
 include 'components/conector.php';
 
-$headquery = "SELECT tema_id, tema_nombre FROM temas ORDER BY tema_nombre ASC";
-$resultOne = $mysqli->query($headquery);
+// Obtiene las categorías para el select de nuevo post y para la página de temas 
+$categoryQuery = "SELECT tema_id, tema_nombre, tema_img FROM temas ORDER BY tema_nombre ASC";
+$categoryResult = $mysqli->query($categoryQuery);
 
-$temas = [];
-while ($fila = $resultOne->fetch_assoc()) {
-    $temas[] = $fila;
+$categoryArray = [];
+while ($row = $categoryResult->fetch_assoc()) {
+    $categoryArray[] = $row;
 }
 
+// Publicar nuevo post y guardarlo en la base de datos
+// Da problema porque siempre guarda el $_POST y se crean entradas cada vez que se refresca la página 
+// Habría que redirigir a otra página (la del nuevo post creado por ejemplo) para evitar esto
+$error = "";
+
+if($_SESSION['signed_in'] == false) {
+  $error = 'Para publicar <a href="signin.php">inicia sesión</a>.';
+} else {
+  if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      $sql = "INSERT INTO publicaciones (publi_titulo, publi_descri, publi_date, publi_tema, publi_user) 
+        VALUES ('$_POST[postTitle]', '$_POST[postDescription]', now(), '$_POST[category]','$_SESSION[user]')";
+      try {
+        $result = $mysqli->query($sql);
+        if (!$result){
+          $error = 'Algo no ha ido bien, por favor inténtalo de nuevo más tarde.';
+        } else {
+          $error = 'Se acaba de publicar tu pregunta.';
+        }
+      } catch (Exception $e) {
+        $error = "Algo ha salido mal. ".$e->getMessage();
+      }
+    }
+}   
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -57,18 +83,20 @@ while ($fila = $resultOne->fetch_assoc()) {
   <main id="main">
   <div class="modal" id="newPostModal">
     <div id="newPost">
-      <form id="postForm">
-        <input type="text" class="input" name="posttitle" id="postTitle" placeholder="Título">
+      <img src="img/icons/x.svg" class="icon" id="xIcon" onclick="closeModal()" alt="Cerrar">
+      <form id="postForm" method="POST">
+        <input type="text" class="input" name="postTitle" id="postTitle" placeholder="Título">
         <select name="category">
           <option selected="true" disabled="disabled">Selecciona un tema</option>
           <?php
-          for ($i=0; $i < count($temas); $i++) { 
-            echo '<option value="'.$temas[$i]["tema_id"].'">'.$temas[$i]["tema_nombre"].'</option>"';
+          for ($i=0; $i < count($categoryArray); $i++) { 
+            echo '<option value="'.$categoryArray[$i]["tema_id"].'">'.$categoryArray[$i]["tema_nombre"].'</option>"';
           }?>
         </select>
         <textarea name="postDescription" id="description"></textarea>
+        <p><?php echo $error?></p>
         <div id="postButtons">
-          <button type="reset" class="button cancel" id="cancelPost">Cancelar</button>
+          <button type="reset" class="button cancel" id="cancelPost" onclick="closeModal()">Cancelar</button>
           <button type="submit" class="button">Guardar</button>
         </div>
         <script>
@@ -76,7 +104,7 @@ while ($fila = $resultOne->fetch_assoc()) {
             selector: 'textarea#description',
             max_width: 1000,
             min_width: 300,
-            height: 450,
+            height: 400,
             plugins: 'code lists',
             mobile: {
               menubar: true,

@@ -92,13 +92,6 @@
     }
 }
 
-.cancel {
-    background-color: var(--light-background);
-}
-
-.cancel:hover{
-    background-color: #DCE5E2;
-}
 
 #buttonContainer {
     display: none;

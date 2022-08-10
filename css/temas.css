@@ -5,10 +5,13 @@ h2 {
 #categoryContainer{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    row-gap: 4%;
     justify-items: center;
     width: 70%;
     margin: 2% auto;
+}
+
+#categoryContainer a{
+    text-decoration: none;
 }
 
 .category svg {
@@ -21,12 +24,16 @@ h2 {
 .category{
     width: 250px;
     height: 250px;
+    cursor: pointer;
     border-radius: 1em;
     box-shadow: 0 0 10px #cfcbbf;
+    margin-bottom: 10%;
 }
+
 
 .category h3{
     text-align: center;
     margin: 0;
     height: 20%;
+    color: var(--text)
 }

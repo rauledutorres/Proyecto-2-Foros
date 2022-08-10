@@ -6,6 +6,7 @@
     box-shadow: 5px 0px 2px #cfcbbf;
     font-size: 0.8em;
     z-index: 50;
+    padding-top: 5px;
   }
 
   ul {
