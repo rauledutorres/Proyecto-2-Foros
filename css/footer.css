@@ -1,18 +1,11 @@
-* {
-   
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-
+ 
   .footer {
     background-color: #fff;
-    position: absolute;
-    bottom: 0;
-    margin-top: 20px;
     height: 5em;
     width: 100%;
-    box-shadow: 10px 5px 10px #cfcbbf;
+    box-shadow: 5px 0px 2px #cfcbbf;
     font-size: 0.8em;
-    z-index: 0;
+    z-index: 50;
   }
 
   ul {
@@ -40,7 +33,8 @@
     text-decoration: underline;
   }
 
-  p {
+  footer p {
     color: #bebebe;
     text-align: center;
   }
+

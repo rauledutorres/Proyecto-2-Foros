@@ -1,3 +1,15 @@
+<?php
+include 'components/conector.php';
+
+$headquery = "SELECT tema_id, tema_nombre FROM temas ORDER BY tema_nombre ASC";
+$resultOne = $mysqli->query($headquery);
+
+$temas = [];
+while ($fila = $resultOne->fetch_assoc()) {
+    $temas[] = $fila;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,12 +54,17 @@
     </div>
     <script src="js/header.js"></script>
   </header>
+  <main id="main">
   <div class="modal" id="newPostModal">
     <div id="newPost">
       <form id="postForm">
         <input type="text" class="input" name="posttitle" id="postTitle" placeholder="Título">
-        <select>
+        <select name="category">
           <option selected="true" disabled="disabled">Selecciona un tema</option>
+          <?php
+          for ($i=0; $i < count($temas); $i++) { 
+            echo '<option value="'.$temas[$i]["tema_id"].'">'.$temas[$i]["tema_nombre"].'</option>"';
+          }?>
         </select>
         <textarea name="postDescription" id="description"></textarea>
         <div id="postButtons">

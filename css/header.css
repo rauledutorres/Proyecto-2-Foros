@@ -10,14 +10,15 @@
 * {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     box-sizing: border-box;
-
 }
 
 body {
+    padding: 0;
     margin: 0;
     width: 100%;
     height: 100vh;
-    position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -168,7 +169,6 @@ h1 {
 }
 
 #profileIcon {
-    position: relative;
     cursor: pointer;
 }
 
@@ -350,6 +350,7 @@ h1 {
     margin-bottom: 2%;
     padding: 2%;
     border-radius: 1em;
+    width: 100%;
 }
 
 @media only screen and (max-width: 768px) {
@@ -386,3 +387,6 @@ h1 {
     }
 }
 
+main {
+    flex-grow: 1;
+}
