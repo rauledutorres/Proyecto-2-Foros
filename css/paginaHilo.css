@@ -1,0 +1,102 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.temasLista{
+    display: flex;
+    font-weight: lighter;
+    flex-direction: column;
+    margin-left: 60px;
+    margin-top: 60px;
+}
+
+.temasLista ul{
+    display: flex;
+    list-style: none;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.tituloLista{
+    display: flex;
+    padding-left: 45px;
+}
+
+.tituloLista h4{
+    font-size: 1em;
+    font-weight: lighter;
+    padding-bottom: 10px;
+}
+
+.temasLista button{
+    display: flex;
+    width: 200px;
+    justify-content: flex-start;
+    background-color: white;
+    color: black;
+    /*border: 1px solid #F5CB5C;*/
+    border: none;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    }
+    
+.temasLista button:hover {
+    background-color: #F5CB5C;
+}
+
+.temasLista li{
+    font-weight: 600;
+    padding: 6px;
+    font-size: larger;
+}
+
+.paginaEntera{
+    display: flex;
+    flex-direction: row;
+}
+
+/*PARTE DE LOS HILOS*/
+
+.listaHiloPrincipal{
+    display: flex;
+    flex-direction: column;
+    padding-top: 300px;
+}
+
+.hilo{
+    display: flex;
+    flex-direction: row;
+    margin-left: 50px;
+    margin-right: 100px;
+    padding: 20px;
+    box-shadow: 5px 5px 10px #cfcbbf;
+    padding-right: 40px;
+}
+
+.listaHiloPrincipal h2{
+    padding-top: 30px;
+    padding-left: 45px;
+    padding-bottom: 50px;
+}
+
+.hiloFoto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.hiloTexto{
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+}
+
+.hiloTexto p{
+    text-align: justify;
+    padding-top: 20px;
+    font-weight: lighter;
+}
