@@ -62,7 +62,7 @@
 .listaHiloPrincipal{
     display: flex;
     flex-direction: column;
-    padding-top: 300px;
+    padding-top: 30px;
 }
 
 .hilo{
@@ -99,4 +99,10 @@
     text-align: justify;
     padding-top: 20px;
     font-weight: lighter;
+}
+
+/*PARTE DE LOS COMENTARIOS*/
+
+.comentario{
+    padding-left: 500px;
 }
