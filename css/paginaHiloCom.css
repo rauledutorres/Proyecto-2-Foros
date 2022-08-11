@@ -84,15 +84,21 @@
 .hiloFoto{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     padding-right: 30px;
-    padding-left: 30px;
+    padding-left: 10px;
+    width: 80px;
+}
+
+h5{
+    display: flex;
+    font-size: 1rem;
 }
 
 .hiloTexto{
     display: flex;
     flex-direction: column;
-    padding-left: 20px;
+    padding-left: 50px;
 }
 
 .hiloTexto p{
@@ -104,9 +110,32 @@
 /*PARTE DE LOS COMENTARIOS*/
 
 .comentario{
-    padding-left: 500px;
+    display: flex;
+    padding-left: 400px;
 }
 
 .comentario textarea{
     font-weight: lighter;
+    width: 700px;
+}
+
+.comentario input{
+    display: flex;
+    font-weight: bold;
+    width: 116px;
+    font-size: 16px;
+    background-color: #F5CB5C;
+    margin-right: 60px;
+    border-radius: 10px;
+    height: 40px;
+    max-width: 153px;
+    justify-content: center;
+    border: none;
+    color: white;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.comentario input:hover {
+    color: black;
 }

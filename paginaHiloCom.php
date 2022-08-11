@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/paginaHilo.css">
+    <link rel="stylesheet" href="./css/paginaHiloCom.css">
     
 </head>
 <body>
@@ -53,8 +53,9 @@
 
         </div>            
         <div class="comentario">
-            <form>
+            <form method="post">
                 <textarea name="comment" placeholder="Introduzca aquí su comentario" rows=5 cols=40></textarea>
+                <input type="submit" value="Publicar">
             </form>
         </div>    
 </body>
