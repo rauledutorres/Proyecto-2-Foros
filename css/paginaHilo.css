@@ -106,3 +106,7 @@
 .comentario{
     padding-left: 500px;
 }
+
+.comentario textarea{
+    font-weight: lighter;
+}

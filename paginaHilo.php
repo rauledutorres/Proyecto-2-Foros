@@ -1,5 +1,5 @@
 <?php
-//http://localhost/proyecto2_foros/Proyecto-2-Foros/paginaHilo
+//localhost/proyecto2_foros/Proyecto-2-Foros/paginaHilo.php
 ?>
 
 <!DOCTYPE html>
@@ -54,8 +54,7 @@
         </div>            
         <div class="comentario">
             <form>
-                <textarea name="comment" rows=5 cols=40 placeholder="Introduzca aquí sus comentarios">
-                </textarea>
+                <textarea name="comment" placeholder="Introduzca aquí su comentario" rows=5 cols=40></textarea>
             </form>
         </div>    
 </body>
