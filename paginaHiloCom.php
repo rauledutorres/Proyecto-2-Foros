@@ -1,5 +1,5 @@
 <?php
-//localhost/proyecto2_foros/Proyecto-2-Foros/paginaHilo.php
+//localhost/proyecto2_foros/Proyecto-2-Foros/paginaHiloCom.php
 ?>
 
 <!DOCTYPE html>
@@ -32,6 +32,8 @@
             </div>
             
             <div class="listaHiloPrincipal">
+
+
                 <div class="hilo">
                     <div class="hiloFoto">
                         <img src="./img/woman1.png" alt="">
@@ -49,14 +51,49 @@
                         </div>
                     </div>    
                 </div>
+
+
+                <div class="comentario">
+                    <form method="post">
+                        <textarea name="comment" placeholder="Introduzca aquí su comentario" rows=5 cols=40></textarea>
+                        <input type="submit" value="Publicar">
+                    </form>
+                </div>
+
+
+                <div class="respuestas">
+                    <div class="reply">
+                        <div class="replyFoto">
+                            <img src="./img/man1.png" alt="">
+                            <h5>elKevin02</h5>
+                        </div>
+                        <div class="replyTexto">
+                            <div class="replyTime">
+                                <h6>vie, 29 de Julio del 2022, 13:40:13(GMT)</h6>
+                            </div>
+                            <div class="replyDesc">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus tempora minus alias harum, consectetur exercitationem. Perspiciatis odio saepe ipsa minima, praesentium, illo animi vero autem nesciunt, cupiditate accusantium ex sapiente.</p>
+                            </div>
+                        </div>    
+                    </div>
+                    <div class="reply">
+                        <div class="replyFoto">
+                            <img src="./img/man2.png" alt="">
+                            <h5>Anton34</h5>
+                        </div>
+                        <div class="replyTexto">
+                            <div class="replyTime">
+                                <h6>vie, 29 de Julio del 2022, 13:42:54(GMT)</h6>
+                            </div>
+                            <div class="replyDesc">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus tempora minus alias harum, consectetur exercitationem. Perspiciatis odio saepe ipsa minima, praesentium, illo animi vero autem nesciunt, cupiditate accusantium ex sapiente.</p>
+                            </div>
+                        </div>    
+                    </div>
+                </div>    
             </div>
 
         </div>            
-        <div class="comentario">
-            <form method="post">
-                <textarea name="comment" placeholder="Introduzca aquí su comentario" rows=5 cols=40></textarea>
-                <input type="submit" value="Publicar">
-            </form>
-        </div>    
+        
 </body>
 </html>
