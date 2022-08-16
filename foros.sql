@@ -12,7 +12,7 @@ USE `foros`;
 
 CREATE TABLE IF NOT EXISTS `comentarios` (
   `com_id` int(11) NOT NULL AUTO_INCREMENT,
-  `com_coment` mediumtext NOT NULL,
+  `com_coment` varchar(50) NOT NULL DEFAULT '',
   `com_date` datetime DEFAULT NULL,
   `com_user` int(11) NOT NULL,
   PRIMARY KEY (`com_id`),
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
 CREATE TABLE IF NOT EXISTS `publicaciones` (
   `publi_id` int(11) NOT NULL AUTO_INCREMENT,
   `publi_titulo` varchar(255) NOT NULL,
-  `publi_descri` mediumblob DEFAULT NULL,
+  `publi_descri` varchar(50) NOT NULL,
   `publi_date` datetime NOT NULL,
   `publi_tema` int(11) NOT NULL,
   `publi_user` int(11) NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `temas` (
   `tema_id` int(11) NOT NULL AUTO_INCREMENT,
   `tema_nombre` varchar(255) NOT NULL,
   `tema_desc` varchar(500) NOT NULL,
-  `tema_img` mediumblob NOT NULL,
+  `tema_img` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`tema_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `user_nombre` varchar(50) NOT NULL,
   `user_correo` varchar(50) NOT NULL,
   `user_cont` varchar(50) NOT NULL,
-  `user_img` mediumblob DEFAULT NULL,
+  `user_img` varchar(50) DEFAULT NULL,
   `user_time` datetime NOT NULL,
   PRIMARY KEY (`user_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
