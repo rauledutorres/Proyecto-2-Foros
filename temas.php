@@ -12,10 +12,10 @@ include 'components/header.php';
     <?php
     for ($i=0; $i < count($categoryArray); $i++) {
          // **************** Cambiar la dirección a la de la página de hilos ***********************
-        echo '<a href="hilos.php?id='.$categoryArray[$i]["tema_id"].'"><div class="category">
+        echo '<a href="hilos.php?id='.$categoryArray[$i]["tema_id"].'" class="category">
         '.$categoryArray[$i]["tema_img"].'
             <h3>'.$categoryArray[$i]["tema_nombre"].'</h3>
-        </div></a>';
+        </a>';
     }?>
     </div>
 </div>
