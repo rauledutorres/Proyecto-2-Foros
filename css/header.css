@@ -5,6 +5,8 @@
     --input-background: #E8EDDF;
     --btn: #F5CB5C;
     --btn-hover: #F9E19F;
+    --error: #EF626C;
+    --status: #034732;
 }
 
 * {

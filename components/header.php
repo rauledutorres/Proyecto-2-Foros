@@ -1,7 +1,8 @@
 <?php
 session_start();
 $_SESSION['signed_in'] = true; // Variable de prueba, cambiar a true cuando un usuario inicie sesión
-$_SESSION['user'] = 1; // Variable inventada, a user_id cuando haya usuario con sesión iniciada
+$_SESSION['user'] = 1;
+$id = 1;  // Variable inventada, a user_id cuando haya usuario con sesión iniciada
 include 'components/conector.php';
 
 // Obtiene las categorías para el select de nuevo post y para la página de temas 
@@ -21,7 +22,7 @@ $error = "";
 if($_SESSION['signed_in'] == false) {
   $error = 'Para publicar <a href="signin.php">inicia sesión</a>.';
 } else {
-  if($_SERVER['REQUEST_METHOD'] == 'POST'){
+  if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['newPost'])){
       $sql = "INSERT INTO publicaciones (publi_titulo, publi_descri, publi_date, publi_tema, publi_user) 
         VALUES ('$_POST[postTitle]', '$_POST[postDescription]', now(), '$_POST[category]','$_SESSION[user]')";
       try {
@@ -30,6 +31,7 @@ if($_SESSION['signed_in'] == false) {
           $error = 'Algo no ha ido bien, por favor inténtalo de nuevo más tarde.';
         } else {
           $error = 'Se acaba de publicar tu pregunta.';
+          unset($_POST['newPost']);
         }
       } catch (Exception $e) {
         $error = "Algo ha salido mal. ".$e->getMessage();
@@ -53,7 +55,7 @@ if($_SESSION['signed_in'] == false) {
 <body>
   <header>
     <div class="header" id="logoContainer">
-      <a href="" class="header_logo">
+      <a href="index.php" class="header_logo">
         <img src="img/icons/logo.svg" alt="foro">
         <h1>foro</h1>
       </a>
@@ -72,7 +74,7 @@ if($_SESSION['signed_in'] == false) {
         <img class="headerProfile" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="" srcset="">
         <img src="img/icons/down.svg" class="icon" id="profileMore">
         <div id="profileMenu">
-          <a href="editProfile.php">Editar perfil</a>
+          <a href="editProfile.php?id=<?php echo $id;?>">Editar perfil</a>
           <span></span>
           <a href="index.php">Cerrar sesión</a>
         </div>
@@ -84,7 +86,8 @@ if($_SESSION['signed_in'] == false) {
   <div class="modal" id="newPostModal">
     <div id="newPost">
       <img src="img/icons/x.svg" class="icon" id="xIcon" onclick="closeModal()" alt="Cerrar">
-      <form id="postForm" method="POST">
+      <form id="postForm" method="POST" enctype='multipart/form-data'> 
+        <input type="hidden" name="newPost">
         <input type="text" class="input" name="postTitle" id="postTitle" placeholder="Título">
         <select name="category">
           <option selected="true" disabled="disabled">Selecciona un tema</option>
@@ -104,7 +107,7 @@ if($_SESSION['signed_in'] == false) {
             selector: 'textarea#description',
             max_width: 1000,
             min_width: 300,
-            height: 400,
+            height: 350,
             plugins: 'code lists',
             mobile: {
               menubar: true,
