@@ -14,7 +14,6 @@ body .container{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
 }
 .header_cont{
     max-width: 275px;
@@ -35,10 +34,10 @@ body .container{
     display: none;
 }
 .header #reg:hover{
-    background-color: black;
+    background-color: #F5CB5C;
 }
 .header #is:hover{
-    background-color: black;
+    background-color: #F5CB5C;
 }
 .btn{
     border: 1px solid #F9E19F;
@@ -146,6 +145,7 @@ form .btn_log{
 }
 form .btn_reg{
     margin-top: 7px;
+    margin-bottom: 31px;
 }
 form .img_group img{
     width: 20px;
@@ -154,11 +154,47 @@ form .img_group{
     position:absolute;
     left: 0.5rem;
 }
-form .img_log_name{
+form .img_log_email{
     top: 0.9rem;
 }
 form .img_log_pass{
     top: 5.7rem;
+}
+form .img_reg_name{
+    top: 0.7rem;
+}
+form .img_reg_email{
+    top: 4.7rem;
+}
+form .img_reg_pass{
+    top: 8.3rem;
+}
+form .img_reg_vitxt{
+    left: 16.5rem;
+    top: 8.4rem;
+}
+form .img_reg_vipass{
+    left: 16.5rem;
+    top: 8.3rem;
+}
+
+form .img_log_vitxt{
+    left: 16rem;
+    top: 5.8rem;
+}
+form .img_log_vipass{
+    left: 16rem;
+    top: 5.7rem;
+}
+
+form .pass{
+    display: none;
+}
+form .txt{
+   display: none;
+}
+form .img_reg_pass1{
+    top: 12rem;
 }
 .caja .cont_img{
     width: 50%;
