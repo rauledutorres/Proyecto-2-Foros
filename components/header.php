@@ -1,61 +1,73 @@
-<?php
-//http://localhost/proyecto2_foros/Proyecto-2-Foros/headerFooter/header.php
-?>
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
-    <style>
-        div{
-          font-family: 'Roboto', sans-serif;
-          font-weight: bold;
-        }
-    </style>
-  </head>
-  <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-  
-  <header class="p-3 mb-3 border-bottom">
-    <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
-          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-        </a>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><?php echo $title; ?></title>
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href=<?php echo $css ?>>
+  <script src="https://cdn.tiny.cloud/1/wyr78gq4bxmh08sv63gfilc0rvzydpgjc3knjw3k6t1xpcev/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+</head>
 
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">Inventory</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">Products</a></li>
-        </ul>
-
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-          <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-        </form>
-
-        <div class="dropdown text-end">
-          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
-          </a>
-          <ul class="dropdown-menu text-small">
-            <li><a class="dropdown-item" href="#">New project...</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
-          </ul>
+<body>
+  <header>
+    <div class="header" id="logoContainer">
+      <a href="" class="header_logo">
+        <img src="img/icons/logo.svg" alt="foro">
+        <h1>foro</h1>
+      </a>
+    </div>
+    <div class="header perfil_hilo">
+      <div class="header_search">
+        <img src="img/icons/search.svg" class="icon" id="searchIcon">
+        <input type="search" placeholder="Buscar" class="input">
+        <button id="searchButton" class="button">search</button>
+      </div>
+      <div class="nuevoHilo" onclick="openModal()">
+        <img src="img/icons/post.svg" class="icon" id="postIcon">
+        <button class="button" >Nuevo Hilo</button>
+      </div>
+      <div id="profileIcon">
+        <img class="headerProfile" src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="" srcset="">
+        <img src="img/icons/down.svg" class="icon" id="profileMore">
+        <div id="profileMenu">
+          <a href="editProfile.php">Editar perfil</a>
+          <span></span>
+          <a href="index.php">Cerrar sesión</a>
         </div>
       </div>
     </div>
+    <script src="js/header.js"></script>
   </header>
-    
-  </body>
-</html>
+  <div class="modal" id="newPostModal">
+    <div id="newPost">
+      <form id="postForm">
+        <input type="text" class="input" name="posttitle" id="postTitle" placeholder="Título">
+        <select>
+          <option selected="true" disabled="disabled">Selecciona un tema</option>
+        </select>
+        <textarea name="postDescription" id="description"></textarea>
+        <div id="postButtons">
+          <button type="reset" class="button cancel" id="cancelPost">Cancelar</button>
+          <button type="submit" class="button">Guardar</button>
+        </div>
+        <script>
+          tinymce.init({
+            selector: 'textarea#description',
+            max_width: 1000,
+            min_width: 300,
+            height: 450,
+            plugins: 'code lists',
+            mobile: {
+              menubar: true,
+              plugins: 'autosave lists autolink',
+              toolbar: 'undo bold italic styles'
+            }
+          });
+        </script>
+      </form>
+    </div>
+  </div>
