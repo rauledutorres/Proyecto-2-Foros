@@ -1,9 +1,6 @@
 <?php
 require 'config.php';
 session_start();
-// if (isset($_SESSION['welcome_usuario'])) {
-//     header('location:temas.php');
-// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,13 +9,13 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/login.css">
-    <title>Login/Sign up</title>
+    <title>foro</title>
 </head>
 <body>
         <div class="container">
             <div class="header">
                 <div class="header_cont">
-                    <img src="img/icono.png" alt=""/>
+                    <img src="img/icons/logo.svg" alt=""/>
                     <div>
                         <h1><i>Foro</i></h1>
                         <h4>Habla con internet</h4>
@@ -62,10 +59,11 @@ session_start();
                                     $id=$row['user_id'];
                                     if ($email == $row['user_correo'] && $password == $row['user_cont']) {
                                         
-                                        $_SESSION['welcome_usuario']=$id;
+                                        $_SESSION['id'] = $id;
+                                        $_SESSION['signed_in']= true;
                                         $acceso = date("Y-m-d H:i:s");
                                         $int=mysqli_query($connect,"UPDATE `usuarios` SET `user_time`='$acceso' WHERE `user_id`='$id';");
-                                        header('location:http://localhost:8018/proyecto/git%20p2/Proyecto-2-Foros/temas.php ');
+                                        header('location: index.php ');
                                     }
                                 }
                             }
@@ -73,13 +71,13 @@ session_start();
                         </form>
                     </div>
                     <div class="cont_img">
-                        <img class="img_one" src="img/img_log.png" alt="">
+                        <img class="img_one" src="img/web/img_login.jpg" alt="">
                     </div>
                 </div>
 
                 <div id="registro" class="caja registro">
                     <div class="cont_img">
-                        <img class="img_two" src="img/image_log2.png" alt="">
+                        <img src="img/web/questions-not-css.svg" alt=""></svg>
                     </div>
                     <div class="cont_form reg">
                         <div class="title_reg">
@@ -98,7 +96,7 @@ session_start();
                             <label class="img_group img_reg_pass1" ><img src="img/icon_input_pass.png" alt=""></label>
                             <input id="valid_pass"class="inp_reg" type="text" name="valid_pass" placeholder="Repite tu Contraseña">
                             <button disabled class="btn_reg" type="submit" name="registrar" >Registrate</button>
-                            <span>¿Ya tienes Cuenta?<a class="form_et" href="">Inicia Sesion</a></span>
+                            <span>¿Ya tienes Cuenta? <a class="form_et" href="">Inicia Sesion</a></span>
                             
                             <?php 
                                 if (isset($_POST['registrar'])){

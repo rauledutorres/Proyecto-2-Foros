@@ -2,8 +2,6 @@
 $title = "Categorías";
 $css = "css/temas.css";
 include 'components/header.php';
-
-
 ?>
 
 <div class="pageContent">

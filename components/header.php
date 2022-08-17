@@ -1,8 +1,6 @@
 <?php
 session_start();
-$_SESSION['signed_in'] = true; // Variable de prueba, cambiar a true cuando un usuario inicie sesión
-$_SESSION['user'] = 1;
-$id = 1;  // Variable inventada, a user_id cuando haya usuario con sesión iniciada
+$id = $_SESSION['id']; // Variable inventada, a user_id cuando haya usuario con sesión iniciada
 include 'components/conector.php';
 
 // Obtiene las categorías para el select de nuevo post y para la página de temas 
@@ -76,7 +74,7 @@ if($_SESSION['signed_in'] == false) {
         <div id="profileMenu">
           <a href="editProfile.php?id=<?php echo $id;?>">Editar perfil</a>
           <span></span>
-          <a href="index.php">Cerrar sesión</a>
+          <a href="logout.php">Cerrar sesión</a>
         </div>
       </div>
     </div>
