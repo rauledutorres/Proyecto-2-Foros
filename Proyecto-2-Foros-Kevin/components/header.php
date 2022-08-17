@@ -2,15 +2,16 @@
 session_start();
 $_SESSION['signed_in'] = true; // Variable de prueba, cambiar a true cuando un usuario inicie sesión
 $_SESSION['user'] = 1; // Variable inventada, a user_id cuando haya usuario con sesión iniciada
-include './config.php';
+include './components/conector.php';
+
 
 // Obtiene las categorías para el select de nuevo post y para la página de temas 
-$categoryQuery =mysqli_query($connect,"SELECT tema_id, tema_nombre, tema_img FROM temas ORDER BY tema_nombre ASC");
-// $categoryResult = $mysqli->query($categoryQuery);
+$categoryQuery = "SELECT tema_id, tema_nombre, tema_img FROM temas ORDER BY tema_nombre ASC";
+$categoryResult = $mysqli->query($categoryQuery);
 
 $categoryArray = [];
 
-while ($row = mysqli_fetch_assoc($categoryQuery)) {
+while ($row = mysqli_fetch_assoc($categoryResult)) {
     $categoryArray[] = $row;
 }
 
@@ -23,10 +24,17 @@ if($_SESSION['signed_in'] == false) {
   $error = 'Para publicar <a href="signin.php">inicia sesión</a>.';
 } else {
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
-      $sql = "INSERT INTO publicaciones (publi_titulo, publi_descri, publi_date, publi_tema, publi_user) 
+    // try{
+    //   $sqli=mysqli_query($connect,"INSERT INTO publicaciones (publi_titulo, publi_descri, publi_date, publi_tema, publi_user) 
+    //   VALUES ('$_POST[postTitle]', '$_POST[postDescription]', now(), '$_POST[category]','$_SESSION[user]')");
+    // }  catch (Exception $e) {
+    //     $error = "Algo ha salido mal. ".$e->getMessage();
+    //   }
+
+      $sqli = "INSERT INTO publicaciones (publi_titulo, publi_descri, publi_date, publi_tema, publi_user) 
         VALUES ('$_POST[postTitle]', '$_POST[postDescription]', now(), '$_POST[category]','$_SESSION[user]')";
       try {
-        $result = $mysqli->query($sql);
+        $result = $mysqli->query($sqli);
         if (!$result){
           $error = 'Algo no ha ido bien, por favor inténtalo de nuevo más tarde.';
         } else {
