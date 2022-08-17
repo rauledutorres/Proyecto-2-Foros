@@ -16,7 +16,7 @@
     
 </head>
 <body>
-    <?php include './components/headerBien.php' ?>
+    <?php include './components/header.php' ?>
         <div class="paginaEntera">
             <div class="temasLista">
                 <div class="tituloLista">
