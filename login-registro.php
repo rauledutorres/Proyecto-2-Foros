@@ -97,7 +97,7 @@ session_start();
                             <input id="pass" class="inp_reg input_pass" type="password" name="pass"  placeholder="Contraseña">
                             <label class="img_group img_reg_pass1" ><img src="img/icon_input_pass.png" alt=""></label>
                             <input id="valid_pass"class="inp_reg" type="text" name="valid_pass" placeholder="Repite tu Contraseña">
-                            <button class="btn_reg" type="submit" name="registrar" >Registrate</button>
+                            <button disabled class="btn_reg" type="submit" name="registrar" >Registrate</button>
                             <span>¿Ya tienes Cuenta?<a class="form_et" href="">Inicia Sesion</a></span>
                             
                             <?php 
