@@ -14,3 +14,4 @@ document.getElementById("profileIcon").onclick = function() {
   function closeModal(){
     document.getElementById("newPostModal").style.display = "none"
   }
+
