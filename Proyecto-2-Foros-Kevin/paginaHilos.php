@@ -7,9 +7,11 @@ $cod=$_GET['id'];
 $tema=[];
 foreach ($categoryArray as $key => $category) {
     if($category['tema_nombre'] == $cod ){
-        $sql=$category;
+        $sqli=$category;
     }
 }
+
+print_r($sqli);
 if (isset($_POST[''])) {
 
 }
@@ -46,7 +48,7 @@ if (isset($_POST[''])) {
             </div>
             
             <div class="listaHilos">
-                <h2><?php echo strtoupper($sql['tema_nombre']);?></h2>
+                <h2><?php echo strtoupper($categoryArray['tema_nombre']);?></h2>
                 <div class="hilo">
                     <div class="hiloFoto">
                         <img src="./img/woman1.png" alt="">
