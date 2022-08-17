@@ -1,3 +1,10 @@
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Versión del servidor:         10.4.24-MariaDB - mariadb.org binary distribution
+-- SO del servidor:              Win64
+-- HeidiSQL Versión:             12.0.0.6468
+-- --------------------------------------------------------
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
 /*!50503 SET NAMES utf8mb4 */;
@@ -7,9 +14,12 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+-- Volcando estructura de base de datos para foros
 CREATE DATABASE IF NOT EXISTS `foros` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `foros`;
 
+-- Volcando estructura para tabla foros.comentarios
 CREATE TABLE IF NOT EXISTS `comentarios` (
   `com_id` int(11) NOT NULL AUTO_INCREMENT,
   `com_coment` mediumtext NOT NULL,
@@ -20,6 +30,9 @@ CREATE TABLE IF NOT EXISTS `comentarios` (
   CONSTRAINT `FK_comentarios_usuarios` FOREIGN KEY (`com_user`) REFERENCES `usuarios` (`user_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla foros.publicaciones
 CREATE TABLE IF NOT EXISTS `publicaciones` (
   `publi_id` int(11) NOT NULL AUTO_INCREMENT,
   `publi_titulo` varchar(255) NOT NULL,
@@ -27,7 +40,8 @@ CREATE TABLE IF NOT EXISTS `publicaciones` (
   `publi_date` datetime NOT NULL,
   `publi_tema` int(11) NOT NULL,
   `publi_user` int(11) NOT NULL,
-  `publi_com` int(11) NOT NULL,
+  `publi_com` int(11) DEFAULT NULL,
+  `publi_est` enum('Abierto','Cerrado') NOT NULL DEFAULT 'Abierto',
   PRIMARY KEY (`publi_id`) USING BTREE,
   KEY `publi_tema` (`publi_tema`),
   KEY `publi_com` (`publi_com`),
@@ -35,22 +49,33 @@ CREATE TABLE IF NOT EXISTS `publicaciones` (
   CONSTRAINT `FK_publicaciones_comentarios` FOREIGN KEY (`publi_com`) REFERENCES `comentarios` (`com_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_publicaciones_temas` FOREIGN KEY (`publi_tema`) REFERENCES `temas` (`tema_ID`) ON UPDATE CASCADE,
   CONSTRAINT `FK_publicaciones_usuarios` FOREIGN KEY (`publi_user`) REFERENCES `usuarios` (`user_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla foros.temas
 CREATE TABLE IF NOT EXISTS `temas` (
   `tema_id` int(11) NOT NULL AUTO_INCREMENT,
   `tema_nombre` varchar(255) NOT NULL,
+  `tema_desc` varchar(500) NOT NULL,
+  `tema_img` mediumblob NOT NULL,
   PRIMARY KEY (`tema_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
+-- La exportación de datos fue deseleccionada.
+
+-- Volcando estructura para tabla foros.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_nombre` varchar(50) NOT NULL,
   `user_correo` varchar(50) NOT NULL,
   `user_cont` varchar(50) NOT NULL,
   `user_img` mediumblob DEFAULT NULL,
+  `user_time` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- La exportación de datos fue deseleccionada.
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
