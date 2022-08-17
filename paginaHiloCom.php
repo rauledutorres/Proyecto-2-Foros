@@ -2,17 +2,53 @@
 $title = "foro";
 $css = "css/paginaHiloCom.css";
 $_GET["id"] = 13;
+$_SESSION["id"] = 4;
+
+$userId = 4;
+$publiId = 13;
 include 'components/header.php';
 
+
+//Recuperar la publicación original con los datos del usuario
 $threadQuery = "SELECT publicaciones.publi_titulo AS postTitle, publicaciones.publi_descri AS postDescription, publicaciones.publi_date AS postDate, usuarios.user_id AS user_id, usuarios.user_nombre AS userName, usuarios.user_img AS userImg
 FROM publicaciones
 JOIN usuarios ON usuarios.user_id = publicaciones.publi_user
-WHERE (SELECT publi_id = $_GET[id])";
+WHERE publi_id = $_GET[id]";
 $threadResult = $mysqli->query($threadQuery);
 
 $threadArray = [];
 while ($row = $threadResult->fetch_assoc()) {
     $threadArray[] = $row;
+}
+
+// Recuperar los comentarios asociados a la publicación
+$commentQuery = "SELECT comentarios.com_id, comentarios.com_coment, comentarios.com_date, usuarios.user_nombre, usuarios.user_img, comentarios.com_publi
+FROM comentarios
+JOIN usuarios
+ON comentarios.com_user = usuarios.user_id
+WHERE com_publi = $_GET[id]";
+$commentResult = $mysqli->query($commentQuery);
+$commentArray = [];
+while ($row = $commentResult->fetch_assoc()) {
+    $commentArray[] = $row;
+}
+
+//Guardar comentario en base de datos
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $sql = "INSERT INTO comentarios (com_coment, com_user, com_publi) 
+    VALUES ('$_POST[comment]', '$userId', '$publiId')";
+    try {
+        $result = $mysqli->query($sql);
+        if (!$result){
+          $error = 'No se ha podido publicar tu comentario';
+        } else {
+        unset($_POST);
+        header('Location: '.$_SERVER['PHP_SELF']);
+        die;
+        }
+      } catch (Exception $e) {
+        $error = "Algo ha salido mal. ".$e->getMessage();
+      }
 }
 
 ?>
@@ -31,24 +67,20 @@ while ($row = $threadResult->fetch_assoc()) {
     <div class="listaHiloPrincipal">
         <div class="hilo">
             <div class="hiloFoto">
-                <img src=<?php echo $threadArray[0]["userImg"];?> alt="">
-                <h5><?php echo $threadArray[0]["userName"];?></h5>
+                <img src=<?php echo $threadArray[0]["userImg"]; ?> alt="">
+                <h5><?php echo $threadArray[0]["userName"]; ?></h5>
             </div>
             <div class="hiloTexto">
-                <div class="hiloTitulo">
-                    <h3><?php echo $threadArray[0]["postTitle"];?></h3>
-                </div>
-                <div class="hiloTime">
-                    <h6><?php echo $threadArray[0]["postDate"];?></h6>
-                </div>
+                    <h3 class="hiloTitulo"><?php echo $threadArray[0]["postTitle"]; ?></h3>
+                    <h6 class="hiloTime">Fecha de publicación: <?php echo $threadArray[0]["postDate"]; ?></h6>
                 <div class="hiloDesc">
-                   <?php echo $threadArray[0]["postDescription"];?>
+                    <?php echo $threadArray[0]["postDescription"]; ?>
                 </div>
             </div>
         </div>
 
         <div class="comentario">
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 <textarea name="comment" id="comment" placeholder="Introduzca aquí su comentario" rows=5 cols=40></textarea>
                 <div id="postButtons">
                     <button type="reset" class="button cancel" id="cancelPost" onclick="closeModal()">Cancelar</button>
@@ -58,34 +90,20 @@ while ($row = $threadResult->fetch_assoc()) {
         </div>
 
         <div class="respuestas">
-            <div class="reply">
+            <?php for ($i = 0; $i < count($commentArray); $i++) {
+                print('<div class="reply">
                 <div class="replyFoto">
-                    <img src="./img/man1.png" alt="">
-                    <h5>elKevin02</h5>
+                    <img src="' . $commentArray[$i]['user_img'] . '" alt="">
+                    <div class="userData">
+                    <a href=""><h5>@' . $commentArray[$i]['user_nombre'] . '</h5></a>
+                    <h6 class="replyTime">' . $commentArray[$i]['com_date'] . '</h6>
+                    </div>
                 </div>
                 <div class="replyTexto">
-                    <div class="replyTime">
-                        <h6>vie, 29 de Julio del 2022, 13:40:13(GMT)</h6>
-                    </div>
-                    <div class="replyDesc">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus tempora minus alias harum, consectetur exercitationem. Perspiciatis odio saepe ipsa minima, praesentium, illo animi vero autem nesciunt, cupiditate accusantium ex sapiente.</p>
-                    </div>
+                    ' . $commentArray[$i]['com_coment'] . '
                 </div>
-            </div>
-            <div class="reply">
-                <div class="replyFoto">
-                    <img src="./img/man2.png" alt="">
-                    <h5>Anton34</h5>
-                </div>
-                <div class="replyTexto">
-                    <div class="replyTime">
-                        <h6>vie, 29 de Julio del 2022, 13:42:54(GMT)</h6>
-                    </div>
-                    <div class="replyDesc">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus tempora minus alias harum, consectetur exercitationem. Perspiciatis odio saepe ipsa minima, praesentium, illo animi vero autem nesciunt, cupiditate accusantium ex sapiente.</p>
-                    </div>
-                </div>
-            </div>
+            </div>');
+            } ?>
         </div>
     </div>
 

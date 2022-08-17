@@ -1,7 +1,5 @@
 .temasLista{
-    display: flex;
     font-weight: lighter;
-    flex-direction: column;
     margin-top: 1%;
     margin-right: 2%;
     margin-left: 2%;
@@ -64,21 +62,18 @@ h4{
 /*PARTE DE LOS HILOS*/
 
 .listaHiloPrincipal{
-    display: flex;
-    flex-direction: column;
-    padding-top: 30px;
-    margin-bottom: 40px;
+    margin-top: 4%;
+    margin-bottom: 2%;
 }
 
 .hilo{
     display: flex;
     flex-direction: row;
-    margin-left: 50px;
-    margin-right: 100px;
-    padding: 20px;
+    padding-block: 1%;
     box-shadow: 5px 5px 10px #cfcbbf;
-    padding-right: 40px;
+    padding-right: 3%;
     border-radius: 1em;
+    width: 95%;
 }
 
 .listaHiloPrincipal h2{
@@ -90,10 +85,9 @@ h4{
 .hiloFoto{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding-right: 30px;
-    padding-left: 10px;
-    width: 80px;
+    justify-content: flex-start;
+    margin-left: 4%;
+    margin-top: 2%;
     align-items: center;
 }
 
@@ -108,14 +102,19 @@ h4{
 }
 
 .hiloTexto{
-    display: flex;
-    flex-direction: column;
-    padding-left: 50px;
+    margin-left: 2%;
+}
+
+.hiloTexto h3{
+    margin-bottom:0;
+}
+
+.hiloTexto h6{
+    margin-bottom:0;
 }
 
 .hiloTexto p{
     text-align: justify;
-    padding-top: 20px;
     font-weight: lighter;
 }
 
@@ -160,7 +159,7 @@ h4{
 
 .reply{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin-left: 50px;
     margin-right: 100px;
     padding: 20px;
@@ -173,26 +172,43 @@ h4{
 
 .replyFoto{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: flex-start;
+    align-items: center;
     padding-right: 30px;
     padding-left: 10px;
-    width: 80px;
-}
-
-h5{
-    display: flex;
-    font-size: 1rem;
 }
 
 .replyTexto{
-    display: flex;
-    flex-direction: column;
-    padding-left: 50px;
+    text-align: justify;
+    font-weight: lighter;
 }
 
-.replyTexto p{
-    text-align: justify;
-    padding-top: 20px;
-    font-weight: lighter;
+#postButtons{
+    margin-block: 2%;
+    text-align: right;
+}
+
+.reply a {
+    cursor: auto;
+    text-decoration: none;
+    color: var(--text);
+}
+
+.reply h5 { 
+    margin-bottom: 0;
+}
+
+
+.reply h6 { 
+    margin-top: 2px;
+}
+
+.replyFoto img {
+    width: 50px;
+    border-radius: 50%;
+}
+
+.userData {
+    margin-left: 2%;
 }
