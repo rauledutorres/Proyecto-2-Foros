@@ -1,7 +1,9 @@
 <?php
 require 'config.php';
 session_start();
-
+// if (isset($_SESSION['welcome_usuario'])) {
+//     header('location:temas.php');
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +11,7 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="stylee.css">
+    <link rel="stylesheet" href="css/login.css">
     <title>Login/Sign up</title>
 </head>
 <body>
@@ -50,6 +52,7 @@ session_start();
                                 $email=$_POST['email'];
                                 $password=$_POST['pass']; 
 
+
                                 $sql=mysqli_query($connect,("SELECT * FROM usuarios where 
                                                                         user_correo ='$email' and 
                                                                         user_cont = '$password'"));
@@ -58,10 +61,11 @@ session_start();
                                    $row=mysqli_fetch_array($sql);
                                     $id=$row['user_id'];
                                     if ($email == $row['user_correo'] && $password == $row['user_cont']) {
-
+                                        
+                                        $_SESSION['welcome_usuario']=$id;
                                         $acceso = date("Y-m-d H:i:s");
                                         $int=mysqli_query($connect,"UPDATE `usuarios` SET `user_time`='$acceso' WHERE `user_id`='$id';");
-                                        // header('location: ');
+                                        header('location:http://localhost:8018/proyecto/git%20p2/Proyecto-2-Foros/temas.php ');
                                     }
                                 }
                             }
@@ -95,7 +99,7 @@ session_start();
                             <input id="valid_pass"class="inp_reg" type="text" name="valid_pass" placeholder="Repite tu Contraseña">
                             <button class="btn_reg" type="submit" name="registrar" >Registrate</button>
                             <span>¿Ya tienes Cuenta?<a class="form_et" href="">Inicia Sesion</a></span>
-                            <script>
+                            
                             <?php 
                                 if (isset($_POST['registrar'])){
                                     
@@ -118,13 +122,13 @@ session_start();
                                     }                              
                                 }
                             ?>
-                            </script>
                         </form>
                         
                     </div> 
                 </div>
             </main>
         </div>
+        
         <script src="scrip.js"></script>
 </body>
 </html>

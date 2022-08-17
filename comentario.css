@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto' system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+}
+
+header{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 5px 5px 10px #cfcbbf;
+}
+
+.header .header_logo{
+    display: flex;
+    align-items: center;
+}
+
+.header_logo img{
+    width: 65px;
+}
+
+.header .header_perfil{
+    display: flex;
+    align-items: center;
+}
+
+.perfil_hilo span{
+    display: flex;
+    font-size: 16px;
+    padding: 10px;
+    background-color: #F5CB5C;
+    margin-right: 60px;
+    border-radius: 10px;
+    height: 50px;
+    max-width: 150px;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.header .header_search input{
+    width: 400px;
+    height: 50px;
+    background-color: #E8EDDF;
+    border: none;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
