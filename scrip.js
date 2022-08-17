@@ -60,6 +60,7 @@ valid.addEventListener('keyup',(event)=>{
     let val_con = event.target.value;
     if (con === val_con) {
         console.log("las contraseña son iguales");
+        
     }else{
         console.log("no son iguales");
     }
