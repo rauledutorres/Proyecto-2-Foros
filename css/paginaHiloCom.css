@@ -78,6 +78,7 @@ h4{
     padding: 20px;
     box-shadow: 5px 5px 10px #cfcbbf;
     padding-right: 40px;
+    border-radius: 1em;
 }
 
 .listaHiloPrincipal h2{
@@ -89,14 +90,20 @@ h4{
 .hiloFoto{
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     padding-right: 30px;
     padding-left: 10px;
     width: 80px;
+    align-items: center;
 }
 
-h5{
-    display: flex;
+.hiloFoto img {
+    border-radius: 50%;
+    width: 80px;
+}
+
+
+.hiloFoto h5{
     font-size: 1rem;
 }
 
@@ -161,6 +168,7 @@ h5{
     padding-right: 40px;
     margin-top: 15px;
     margin-bottom: 15px;
+    border-radius: 1em;
 }
 
 .replyFoto{

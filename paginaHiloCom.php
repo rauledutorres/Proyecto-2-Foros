@@ -1,38 +1,48 @@
 <?php
-//localhost/proyecto2_foros/Proyecto-2-Foros/paginaHiloCom.php
-$title = "Categorías";
+$title = "foro";
 $css = "css/paginaHiloCom.css";
+$_GET["id"] = 13;
 include 'components/header.php';
+
+$threadQuery = "SELECT publicaciones.publi_titulo AS postTitle, publicaciones.publi_descri AS postDescription, publicaciones.publi_date AS postDate, usuarios.user_id AS user_id, usuarios.user_nombre AS userName, usuarios.user_img AS userImg
+FROM publicaciones
+JOIN usuarios ON usuarios.user_id = publicaciones.publi_user
+WHERE (SELECT publi_id = $_GET[id])";
+$threadResult = $mysqli->query($threadQuery);
+
+$threadArray = [];
+while ($row = $threadResult->fetch_assoc()) {
+    $threadArray[] = $row;
+}
+
 ?>
 
 <div class="paginaEntera">
     <div class="temasLista">
         <h4>Temas</h4>
         <ul>
-          <?php
-          for ($i=0; $i < count($categoryArray); $i++) { 
-            echo '<a href="paginaHilo.php?id='.$categoryArray[$i]["tema_id"].'"><li><img src="./img/icons/compass.svg" class="listIcon">'.$categoryArray[$i]["tema_nombre"].'</li></a>';
-          }?>
+            <?php
+            for ($i = 0; $i < count($categoryArray); $i++) {
+                echo '<a href="paginaHilo.php?id=' . $categoryArray[$i]["tema_id"] . '"><li><img src="./img/icons/compass.svg" class="listIcon">' . $categoryArray[$i]["tema_nombre"] . '</li></a>';
+            } ?>
         </ul>
     </div>
 
     <div class="listaHiloPrincipal">
-
-
         <div class="hilo">
             <div class="hiloFoto">
-                <img src="./img/woman1.png" alt="">
-                <h5>ariana95</h5>
+                <img src=<?php echo $threadArray[0]["userImg"];?> alt="">
+                <h5><?php echo $threadArray[0]["userName"];?></h5>
             </div>
             <div class="hiloTexto">
                 <div class="hiloTitulo">
-                    <h3>Lanzamiento Telescopio James Webb</h3>
+                    <h3><?php echo $threadArray[0]["postTitle"];?></h3>
                 </div>
                 <div class="hiloTime">
-                    <h6>vie, 29 de Julio del 2022, 13:31:35(GMT)</h6>
+                    <h6><?php echo $threadArray[0]["postDate"];?></h6>
                 </div>
                 <div class="hiloDesc">
-                    <p>Después de innumerables retrasos, el 25/12/2021 a las 12:20 UTC parece que va a ser la fecha definitiva para el lanzamiento del telescopio espacial James Webb, el telescopio mas potente y complejo de la historia que se espera revolucione el conocimiento en la astrofísica.</p>
+                   <?php echo $threadArray[0]["postDescription"];?>
                 </div>
             </div>
         </div>
