@@ -7,7 +7,7 @@ include 'components/header.php';
 
 
 //Recuperar la publicación original con los datos del usuario
-$threadQuery = "SELECT publicaciones.publi_titulo AS postTitle, publicaciones.publi_descri AS postDescription, publicaciones.publi_date AS postDate, usuarios.user_id AS user_id, usuarios.user_nombre AS userName, usuarios.user_img AS userImg
+$threadQuery = "SELECT publicaciones.publi_titulo AS postTitle, publicaciones.publi_descri AS postDescription, publicaciones.publi_date AS postDate, publicaciones.publi_est AS postStatus, usuarios.user_id AS user_id, usuarios.user_nombre AS userName, usuarios.user_img AS userImg
 FROM publicaciones
 JOIN usuarios ON usuarios.user_id = publicaciones.publi_user
 WHERE publi_id = $idHilo";
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </div>
 
-        <div class="comentario">
+        <div class="comentario" <?php echo($threadArray[0]["postStatus"] == "Cerrado" ? "style='display: none'" : "style='display: flex'");?>>
             <form method="post" enctype="multipart/form-data">
                 <input type="hidden" name="comment">
                 <textarea name="comment" id="comment" placeholder="Introduzca aquí su comentario" rows=5 cols=40></textarea>
@@ -87,6 +87,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <button type="submit" class="button">Guardar</button>
                 </div>
             </form>
+        </div>
+
+        <div id="closedPost" <?php echo($threadArray[0]["postStatus"] == "Cerrado" ? "style='display: block'" : "style='display: none'");?>>
+        <p>Publicación cerrada por el autor. No admite más comentarios</p>
         </div>
 
         <div class="respuestas">

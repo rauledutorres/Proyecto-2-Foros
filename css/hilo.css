@@ -218,3 +218,9 @@ h4{
     margin-left: 2%;
 }
 
+#closedPost {
+    text-align: center;
+    color:var(--text);
+    font-weight: bold;
+}
+
