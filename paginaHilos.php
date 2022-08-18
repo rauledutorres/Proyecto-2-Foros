@@ -3,8 +3,16 @@
 //http://localhost/proyecto2_foros/Proyecto-2-Foros/paginaHilos
 $title = "Categorías";
 $css = "css/temas.css";
+require 'config.php';
 include 'components/header.php';
-print_r($categoryArray[0]['tema_nombre']);
+$cod=$_GET['id'];
+for($i=0;$i<count($categoryArray);$i++){
+    if ($categoryArray[$i]['tema_id'] == $cod) {
+        $cat=$categoryArray[$i];
+    }
+}
+
+$selecUser=mysqli_fetch_assoc($selecUser);
 ?>
 
 <!DOCTYPE html>
@@ -27,20 +35,29 @@ print_r($categoryArray[0]['tema_nombre']);
                     <h4>Temas</h4>
                 </div>
                 <ul>
-                    <button><li><img src="./img/CircleWavyQuestion.png">Ciencia</li></button>
-                    <button><li><img src="./img/Compass.png">Musica</li></button>
-                    <button><li><img src="./img/Compass.png">Sociales</li></button>
-                    <button><li><img src="./img/Compass.png">Deportes</li></button>
-                    <button><li><img src="./img/Compass.png">Videojuegos</li></button>
+                    <?php
+                    for ($i=0;$i<count($categoryArray);$i++) {
+                        //colocar un if para verificar la imagen si esta seleccionado o  no.s
+                        ?>
+                        <button><li>
+                           <a href="paginaHilos.php?id=<?php echo $categoryArray[$i]["tema_id"]; ?>">
+                           <img src="./img/<?php if ($categoryArray[$i]['tema_id'] == $cat['tema_id']) {
+                                echo 'CircleWavyQuestion.png';
+                        }else{
+                            echo 'Compass.png';
+                        }?>"><?php echo $categoryArray[$i]['tema_nombre'];?></a></li></button>
+                        <?php
+                    }
+                    ?>
                 </ul>
             </div>
             
             <div class="listaHilos">
-                <h2>Ciencias</h2>
+                <h2><?php echo $cat['tema_nombre'];?></h2>
                 <div class="hilo">
                     <div class="hiloFoto">
                         <img src="./img/woman1.png" alt="">
-                        <h5>ariana95</h5>
+                        <h5><?php echo $selecUser['user_nombre'];?></h5>
                     </div>
                     <div class="hiloTexto">
                         <div class="hiloTitulo">

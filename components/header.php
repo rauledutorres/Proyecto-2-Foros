@@ -1,10 +1,21 @@
 <?php
 session_start();
+include './config.php';
+if (isset($_SESSION['welcome_usuario'])) {
+  $user=$_SESSION['welcome_usuario'];
+  //usuario selecciona dependiendo el login
+  $selecUser=mysqli_query($connect,"SELECT * FROM usuarios where user_id= $user") ;
+}else{
+  echo 'no hiniciado session';
+}
 $_SESSION['signed_in'] = true; // Variable de prueba, cambiar a true cuando un usuario inicie sesión
 $_SESSION['user'] = 1; // Variable inventada, a user_id cuando haya usuario con sesión iniciada
-include './config.php';
+include 'components/conector.php';
+
 
 // Obtiene las categorías para el select de nuevo post y para la página de temas 
+
+//seleccion del tema a gusto del usuario 
 $categoryQuery =mysqli_query($connect,"SELECT tema_id, tema_nombre, tema_img FROM temas ORDER BY tema_nombre ASC");
 // $categoryResult = $mysqli->query($categoryQuery);
 
