@@ -12,7 +12,6 @@ for($i=0;$i<count($categoryArray);$i++){
     }
 }
 
-$selecUser=mysqli_fetch_assoc($selecUser);
 ?>
 
 <!DOCTYPE html>
@@ -54,23 +53,35 @@ $selecUser=mysqli_fetch_assoc($selecUser);
             
             <div class="listaHilos">
                 <h2><?php echo ucwords($cat['tema_nombre']);?></h2>
+                <?php
+                    for ($i=0; $i <count($selecHilos) ; $i++) { 
+                        if ($selecHilos[$i]['publi_tema'] == $cat['tema_id']) {
+                    ?>
                 <div class="hilo">
                     <div class="hiloFoto">
                         <img src="./img/woman1.png" alt="">
-                        <h5><?php echo $selecUser['user_nombre'];?></h5>
+                        <h5><?php for ($j=0; $j <count($allUser) ; $j++) { 
+                            if ($allUser[$j]['user_id']==$selecHilos[$i]['publi_user']) {
+                                echo $allUser[$j]['user_nombre'];
+                            }
+                           
+                        } ?></h5>
                     </div>
                     <div class="hiloTexto">
                         <div class="hiloTitulo">
-                            <h3>Lanzamiento Telescopio James Webb</h3>
+                            <h3> <?php echo $selecHilos[$i]['publi_titulo'];?></h3>
                         </div>
                         <div class="hiloTime">
-                            <h6>vie, 29 de Julio del 2022, 13:31:35(GMT)</h6>
+                            
+                            <h6><?php //hacer una conversion de la fecha para obtenerla con este formato?>vie, 29 de Julio del 2022, 13:31:35(GMT)</h6>
                         </div>
                         <div class="hiloDesc">
-                            <p>Después de innumerables retrasos, el 25/12/2021 a las 12:20 UTC parece que va a ser la fecha definitiva para el lanzamiento del telescopio espacial James Webb, el telescopio mas potente y complejo de la historia que se espera revolucione el conocimiento en la astrofísica.</p>
+                            <p><?php echo $selecHilos[$i]['publi_descri'];?></p>
                         </div>
                     </div>    
                 </div>
+                <?php } } ?>
+               
             </div>
         </div>    
 </body>

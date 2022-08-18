@@ -1,18 +1,29 @@
 <?php
 session_start();
 include './config.php';
+
 if (isset($_SESSION['welcome_usuario'])) {
   $user=$_SESSION['welcome_usuario'];
   //usuario selecciona dependiendo el login
-  $selecUser=mysqli_query($connect,"SELECT * FROM usuarios where user_id= $user") ;
+  $selecUser=mysqli_fetch_assoc(mysqli_query($connect,"SELECT * FROM usuarios where user_id= $user"));
 }else{
-  echo 'no hiniciado session';
+  echo 'no se inicio session';
 }
+include 'components/conector.php';
+$categoryUsers=mysqli_query($connect,"SELECT * FROM usuarios");
+$allUser=[];
+while($x=mysqli_fetch_assoc($categoryUsers)){
+$allUser[]=$x;
+}
+print_r($allUser);
 $_SESSION['signed_in'] = true; // Variable de prueba, cambiar a true cuando un usuario inicie sesión
 $_SESSION['user'] = 1; // Variable inventada, a user_id cuando haya usuario con sesión iniciada
-include 'components/conector.php';
 
-
+$categoryHilos=mysqli_query($connect,"SELECT * FROM publicaciones");
+$selecHilos=[];
+while($cont = mysqli_fetch_assoc($categoryHilos)){
+$selecHilos[] = $cont;
+}
 // Obtiene las categorías para el select de nuevo post y para la página de temas 
 
 //seleccion del tema a gusto del usuario 
@@ -34,8 +45,9 @@ if($_SESSION['signed_in'] == false) {
   $error = 'Para publicar <a href="signin.php">inicia sesión</a>.';
 } else {
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    //solo coloque mi variable SESSION_usuario
       $sql = "INSERT INTO publicaciones (publi_titulo, publi_descri, publi_date, publi_tema, publi_user) 
-        VALUES ('$_POST[postTitle]', '$_POST[postDescription]', now(), '$_POST[category]','$_SESSION[user]')";
+        VALUES ('$_POST[postTitle]', '$_POST[postDescription]', now(), '$_POST[category]','$_SESSION[welcome_usuario]')";
       try {
         $result = $mysqli->query($sql);
         if (!$result){

@@ -66,6 +66,7 @@
 }
 
 .hilo{
+    width: 807px;
     display: flex;
     flex-direction: row;
     margin-left: 50px;
@@ -102,4 +103,7 @@
 }
 ul{
     padding-left: 1rem;
+}
+a{
+    text-decoration: none;
 }
