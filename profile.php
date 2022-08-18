@@ -3,10 +3,19 @@ $title = "Mi perfil";
 $css = "css/profile.css";
 include("components/header.php");
 $errorMsg = "";
+$userThreads = [];
+try {
+    $userThreadsQuery = "SELECT * FROM publicaciones WHERE publi_user = $id";
+    $userThreadsResult = $mysqli->query($userThreadsQuery);
+    while ($row = $userThreadsResult->fetch_assoc()) {
+        $userThreads[] = $row;
+    }
+} catch (Exception $e) {
+    echo $e->getMessage();
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['edit'])) {
-
         if (!empty($_POST['userName'] && $_POST['userName'] != $userData[0]['user_nombre'])) {
             $newName = $_POST['userName'];
             $editQuery = "UPDATE usuarios SET user_nombre = '$newName' WHERE user_id = $id";
@@ -54,7 +63,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
             }
         }
+        
     }
+
 }
 
 ?>
@@ -99,14 +110,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </form>
     </div>
-    <div id="userThread">
+    <div id="threadContainer">
         <div id="title">
             <img src="./img/icons/question.svg" class="icon" id="questionIcon">
             <h2>Mis hilos</h2>
         </div>
-        <div id="threadContent">
-            <img src="./img/web/man-thinking.svg" alt="man thinking">
-            <p>¡No seas tímido, publica algo!</p>
+        <div id="userThread">
+            <?php if (count($userThreads) > 0) {
+                for ($i=0; $i < count($userThreads); $i++) {
+                    echo '
+                    <div class="thread '.$userThreads[$i]["publi_est"].'" id="'.$userThreads[$i]["publi_id"].'">
+                        <div class="threadContent">
+                        <h3>'.$userThreads[$i]["publi_titulo"].'</h3>
+                        <div class="threadText">
+                        '.$userThreads[$i]["publi_descri"].'
+                        </div>
+                        <p style="display:none">'.$userThreads[$i]["publi_tema"].'</p>
+                        </div>
+                        <form class="threadButtons" method="POST"'.($userThreads[$i]["publi_est"] == "Cerrado" ? "style='display: none'" : "style='display: flex'").'>
+                            <button type="button" class="editThread" name="editId" onclick="edit(event);">Editar</button>
+                            <button type="submit" class="closeThread" name="closeId" onclick="closePost(event);">Cerrar</button>
+                        </form>
+                        <img src="./img/icons/closed2.svg" class="lockIcon"'.($userThreads[$i]["publi_est"] == "Cerrado" ? "style='display: block'" : "style='display: none'").'>
+                    </div>
+                    ';
+                } 
+            } else {
+                echo '
+                <div id="noThread">
+                    <img src="./img/web/man-thinking.svg" alt="man thinking">
+                    <p>¡No seas tímido, publica algo!</p>
+                </div>
+                ';
+            };?>
         </div>
     </div>
 </div>

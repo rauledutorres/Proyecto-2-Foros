@@ -27,30 +27,58 @@ try {
   echo $e->getMessage();
 }
 // Publicar nuevo post y guardarlo en la base de datos
-// Da problema porque siempre guarda el $_POST y se crean entradas cada vez que se refresca la página 
-// Habría que redirigir a otra página (la del nuevo post creado por ejemplo) para evitar esto
 $error = "";
 
 if ($_SESSION['signed_in'] == false) {
   $signedInError = true;
 } else {
-  if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['newPost'])) {
-    $title = $_POST['postTitle'];
-    $description = $_POST['postDescription'] ?? "";
-    $category = $_POST['postCategory'];
-    $sql = "INSERT INTO publicaciones (publi_titulo, publi_descri, publi_date, publi_tema, publi_user) 
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['newPost'])) {
+      $title = $_POST['postTitle'];
+      $description = $_POST['postDescription'] ?? "";
+      $category = $_POST['postCategory'];
+      $sql = "INSERT INTO publicaciones (publi_titulo, publi_descri, publi_date, publi_tema, publi_user) 
         VALUES ('$title', '$description', now(), '$category','$id')";
-    try {
-      $result = $mysqli->query($sql);
-      if (!$result) {
-        $error = 'Algo no ha ido bien, por favor inténtalo de nuevo más tarde.';
-      } else {
-        $newId = $mysqli->insert_id;
-        header('Location: hilo.php?id='.$newId);
+      try {
+        $result = $mysqli->query($sql);
+        if (!$result) {
+          $error = 'Algo no ha ido bien, por favor inténtalo de nuevo más tarde.';
+        } else {
+          $newId = $mysqli->insert_id;
+          header('Location: hilo.php?id=' . $newId);
+        }
+      } catch (Exception $e) {
+        $error = "Algo ha salido mal. " . $e->getMessage();
       }
-    } catch (Exception $e) {
-      $error = "Algo ha salido mal. " . $e->getMessage();
     }
+    if (isset($_POST['editPost'])) {
+      $title = $_POST['postTitle'];
+      $description = $_POST['postDescription'] ?? "";
+      $postId = $_POST['editPost'];
+      $sql = "UPDATE publicaciones SET publi_titulo = '$title', publi_descri = '$description' WHERE publi_id = $postId";
+      try {
+        $result = $mysqli->query($sql);
+        if (!$result) {
+          $error = 'Algo no ha ido bien, por favor inténtalo de nuevo más tarde.';
+        } else {
+          header('Location: hilo.php?id=' . $postId);
+        }
+      } catch (\Exception $e) {
+        echo $e->getMessage();
+      }
+    }
+
+    if (isset($_POST['closeId'])) {
+      $closeSQL = "UPDATE publicaciones SET publi_est = 'Cerrado' WHERE publi_id = $_POST[closeId]";
+      try {
+          $result = $mysqli->query($closeSQL);
+          if($result){
+              header('Location: '.$_SERVER['PHP_SELF']);
+          }
+      } catch (\Exception $e){
+          echo $e->getMessage();
+      }
+  }
   }
 }
 ?>
@@ -67,7 +95,6 @@ if ($_SESSION['signed_in'] == false) {
   <link rel="stylesheet" href=<?php echo $css ?>>
   <script src="https://cdn.tiny.cloud/1/wyr78gq4bxmh08sv63gfilc0rvzydpgjc3knjw3k6t1xpcev/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
-
 <body>
   <header>
     <div class="header" id="logoContainer">
@@ -82,15 +109,15 @@ if ($_SESSION['signed_in'] == false) {
         <input type="search" placeholder="Buscar" class="input">
         <button id="searchButton" class="button">search</button>
       </div>
-      <div class="nuevoHilo" onclick="openModal()">
+      <div class="nuevoHilo" onclick="openModal(event)">
         <img src="img/icons/post.svg" class="icon" id="postIcon">
         <button class="button">Nuevo Hilo</button>
       </div>
       <?php if ($_SESSION['signed_in'] == true) echo '<div id="profileIcon">
-        <img class="headerProfile" src="'.$userData[0]["user_img"].'" alt="" srcset="">
+        <img class="headerProfile" src="' . $userData[0]["user_img"] . '" alt="" srcset="">
         <img src="img/icons/down.svg" class="icon" id="profileMore">
         <div id="profileMenu">
-          <a href="profile.php?id='.$id.'">Editar perfil</a>
+          <a href="profile.php?id=' . $id . '">Editar perfil</a>
           <span></span>
           <a href="logout.php">Cerrar sesión</a>
         </div>
@@ -103,9 +130,9 @@ if ($_SESSION['signed_in'] == false) {
       <div id="newPost" <?php if (isset($signedInError)) echo 'style="display:none"'; ?>>
         <img src="img/icons/x.svg" class="icon" id="xIcon" onclick="closeModal()" alt="Cerrar">
         <form id="postForm" method="POST" enctype='multipart/form-data'>
-          <input type="hidden" name="newPost">
+          <input type="hidden" name="newPost" id="newPostInput">
           <input type="text" class="input" name="postTitle" id="postTitle" placeholder="Título" required>
-          <select name="postCategory" required>
+          <select name="postCategory" id="postCategory" required>
             <option selected="true" disabled="disabled">Selecciona un tema</option>
             <?php
             for ($i = 0; $i < count($categoryArray); $i++) {
@@ -116,7 +143,7 @@ if ($_SESSION['signed_in'] == false) {
 
           <div id="postButtons">
             <button type="reset" class="button cancel" id="cancelPost" onclick="closeModal()">Cancelar</button>
-            <button type="submit" class="button">Guardar</button>
+            <button type="submit" class="button" id="publishButton">Publicar</button>
           </div>
 
           <script>
@@ -138,6 +165,7 @@ if ($_SESSION['signed_in'] == false) {
       <div id="modalError" <?php if (isset($signedInError)) echo 'style="display:block"'; ?>>
         <img src="img/icons/x.svg" class="icon" onclick="closeModal()" alt="Cerrar">
         <img src="img/web/signup.svg" id="errorImg">
-        <?php if (isset($signedInError)) echo '<p>¡Únete a nosotros! Para publicar <a href="login-registro.php">regístrate</a> o <a href="login-registro.php">inicia sesión</a>.</p>'?>
+        <?php if (isset($signedInError)) echo '<p>¡Únete a nosotros! Para publicar <a href="login-registro.php">regístrate</a> o <a href="login-registro.php">inicia sesión</a>.</p>' ?>
       </div>
     </div>
+    

@@ -38,3 +38,41 @@ document.getElementById('profilePic').onchange = function (e) {
         };
     }
 }
+
+function edit(event) {
+    openModal();
+    var titulo = event.target.parentNode.parentNode.children[0].children[0].innerText;
+    var description = event.target.parentNode.parentNode.children[0].children[1].innerHTML;
+    var id = event.target.parentNode.parentNode.id;
+    var category = event.target.parentNode.parentNode.children[0].children[2].innerText;
+
+    var form = document.getElementById("postForm");
+    var hidden = document.createElement("input");
+    hidden.setAttribute("type", "hidden");
+    hidden.setAttribute("name", "editPost");
+    hidden.value = id;
+    form.appendChild(hidden);
+    document.getElementById("newPostInput").remove();
+    document.getElementById("postTitle").value = titulo;
+    tinymce.activeEditor.setContent(description)
+    var select = document.getElementById("postCategory");
+    select.setAttribute("disabled", "disabled");
+    for (let option = 0; option < select.length; option++) {
+        if (select.options[option].value == category){
+            select.options[option].selected = true;
+        }
+    }
+    document.getElementById("publishButton").innerText = "Guardar";
+}
+
+function closePost(event){
+    var id = event.target.parentNode.parentNode.id;
+    if(confirm("¿Estas seguro de eliminar el hilo seleccionado?")){
+        event.target.value = id;
+        var form = event.target.parentNode;
+        form.submit();
+    }else{
+        
+    }
+
+}
