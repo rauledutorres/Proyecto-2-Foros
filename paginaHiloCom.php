@@ -2,9 +2,8 @@
 $title = "foro";
 $css = "css/paginaHiloCom.css";
 $_GET["id"] = 13;
-$_SESSION["id"] = 4;
 
-$userId = 4;
+
 $publiId = 13;
 include 'components/header.php';
 
@@ -35,20 +34,22 @@ while ($row = $commentResult->fetch_assoc()) {
 
 //Guardar comentario en base de datos
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $sql = "INSERT INTO comentarios (com_coment, com_user, com_publi) 
-    VALUES ('$_POST[comment]', '$userId', '$publiId')";
-    try {
-        $result = $mysqli->query($sql);
-        if (!$result){
-          $error = 'No se ha podido publicar tu comentario';
-        } else {
-        unset($_POST);
-        header('Location: '.$_SERVER['PHP_SELF']);
-        die;
-        }
-      } catch (Exception $e) {
-        $error = "Algo ha salido mal. ".$e->getMessage();
-      }
+    if (isset($_POST['comment'])){
+        $sql = "INSERT INTO comentarios (com_coment, com_user, com_publi) 
+        VALUES ('$_POST[comment]', '$id', '$publiId')";
+        try {
+            $result = $mysqli->query($sql);
+            if (!$result){
+              $error = 'No se ha podido publicar tu comentario';
+            } else {
+            unset($_POST);
+            header('Location: '.$_SERVER["PHP_SELF"]);
+            die;
+            }
+          } catch (Exception $e) {
+            $error = "Algo ha salido mal. ".$e->getMessage();
+          }
+    }
 }
 
 ?>
@@ -81,6 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <div class="comentario">
             <form method="post" enctype="multipart/form-data">
+                <input type="hidden" name="comment">
                 <textarea name="comment" id="comment" placeholder="Introduzca aquí su comentario" rows=5 cols=40></textarea>
                 <div id="postButtons">
                     <button type="reset" class="button cancel" id="cancelPost" onclick="closeModal()">Cancelar</button>

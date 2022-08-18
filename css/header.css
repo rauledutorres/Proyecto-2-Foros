@@ -85,6 +85,7 @@ h1 {
 
 .headerProfile {
     width: 50px;
+    height: 50px;
     border-radius: 50%;
     border: white solid 2px;
 }
@@ -399,4 +400,33 @@ h1 {
     #postButtons button{
         margin-right: 5px;
     }
+}
+
+#modalError {
+    display: none;
+    background-color:#fff;
+    width: 50%;
+    height: auto;
+    margin: 1% auto;
+    border-radius: 1em;
+    padding: 5% 4%;
+    text-align: center;
+    font-size: 1.3em;    
+    position: relative;
+    color: var (--text);
+    font-weight: 500;
+}
+
+#modalError a {
+    color: var(--contrast-text);
+}
+
+#modalError .icon{
+    right: 1%;
+    top: 0%;
+    cursor: pointer;
+}
+
+#errorImg {
+    width: 60%;
 }

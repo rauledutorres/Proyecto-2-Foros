@@ -2,15 +2,8 @@
 $title = "Mi perfil";
 $css = "css/editProfile.css";
 include("components/header.php");
-
-$editQuery = "SELECT * FROM usuarios WHERE $id = user_id";
-$editResult = $mysqli->query($editQuery);
-
-$userData = [];
-while ($row = $editResult->fetch_assoc()) {
-    $userData[] = $row;
-}
 $errorMsg = "";
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['edit'])) {
 
@@ -53,13 +46,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $imageSql = "UPDATE usuarios SET user_img = '$imagePath' WHERE $id = user_id";
                     $result = $mysqli->query($imageSql);
                     if ($result) {
-                        $statusMsg = 'Foto de perfil actualizada';
+                        unlink($userData[0]['user_img']);
+                        header("Location: ".$_SERVER["PHP_SELF"]);
                     } else {
                         $errorMsg = 'No se puede subir el archivo';
                     }
                 }
             }
-            unset($_POST);
         }
     }
 }
