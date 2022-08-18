@@ -53,7 +53,7 @@ $selecUser=mysqli_fetch_assoc($selecUser);
             </div>
             
             <div class="listaHilos">
-                <h2><?php echo $cat['tema_nombre'];?></h2>
+                <h2><?php echo ucwords($cat['tema_nombre']);?></h2>
                 <div class="hilo">
                     <div class="hiloFoto">
                         <img src="./img/woman1.png" alt="">
