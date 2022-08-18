@@ -1,6 +1,6 @@
 <?php
-$title = "Categorías";
-$css = "css/temas.css";
+$title = "foro: Categorías";
+$css = "css/index.css";
 include 'components/header.php';
 ?>
 
@@ -10,7 +10,7 @@ include 'components/header.php';
     <?php
     for ($i=0; $i < count($categoryArray); $i++) {
          // **************** Cambiar la dirección a la de la página de hilos ***********************
-        echo '<a href="hilos.php?id='.$categoryArray[$i]["tema_id"].'" class="category">
+        echo '<a href="categoria.php?id='.$categoryArray[$i]["tema_id"].'" class="category">
         '.$categoryArray[$i]["tema_img"].'
             <h3>'.$categoryArray[$i]["tema_nombre"].'</h3>
         </a>';

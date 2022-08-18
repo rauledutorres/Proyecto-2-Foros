@@ -45,8 +45,8 @@ if ($_SESSION['signed_in'] == false) {
       if (!$result) {
         $error = 'Algo no ha ido bien, por favor inténtalo de nuevo más tarde.';
       } else {
-        $error = 'Se acaba de publicar tu pregunta.';
-        unset($_POST['newPost']);
+        $newId = $mysqli->insert_id;
+        header('Location: hilo.php?id='.$newId);
       }
     } catch (Exception $e) {
       $error = "Algo ha salido mal. " . $e->getMessage();
@@ -90,7 +90,7 @@ if ($_SESSION['signed_in'] == false) {
         <img class="headerProfile" src="'.$userData[0]["user_img"].'" alt="" srcset="">
         <img src="img/icons/down.svg" class="icon" id="profileMore">
         <div id="profileMenu">
-          <a href="editProfile.php?id=<?php echo $id;?>">Editar perfil</a>
+          <a href="profile.php?id='.$id.'">Editar perfil</a>
           <span></span>
           <a href="logout.php">Cerrar sesión</a>
         </div>

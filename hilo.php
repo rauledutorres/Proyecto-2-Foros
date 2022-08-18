@@ -1,10 +1,8 @@
 <?php
 $title = "foro";
-$css = "css/paginaHiloCom.css";
-$_GET["id"] = 13;
+$css = "css/hilo.css";
+$idHilo = $_GET["id"];
 
-
-$publiId = 13;
 include 'components/header.php';
 
 
@@ -12,7 +10,7 @@ include 'components/header.php';
 $threadQuery = "SELECT publicaciones.publi_titulo AS postTitle, publicaciones.publi_descri AS postDescription, publicaciones.publi_date AS postDate, usuarios.user_id AS user_id, usuarios.user_nombre AS userName, usuarios.user_img AS userImg
 FROM publicaciones
 JOIN usuarios ON usuarios.user_id = publicaciones.publi_user
-WHERE publi_id = $_GET[id]";
+WHERE publi_id = $idHilo";
 $threadResult = $mysqli->query($threadQuery);
 
 $threadArray = [];
@@ -60,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <ul>
             <?php
             for ($i = 0; $i < count($categoryArray); $i++) {
-                echo '<a href="paginaHilo.php?id=' . $categoryArray[$i]["tema_id"] . '"><li><img src="./img/icons/compass.svg" class="listIcon">' . $categoryArray[$i]["tema_nombre"] . '</li></a>';
+                echo '<a href="tema.php?id=' . $categoryArray[$i]["tema_id"] . '"><li><img src="./img/icons/compass.svg" class="listIcon">' . $categoryArray[$i]["tema_nombre"] . '</li></a>';
             } ?>
         </ul>
     </div>
@@ -113,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <script>
     tinymce.init({
         selector: 'textarea#comment',
-        width: 1110,
+        width: 1000,
         height: 250,
         plugins: 'code lists',
         mobile: {

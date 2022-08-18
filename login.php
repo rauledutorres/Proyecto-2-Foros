@@ -1,5 +1,5 @@
 <?php
-require 'config.php';
+require 'components/config.php';
 session_start();
 if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true){
     header('Location: index.php');
@@ -129,6 +129,6 @@ if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true){
             </main>
         </div>
         
-        <script src="scrip.js"></script>
+        <script src=".js/login.js"></script>
 </body>
 </html>
