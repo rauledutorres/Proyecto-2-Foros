@@ -98,6 +98,14 @@ h1 {
     width: 50%;
 }
 
+.loginButtons {
+    width: 50%;
+}
+
+.loginButtons button {
+    margin-left: 75%;
+}
+
 @media only screen and (max-width: 426px) {
     .perfil_hilo {
         width: 60%;
@@ -419,7 +427,11 @@ h1 {
 }
 
 #modalError a {
-    color: var(--contrast-text);
+    color: var(--btn);
+}
+
+#modalError a:hover {
+    color: var(--btn-hover);
 }
 
 #modalError .icon{

@@ -5,14 +5,16 @@ include 'components/conector.php';
 
 // Obtiene los datos del usuario que inicia sesión
 $userData = [];
-try {
-  $editQuery = "SELECT * FROM usuarios WHERE $id = user_id";
-  $editResult = $mysqli->query($editQuery);
-  while ($row = $editResult->fetch_assoc()) {
-    $userData[] = $row;
+if (isset($id)) {
+  try {
+    $editQuery = "SELECT * FROM usuarios WHERE $id = user_id";
+    $editResult = $mysqli->query($editQuery);
+    while ($row = $editResult->fetch_assoc()) {
+      $userData[] = $row;
+    }
+  } catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
   }
-} catch (Exception $e) {
-  echo "Error: ";
 }
 
 // Obtiene las categorías para el select de nuevo post y para la página de temas
@@ -29,7 +31,7 @@ try {
 // Publicar nuevo post y guardarlo en la base de datos
 $error = "";
 
-if ($_SESSION['signed_in'] == false) {
+if (isset($_SESSION['signed_in']) == false) {
   $signedInError = true;
 } else {
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -71,14 +73,14 @@ if ($_SESSION['signed_in'] == false) {
     if (isset($_POST['closeId'])) {
       $closeSQL = "UPDATE publicaciones SET publi_est = 'Cerrado' WHERE publi_id = $_POST[closeId]";
       try {
-          $result = $mysqli->query($closeSQL);
-          if($result){
-              header('Location: '.$_SERVER['PHP_SELF']);
-          }
-      } catch (\Exception $e){
-          echo $e->getMessage();
+        $result = $mysqli->query($closeSQL);
+        if ($result) {
+          header('Location: ' . $_SERVER['PHP_SELF']);
+        }
+      } catch (\Exception $e) {
+        echo $e->getMessage();
       }
-  }
+    }
   }
 }
 ?>
@@ -95,6 +97,7 @@ if ($_SESSION['signed_in'] == false) {
   <link rel="stylesheet" href=<?php echo $css ?>>
   <script src="https://cdn.tiny.cloud/1/wyr78gq4bxmh08sv63gfilc0rvzydpgjc3knjw3k6t1xpcev/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
+
 <body>
   <header>
     <div class="header" id="logoContainer">
@@ -103,18 +106,28 @@ if ($_SESSION['signed_in'] == false) {
         <h1>foro</h1>
       </a>
     </div>
-    <div class="header perfil_hilo">
-      <div class="header_search">
-        <img src="img/icons/search.svg" class="icon" id="searchIcon">
-        <input type="search" placeholder="Buscar" class="input">
-        <button id="searchButton" class="button">search</button>
+    <?php if (str_contains('css/login.css', $css)) : ?>
+      <div class="header loginButtons">
+        <button id="is" class="button is">
+          Iniciar Sesion
+        </button>
+        <button id="reg" class="button">
+          Registrarse
+        </button>
       </div>
-      <div class="nuevoHilo" onclick="openModal(event)">
-        <img src="img/icons/post.svg" class="icon" id="postIcon">
-        <button class="button">Nuevo Hilo</button>
-      </div>
-      <?php if ($_SESSION['signed_in'] == true) echo '<div id="profileIcon">
-        <img class="headerProfile" src="' . $userData[0]["user_img"] . '" alt="" srcset="">
+    <?php else : ?>
+      <div class="header perfil_hilo">
+        <div class="header_search">
+          <img src="img/icons/search.svg" class="icon" id="searchIcon">
+          <input type="search" placeholder="Buscar" class="input">
+          <button id="searchButton" class="button">search</button>
+        </div>
+        <div class="nuevoHilo" onclick="openModal(event)">
+          <img src="img/icons/post.svg" class="icon" id="postIcon">
+          <button class="button">Nuevo Hilo</button>
+        </div>
+        <?php if (!isset($signedInError)) echo '<div id="profileIcon">
+        <img class="headerProfile" src="' . ($userData[0]["user_img"] ?? "") . '" alt="" srcset="">
         <img src="img/icons/down.svg" class="icon" id="profileMore">
         <div id="profileMenu">
           <a href="profile.php?id=' . $id . '">Editar perfil</a>
@@ -122,8 +135,9 @@ if ($_SESSION['signed_in'] == false) {
           <a href="logout.php">Cerrar sesión</a>
         </div>
       </div>' ?>
-    </div>
-    <script src="js/header.js"></script>
+      <?php endif; ?>
+      </div>
+      <script src="js/header.js"></script>
   </header>
   <main id="main">
     <div class="modal" id="newPostModal">
@@ -165,7 +179,6 @@ if ($_SESSION['signed_in'] == false) {
       <div id="modalError" <?php if (isset($signedInError)) echo 'style="display:block"'; ?>>
         <img src="img/icons/x.svg" class="icon" onclick="closeModal()" alt="Cerrar">
         <img src="img/web/signup.svg" id="errorImg">
-        <?php if (isset($signedInError)) echo '<p>¡Únete a nosotros! Para publicar <a href="login-registro.php">regístrate</a> o <a href="login-registro.php">inicia sesión</a>.</p>' ?>
+        <?php if (isset($signedInError)) echo '<p>¡Únete a nosotros! Para publicar <a href="login.php">regístrate</a> o <a href="login.php">inicia sesión</a>.</p>' ?>
       </div>
     </div>
-    

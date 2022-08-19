@@ -7,7 +7,7 @@ include 'components/header.php';
 
 
 //Recuperar la publicación original con los datos del usuario
-$threadQuery = "SELECT publicaciones.publi_titulo AS postTitle, publicaciones.publi_descri AS postDescription, publicaciones.publi_date AS postDate, publicaciones.publi_est AS postStatus, usuarios.user_id AS user_id, usuarios.user_nombre AS userName, usuarios.user_img AS userImg
+$threadQuery = "SELECT publicaciones.publi_titulo AS postTitle, publicaciones.publi_descri AS postDescription, publicaciones.publi_date AS postDate, publicaciones.publi_tema AS idTema, publicaciones.publi_est AS postStatus, usuarios.user_id AS user_id, usuarios.user_nombre AS userName, usuarios.user_img AS userImg
 FROM publicaciones
 JOIN usuarios ON usuarios.user_id = publicaciones.publi_user
 WHERE publi_id = $idHilo";
@@ -23,7 +23,7 @@ $commentQuery = "SELECT comentarios.com_id, comentarios.com_coment, comentarios.
 FROM comentarios
 JOIN usuarios
 ON comentarios.com_user = usuarios.user_id
-WHERE com_publi = $_GET[id]";
+WHERE com_publi = $idHilo";
 $commentResult = $mysqli->query($commentQuery);
 $commentArray = [];
 while ($row = $commentResult->fetch_assoc()) {
@@ -58,7 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <ul>
             <?php
             for ($i = 0; $i < count($categoryArray); $i++) {
-                echo '<a href="tema.php?id=' . $categoryArray[$i]["tema_id"] . '"><li><img src="./img/icons/compass.svg" class="listIcon">' . $categoryArray[$i]["tema_nombre"] . '</li></a>';
+                echo '<a href="tema.php?id=' . $categoryArray[$i]["tema_id"] . '"'.($categoryArray[$i]["tema_id"] == $threadArray[0]["idTema"] ? 'class="selected"' : '').'>
+                <li><img src="./img/icons/'.($categoryArray[$i]['tema_id'] == $threadArray[0]["idTema"] ? 'wavyquestion.svg"' : 'compass.svg"').'class="listIcon">' . $categoryArray[$i]["tema_nombre"] . '</li></a>';
             } ?>
         </ul>
     </div>
