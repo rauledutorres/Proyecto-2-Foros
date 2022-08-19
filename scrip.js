@@ -1,7 +1,7 @@
 const btn_reg=document.querySelector("#reg");
 const btn_is=document.querySelector("#is");
 
-const box_login=document.querySelector("#login");;
+const box_login=document.querySelector("#login");
 const box_register=document.querySelector("#registro");
 
 const btn_vipass=document.querySelector(".img_reg_vipass");

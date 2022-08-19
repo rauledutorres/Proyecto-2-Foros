@@ -21,7 +21,8 @@ require 'config.php';
         ?>
         <a href="paginaHilos.php?id=<?php echo $categoryArray[$i]["tema_id"]; ?>">
             <div class="category">
-                <img class="category" src="data:image/jpg;base64,<?php echo base64_encode($categoryArray[$i]["tema_img"]);?>" alt="">
+                <!-- <img class="category" src="data:image/jpg;base64,<?php // echo base64_encode($categoryArray[$i]["tema_img"]);?>" alt=""> -->
+                <?php echo $categoryArray[$i]["tema_img"] ;?>
                 <h3><?php echo $categoryArray[$i]["tema_nombre"];?></h3>
             </div>
         </a>

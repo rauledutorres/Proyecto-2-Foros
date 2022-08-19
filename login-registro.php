@@ -63,9 +63,12 @@ session_start();
                                     if ($email == $row['user_correo'] && $password == $row['user_cont']) {
                                         
                                         $_SESSION['welcome_usuario']=$id;
+                                        $_SESSION['date']=mysqli_fetch_assoc(mysqli_query($connect,"SELECT user_time FROM usuarios WHERE `user_id`='$id'"));
+
                                         $acceso = date("Y-m-d H:i:s");
                                         $int=mysqli_query($connect,"UPDATE `usuarios` SET `user_time`='$acceso' WHERE `user_id`='$id';");
-                                        header('location:http://localhost:8018/proyecto/git%20p2/Proyecto-2-Foros/temas.php ');
+
+                                        header('location:index.php ');
                                     }
                                 }
                             }

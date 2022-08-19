@@ -3,9 +3,12 @@
 //http://localhost/proyecto2_foros/Proyecto-2-Foros/paginaHilos
 $title = "Categorías";
 $css = "css/temas.css";
+
 require 'config.php';
 include 'components/header.php';
+
 $cod=$_GET['id'];
+
 for($i=0;$i<count($categoryArray);$i++){
     if ($categoryArray[$i]['tema_id'] == $cod) {
         $cat=$categoryArray[$i];
@@ -24,27 +27,28 @@ for($i=0;$i<count($categoryArray);$i++){
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/paginaHiloss.css">
+    <link rel="stylesheet" href="./css/paginaHilos.css">
     
 </head>
 <body>
         <div class="paginaEntera">
             <div class="temasLista">
                 <div class="tituloLista">
-                    <h4>Temas</h4>
+                    <a href="temas.php"><h3>Temas</h3></a>
                 </div>
                 <ul>
                     <?php
+                    //El filtro de los temas
                     for ($i=0;$i<count($categoryArray);$i++) {
-                        //colocar un if para verificar la imagen si esta seleccionado o  no.s
+                        //colocar un if para verificar la imagen si esta seleccionado o  no.
                         ?>
+                        <a href="paginaHilos.php?id=<?php echo $categoryArray[$i]["tema_id"]; ?>">
                         <button><li>
-                           <a href="paginaHilos.php?id=<?php echo $categoryArray[$i]["tema_id"]; ?>">
                            <img src="./img/<?php if ($categoryArray[$i]['tema_id'] == $cat['tema_id']) {
                                 echo 'CircleWavyQuestion.png';
                         }else{
                             echo 'Compass.png';
-                        }?>"><?php echo $categoryArray[$i]['tema_nombre'];?></a></li></button>
+                        }?>"><?php echo $categoryArray[$i]['tema_nombre'];?></li></button></a>
                         <?php
                     }
                     ?>
@@ -58,22 +62,42 @@ for($i=0;$i<count($categoryArray);$i++){
                         if ($selecHilos[$i]['publi_tema'] == $cat['tema_id']) {
                     ?>
                 <div class="hilo">
+                    <?php
+                    if (strtotime($newDate['user_time']) < strtotime($selecHilos[$i]['publi_date'])) {
+                        echo gmdate("d-F-Y H:i:s ", time() + 3600*(1+date("I")));
+                        $dateTwo['user_time']=gmdate("d-F-Y H:i:s ", time() + 3600*(1+date("I")));
+                        $_SESSION['date']=$dateTwo;
+                        //es una manera muy obligada de que muestre los mensajes nuevos hay q seguir buscando...
+                        ?><script>
+                            document.querySelector(".hilo").classList.toggle("bord");
+                        </script><?php
+                    }else{
+                        echo 'hola';
+                        ?><script>
+                            document.querySelector(".hilo").classList.remove("bord");
+                        </script><?php
+                    }
+                    ?>
+
                     <div class="hiloFoto">
                         <img src="./img/woman1.png" alt="">
                         <h5><?php for ($j=0; $j <count($allUser) ; $j++) { 
                             if ($allUser[$j]['user_id']==$selecHilos[$i]['publi_user']) {
                                 echo $allUser[$j]['user_nombre'];
-                            }
-                           
-                        } ?></h5>
+                            }}?></h5>
                     </div>
                     <div class="hiloTexto">
                         <div class="hiloTitulo">
-                            <h3> <?php echo $selecHilos[$i]['publi_titulo'];?></h3>
+                            <h3> <?php echo ucwords($selecHilos[$i]['publi_titulo']);?></h3>
                         </div>
                         <div class="hiloTime">
                             
-                            <h6><?php //hacer una conversion de la fecha para obtenerla con este formato?>vie, 29 de Julio del 2022, 13:31:35(GMT)</h6>
+                            <h6><?php $dateHilo = $selecHilos[$i]['publi_date'];
+                            setlocale(LC_ALL, "es-ES");
+                            //$nuevoDateHilo = date("l, d M Y", strftime($dateHilo));
+
+                            echo strftime("%A %d de %B del %Y");
+                            ?>vie, 29 de Julio del 2022, 13:31:35(GMT)</h6>
                         </div>
                         <div class="hiloDesc">
                             <p><?php echo $selecHilos[$i]['publi_descri'];?></p>

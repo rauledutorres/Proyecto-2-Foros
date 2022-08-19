@@ -75,7 +75,9 @@
     box-shadow: 5px 5px 10px #cfcbbf;
     padding-right: 40px;
 }
-
+.bord{
+    border: #F5CB5C solid;
+}
 .listaHilos h2{
     padding-top: 30px;
     padding-left: 45px;
@@ -106,4 +108,5 @@ ul{
 }
 a{
     text-decoration: none;
+    color:black ;
 }
