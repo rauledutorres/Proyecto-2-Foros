@@ -122,8 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
         <div class="emptyComments" <?php echo (empty($commentArray) ? 'style="display:flex"' : 'style="display:none;"'); ?>>
             <img src="img/web/surprise.svg" width="25%">
-            <p style="cursor:default">Todavía no respusetas, ¡sé el primero en contestar!</u></p>
-            <img src="img/web/arrowup.svg" width="25%">
+            <p style="cursor:default">Todavía no hay respusetas, ¡sé el primero en contestar!</u></p>
         </div>
     </div>
 

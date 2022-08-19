@@ -119,7 +119,8 @@ if (isset($_SESSION['signed_in']) == false) {
       <div class="header perfil_hilo">
         <div class="header_search">
           <img src="img/icons/search.svg" class="icon" id="searchIcon">
-          <input type="search" placeholder="Buscar" class="input">
+          <input type="text" class="input" autocomplete="off" id="searchBox" placeholder="Buscar Temas...">
+          <div class="result"></div>
           <button id="searchButton" class="button">search</button>
         </div>
         <div class="nuevoHilo" onclick="openModal(event)">
