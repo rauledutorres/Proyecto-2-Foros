@@ -108,6 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <button type="reset" class="button cancel" id="cancelButton">Cancelar</button>
                 <button type="submit" class="button">Guardar</button>
             </div>
+            <button name="deleteAccount" type="button">Eliminar perfil</button>
         </form>
     </div>
     <div id="threadContainer">

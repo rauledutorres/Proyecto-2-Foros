@@ -5,7 +5,7 @@ $idHilo = $_GET["id"];
 
 include 'components/header.php';
 
-if($signedInError){
+if(isset($signedInError)){
     header('location: index.php');
 }
 
@@ -98,10 +98,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
 
         <div id="closedPost" <?php echo($threadArray[0]["postStatus"] == "Cerrado" ? "style='display: block'" : "style='display: none'");?>>
-        <p>Publicación cerrada por el autor. No admite más comentarios</p>
+        <p>Publicación cerrada por el autor. No admite más respuestas.</p>
         </div>
 
-        <div class="respuestas">
+        <div class="respuestas" <?php echo (empty($commentArray) ? 'style="display:none"' : ''); ?>>
             <?php for ($i = 0; $i < count($commentArray); $i++) {
                 print('<div class="reply">
                 <div class="replyFoto">
@@ -116,6 +116,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>');
             } ?>
+        </div>
+        <div class="respuestas" <?php echo (empty($commentArray) ? 'style="display:flex; flex-direction:column; align-items:center"' : ''); ?>>
+        <img src="img/web/surprise.svg" width="25%">
+        <p onclick=openModal()>Todavía no hay comentarios, <u>¡comenta algo!</u></p>
         </div>
     </div>
 
