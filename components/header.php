@@ -120,7 +120,8 @@ if (isset($_SESSION['signed_in']) == false) {
         <div class="header_search">
           <img src="img/icons/search.svg" class="icon" id="searchIcon">
           <input type="text" class="input" autocomplete="off" id="searchBox" placeholder="Buscar Temas...">
-          <div class="result"></div>
+          <div class="result" id="searchResultContainer">
+          </div>
           <button id="searchButton" class="button">search</button>
         </div>
         <div class="nuevoHilo" onclick="openModal(event)">
@@ -141,6 +142,7 @@ if (isset($_SESSION['signed_in']) == false) {
       <script src="js/header.js"></script>
   </header>
   <main id="main">
+
     <div class="modal" id="newPostModal">
       <div id="newPost" <?php if (isset($signedInError)) echo 'style="display:none"'; ?>>
         <img src="img/icons/x.svg" class="icon" id="xIcon" onclick="closeModal()" alt="Cerrar">

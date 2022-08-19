@@ -19,7 +19,7 @@ if (isset($_GET["term"])) {
                     $search[] = $row;
                 }
             } else {
-                //  echo "<p>No se encontró ningún tema.</p>";
+                 echo "<p>No se encontró ningún tema.</p>";
             }
         } else {
             echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
