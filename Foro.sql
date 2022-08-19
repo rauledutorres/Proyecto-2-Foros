@@ -23,22 +23,51 @@ USE `foros`;
 CREATE TABLE IF NOT EXISTS `comentarios` (
   `com_id` int(11) NOT NULL AUTO_INCREMENT,
   `com_coment` mediumtext NOT NULL,
-  `com_date` datetime DEFAULT NULL,
+  `com_date` datetime NOT NULL DEFAULT current_timestamp(),
   `com_user` int(11) NOT NULL,
   `com_publi` int(11) DEFAULT NULL,
   PRIMARY KEY (`com_id`),
   KEY `com_user` (`com_user`),
   KEY `FK_comentario_publicacion` (`com_publi`),
-  CONSTRAINT `FK_comentario_publicacion` FOREIGN KEY (`com_publi`) REFERENCES `publicaciones` (`publi_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_comentario_publicacion` FOREIGN KEY (`com_publi`) REFERENCES `publicaciones` (`publi_id`) ON UPDATE CASCADE,
   CONSTRAINT `FK_comentarios_usuarios` FOREIGN KEY (`com_user`) REFERENCES `usuarios` (`user_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla foros.comentarios: ~4 rows (aproximadamente)
+-- Volcando datos para la tabla foros.comentarios: ~33 rows (aproximadamente)
 REPLACE INTO `comentarios` (`com_id`, `com_coment`, `com_date`, `com_user`, `com_publi`) VALUES
-	(2, 'prueba', '2022-08-17 13:11:40', 1, 13),
-	(3, 'prueba 2 ', '2022-08-17 13:25:52', 1, 13),
-	(4, 'prueba 3', '2022-08-17 13:26:11', 4, 13),
-	(5, 'prueba 4', '2022-08-17 13:36:45', 1, 14);
+	(2, 'prueba', '2022-08-17 13:11:40', 6, 13),
+	(3, 'prueba 2 ', '2022-08-17 13:25:52', 6, 13),
+	(4, 'prueba 3', '2022-08-17 13:26:11', 5, 13),
+	(5, 'prueba 4', '2022-08-17 13:36:45', 4, 14),
+	(9, '<p>comentario de prueba</p>', '2022-08-17 16:53:33', 4, 13),
+	(10, '<p>comentario de prueba</p>', '2022-08-17 16:53:35', 4, 13),
+	(11, '<p>Comentario de prueba 2</p>', '2022-08-17 16:53:36', 4, 13),
+	(12, '<p>comentario listo</p>', '2022-08-17 17:12:10', 4, 13),
+	(14, '<p>Texto con <strong>estilo </strong>para probar <em>si se publica bien.</em></p>\r\n<h1>T&iacute;tulo principal</h1>\r\n<p style="text-align: center;">probando cosas</p>\r\n<hr>\r\n<p style="text-align: left;"><img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"></p>', '2022-08-17 18:13:01', 4, 13),
+	(15, '', '2022-08-17 19:37:16', 4, 13),
+	(16, '<p>comentario</p>', '2022-08-18 09:20:18', 4, 13),
+	(17, '<p>comentario</p>', '2022-08-18 09:21:03', 4, 13),
+	(18, '<p>comentario</p>', '2022-08-18 09:23:00', 4, 13),
+	(19, '<p>comentario</p>', '2022-08-18 09:23:02', 4, 13),
+	(20, '<p>holaholahola</p>', '2022-08-18 09:25:18', 4, 13),
+	(21, '<p>asdfasdf</p>', '2022-08-18 09:32:27', 4, 13),
+	(22, '<p>asdfasdf</p>', '2022-08-18 09:34:01', 4, 13),
+	(23, '<p>asdfasdf</p>', '2022-08-18 09:34:55', 4, 13),
+	(24, '<p>asdfasdf</p>', '2022-08-18 09:35:13', 4, 13),
+	(25, '<p>asdfasdfasdfasdf</p>', '2022-08-18 10:04:31', 4, 13),
+	(26, '<p>asdfasdfasdfasdf</p>', '2022-08-18 10:05:34', 4, 13),
+	(27, '<p>asdfasdfasdfasdf</p>', '2022-08-18 10:05:53', 4, 13),
+	(28, '<p>asdfasdfasdfasdf</p>', '2022-08-18 10:07:25', 4, 13),
+	(29, '<p>asdfasdfasdfasdf</p>', '2022-08-18 10:07:27', 4, 13),
+	(30, '<p>asdfasdfasdfasdf</p>', '2022-08-18 10:08:24', 4, 13),
+	(31, '<p>hola</p>', '2022-08-18 10:09:07', 4, 13),
+	(32, '<p>hola</p>', '2022-08-18 10:15:44', 4, 13),
+	(33, '<p>hola</p>', '2022-08-18 10:16:48', 7, 13),
+	(34, '<p>hola</p>', '2022-08-18 10:18:06', 7, 13),
+	(35, '<p>hola</p>', '2022-08-18 10:19:59', 7, 13),
+	(36, '<p>hola</p>', '2022-08-18 10:20:01', 7, 13),
+	(37, '<p>hola</p>', '2022-08-18 10:20:15', 7, 13),
+	(38, '<p>asdfasdf</p>', '2022-08-18 10:20:21', 7, 13);
 
 -- Volcando estructura para tabla foros.publicaciones
 CREATE TABLE IF NOT EXISTS `publicaciones` (
@@ -52,16 +81,45 @@ CREATE TABLE IF NOT EXISTS `publicaciones` (
   PRIMARY KEY (`publi_id`) USING BTREE,
   KEY `publi_tema` (`publi_tema`),
   KEY `publi_user` (`publi_user`),
-  CONSTRAINT `FK_publicaciones_temas` FOREIGN KEY (`publi_tema`) REFERENCES `temas` (`tema_ID`) ON UPDATE CASCADE,
+  CONSTRAINT `FK_publicaciones_temas` FOREIGN KEY (`publi_tema`) REFERENCES `temas` (`tema_id`) ON UPDATE CASCADE,
   CONSTRAINT `FK_publicaciones_usuarios` FOREIGN KEY (`publi_user`) REFERENCES `usuarios` (`user_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla foros.publicaciones: ~4 rows (aproximadamente)
+-- Volcando datos para la tabla foros.publicaciones: ~14 rows (aproximadamente)
 REPLACE INTO `publicaciones` (`publi_id`, `publi_titulo`, `publi_descri`, `publi_date`, `publi_tema`, `publi_user`, `publi_est`) VALUES
-	(13, 'Prueba', '<p>Hola</p>', '2022-08-16 15:50:50', 7, 1, 'Abierto'),
+	(13, 'Prueba', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor magna iaculis orci bibendum lobortis. Nullam ut sem dui. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In mauris neque, finibus et tincidunt nec, tincidunt in velit. Duis purus nulla, mattis et turpis gravida, vulputate tristique nibh. Maecenas consectetur arcu in pellentesque pretium. Donec venenatis tortor id nisi feugiat feugiat. Sed vel tristique eros. Donec tempus nunc in lorem suscipit luctus.</p>', '2022-08-16 15:50:50', 7, 1, 'Abierto'),
 	(14, 'segunda prueba', '<p>Texto de segunda prueba</p>', '2022-08-16 15:54:16', 7, 1, 'Abierto'),
 	(26, 'pruebiat', '<p>hosaldf</p>', '2022-08-17 13:56:50', 6, 1, 'Abierto'),
-	(27, 'asdfasdfasdfasdfasdf', '<p>asdflasjddflasdjflksdfjlskdfjlksdf</p>', '2022-08-17 13:58:06', 16, 1, 'Abierto');
+	(37, 'asdfasdfasdfasdfasdf', '<p>asdflasjddflasdjflksdfjlskdfjlksdf</p>', '2022-08-17 16:21:28', 16, 1, 'Abierto'),
+	(38, 'asdfasdfasdfasdfasdf', '<p>asdflasjddflasdjflksdfjlskdfjlksdf</p>', '2022-08-17 18:11:39', 16, 1, 'Abierto'),
+	(50, 'escribo2', '<p>hola</p>', '2022-08-18 09:44:50', 9, 7, 'Cerrado'),
+	(51, 'texto', '<p>texto <strong>bonito</strong></p>', '2022-08-18 09:46:29', 9, 7, 'Cerrado'),
+	(52, 'escribo', '<p>asdfasdfasdfasdfs</p>', '2022-08-18 09:47:12', 9, 7, 'Cerrado'),
+	(53, 'Sí', '<p><em>way</em></p>', '2022-08-18 09:47:14', 9, 7, 'Abierto'),
+	(54, 'escribo', '<p>asdfasdfasdfasdfs</p>', '2022-08-18 09:48:07', 9, 7, 'Abierto'),
+	(55, 'asdfasdfasdfasdfasdf', '<p>asdfasdf</p>', '2022-08-18 11:12:10', 18, 7, 'Abierto'),
+	(56, 'asdfasdfasdfasdfasdf', '<p>asdfasdf</p>', '2022-08-18 11:13:10', 18, 7, 'Abierto'),
+	(57, 'coche', '<p>coche</p>', '2022-08-18 11:13:40', 18, 7, 'Abierto'),
+	(58, 'hola', '<p>asdf</p>', '2022-08-18 11:53:49', 18, 7, 'Abierto'),
+	(59, 'prueba', '<p>comida rica</p>', '2022-08-19 10:58:59', 6, 7, 'Abierto'),
+	(60, 'chocolate', '<p>comida</p>', '2022-08-19 10:59:37', 6, 7, 'Abierto'),
+	(61, 'prueba 3', '<p>asdfasdf</p>', '2022-08-19 11:01:37', 7, 7, 'Abierto'),
+	(62, 'nueva', '<p>asdfasdfasdf</p>', '2022-08-19 11:05:55', 18, 7, 'Abierto'),
+	(63, 'hilo nuevo', '<p>nuevo nuevo</p>', '2022-08-19 11:07:00', 18, 7, 'Abierto'),
+	(64, 'asdfasdf', '<p>asdfasdf</p>', '2022-08-19 11:08:01', 18, 7, 'Abierto'),
+	(65, 'dfasdfs', '<p>asdfasd</p>', '2022-08-19 11:09:00', 7, 7, 'Abierto'),
+	(66, 'prueba deporte', '<p>deporte</p>', '2022-08-19 11:13:18', 5, 7, 'Abierto'),
+	(67, 'prueba 2', '', '2022-08-19 11:15:20', 18, 7, 'Abierto'),
+	(68, 'prueba 3', '<p>asdfasdfasdfasdf</p>', '2022-08-19 11:15:53', 18, 7, 'Abierto'),
+	(69, 'prueba 3', '<p>asdfasdfasdfasdf</p>', '2022-08-19 11:15:55', 18, 7, 'Abierto'),
+	(70, 'asdfasdf', '<p>asdfasdfasdfasdf</p>', '2022-08-19 11:16:19', 20, 7, 'Abierto'),
+	(71, 'dfasdfasdfasdfasdfasdfasdfasdf', '<p>asdfasdfafasdfasdfasdf</p>', '2022-08-19 11:16:29', 20, 7, 'Abierto'),
+	(72, 'economia', '<p>eco</p>', '2022-08-19 11:25:34', 16, 7, 'Abierto'),
+	(73, 'hola', '<p>hola</p>', '2022-08-19 11:28:19', 18, 7, 'Abierto'),
+	(74, 'hola', '<p>hola</p>', '2022-08-19 11:28:30', 7, 7, 'Abierto'),
+	(75, 'osfasdfasdfasdf', '<p>ooo</p>', '2022-08-19 11:36:18', 18, 7, 'Abierto'),
+	(76, 'probando', '<p><span style="color: rgb(186, 55, 42);">asdfasdf</span></p>', '2022-08-19 12:56:52', 7, 7, 'Abierto'),
+	(77, 'fitness', '<h5>prueba con <span style="color: rgb(230, 126, 35);">texto y <span style="color: rgb(186, 55, 42); background-color: rgb(45, 194, 107);">fondo </span></span>asdf s fasdfsaf&nbsp;</h5>', '2022-08-19 13:04:51', 9, 7, 'Abierto');
 
 -- Volcando estructura para tabla foros.temas
 CREATE TABLE IF NOT EXISTS `temas` (
@@ -102,15 +160,18 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `user_nombre` varchar(50) NOT NULL,
   `user_correo` varchar(50) NOT NULL,
   `user_cont` varchar(50) NOT NULL,
-  `user_img` mediumtext DEFAULT NULL,
+  `user_img` mediumtext DEFAULT 'img/profile/Portrait_Placeholder.png',
   `user_time` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla foros.usuarios: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla foros.usuarios: ~5 rows (aproximadamente)
 REPLACE INTO `usuarios` (`user_id`, `user_nombre`, `user_correo`, `user_cont`, `user_img`, `user_time`) VALUES
-	(1, 'Luis', 'prueba@mail.com', 'hola', 'img/profile/01b8550990c3d1e362ffa3a9eb42ab162f8a941deb.jpg', '0000-00-00 00:00:00'),
-	(4, 'Pedro', 'pedro@mail.com', 'hola', 'img/profile/01f524964ef8a400aa8e5341d29b4d9128dcb8a5a2.jpg', '2022-08-16 17:03:24');
+	(1, 'Luis', 'prueba@mail.com', 'hola', 'img/profile/01b8550990c3d1e362ffa3a9eb42ab162f8a941deb.jpg', '2022-08-17 18:57:48'),
+	(4, 'Pedro', 'pedro@mail.com', 'hola', 'img/profile/01f524964ef8a400aa8e5341d29b4d9128dcb8a5a2.jpg', '2022-08-18 09:18:09'),
+	(5, 'Juan', 'juan@mail.com', '1234', 'img/profile/Portrait_Placeholder.png', '2022-08-17 16:02:58'),
+	(6, 'Angela', 'angela@mail.com', '1234', 'img/profile/Portrait_Placeholder.png', '2022-08-17 16:03:12'),
+	(7, 'adrian', 'adrian@mail.com', 'hola', 'img/profile/Yellow_MW_Mac.png', '2022-08-19 12:26:07');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
