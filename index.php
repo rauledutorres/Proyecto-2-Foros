@@ -17,6 +17,9 @@ include 'components/header.php';
     }?>
     </div>
 </div>
+<?php if ($signedInError):?>
+    <script>openModal();</script>
+<?php endif; ?>
 <?php
 include 'components/footer.php';
 ?>

@@ -42,7 +42,7 @@ while ($cont = mysqli_fetch_assoc($categoryHilos)) {
                 if ($selecHilos[$i]['publi_tema'] == $cat['tema_id']) {
             ?>
                     <a href="hilo.php?id=<?php echo $selecHilos[$i]["publi_id"]?>"><div class="hilo<?php
-                                        if (strtotime($userData[0]['user_time']) < strtotime($selecHilos[$i]['publi_date'])) {
+                                        if (isset($userData[0]) && strtotime($userData[0]['user_time']) < strtotime($selecHilos[$i]['publi_date'])) {
                                             echo " bord";
                                             $dateTwo['user_time'] = gmdate("d-F-Y H:i:s ", time() + 3600 * (1 + date("I")));
                                             $_SESSION['date'] = $dateTwo;

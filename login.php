@@ -36,6 +36,7 @@ if (isset($_POST['login'])) {
         <div class="title_log">
             <h2>Accede a Foro</h2>
             <h4>La Mayor comunidad de foros</h4>
+            <?php if ($error) echo '<p>$error</p>';?>
         </div>
         <form method="post" action="#">
             <label class="img_group img_log_email"><img src="img/icon_input_nom.png" alt=""></label>
@@ -74,7 +75,7 @@ if (isset($_POST['login'])) {
             <label class="img_group img_reg_pass1"><img src="img/icon_input_pass.png" alt=""></label>
             <label class="img_group img_reg_vitxt pass"><img src="img/vector_eye.png" alt=""></label>
             <input id="valid_pass" class="inp_reg" type="text" name="valid_pass" placeholder="Repite tu Contraseña">
-            <button class=" button btn_reg" type="submit" name="registrar">Registrate</button>
+            <button class=" button btn_reg" type="submit" name="registrar" id="registerButton">Registrate</button>
             <span>¿Ya tienes Cuenta? <a class="form_et" href="">Inicia Sesion</a></span>
 
             <?php
@@ -93,11 +94,8 @@ if (isset($_POST['login'])) {
                                                                                     '$email',
                                                                                     '$password')");
                 } else {
-            ?>
-                    <script>
-                        alert("El correo ya se encuentra registrado");
-                    </script>
-            <?php
+            
+                    $error ="El correo ya se encuentra registrado";
                 }
             }
             ?>

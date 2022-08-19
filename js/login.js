@@ -15,6 +15,7 @@ const logpass=document.querySelector("#log_pass");
 const valid=document.querySelector("#valid_pass");
 // const reg=document.querySelector("#reg");
 //___________________ boton de incio de sesion y registro__________________
+
 btn_reg.addEventListener('click',()=>{
     btn_is.classList.toggle("is");
     btn_reg.classList.toggle("reg");
@@ -65,5 +66,7 @@ valid.addEventListener('keyup',(event)=>{
     }
 });
 
-
-
+var button = document.getElementById("registerButton");
+button.onclick = function(event){
+    event.preventDefault();
+}

@@ -5,6 +5,9 @@ $idHilo = $_GET["id"];
 
 include 'components/header.php';
 
+if($signedInError){
+    header('location: index.php');
+}
 
 //Recuperar la publicación original con los datos del usuario
 $threadQuery = "SELECT publicaciones.publi_titulo AS postTitle, publicaciones.publi_descri AS postDescription, publicaciones.publi_date AS postDate, publicaciones.publi_tema AS idTema, publicaciones.publi_est AS postStatus, usuarios.user_id AS user_id, usuarios.user_nombre AS userName, usuarios.user_img AS userImg
