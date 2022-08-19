@@ -60,11 +60,11 @@ while ($cont = mysqli_fetch_assoc($categoryHilos)) {
                             </div>
                             <div class="hiloTime">
 
-                                <h6><?php $dateHilo = $selecHilos[$i]['publi_date'];
-                                    setlocale(LC_ALL, "es-ES");
-                                    //$nuevoDateHilo = date("l, d M Y", strftime($dateHilo));
-
-                                    echo strftime("%A %d de %B del %Y");
+                                <h6><?php $dateHilo = strtotime($selecHilos[$i]['publi_date']);
+                            setlocale(LC_ALL, "es-ES");
+                            //$nuevoDateHilo = date("l, d M Y", strftime($dateHilo))
+    
+                            echo strftime("%a, %d de %B del %Y, %H:%M:%S", $dateHilo);
                                     ?></h6>
                             </div>
                             <div class="hiloDesc">
