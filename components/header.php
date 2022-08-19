@@ -4,18 +4,20 @@ include './config.php';
 
 if (isset($_SESSION['welcome_usuario'])) {
   $user=$_SESSION['welcome_usuario'];
+  $newDate=$_SESSION['date'];
   //usuario selecciona dependiendo el login
   $selecUser=mysqli_fetch_assoc(mysqli_query($connect,"SELECT * FROM usuarios where user_id= $user"));
 }else{
   echo 'no se inicio session';
 }
 include 'components/conector.php';
+
 $categoryUsers=mysqli_query($connect,"SELECT * FROM usuarios");
 $allUser=[];
 while($x=mysqli_fetch_assoc($categoryUsers)){
 $allUser[]=$x;
 }
-print_r($allUser);
+
 $_SESSION['signed_in'] = true; // Variable de prueba, cambiar a true cuando un usuario inicie sesión
 $_SESSION['user'] = 1; // Variable inventada, a user_id cuando haya usuario con sesión iniciada
 
@@ -77,7 +79,7 @@ if($_SESSION['signed_in'] == false) {
 <body>
   <header>
     <div class="header" id="logoContainer">
-      <a href="" class="header_logo">
+      <a href="index.php" class="header_logo">
         <img src="img/icons/logo.svg" alt="foro">
         <h1>foro</h1>
       </a>
@@ -98,7 +100,7 @@ if($_SESSION['signed_in'] == false) {
         <div id="profileMenu">
           <a href="editProfile.php">Editar perfil</a>
           <span></span>
-          <a href="index.php">Cerrar sesión</a>
+          <a href="config2.php">Cerrar sesión</a>
         </div>
       </div>
     </div>
