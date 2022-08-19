@@ -6,6 +6,11 @@
     width: 15%;
 }
 
+a {
+    color:var(--text);
+    text-decoration: none;
+}
+
 .temasLista ul{
     display: flex;
     list-style: none;
@@ -62,8 +67,8 @@ h4{
 
 /*PARTE DE LOS HILOS*/
 
-.listaHiloPrincipal{
-    margin-top: 4%;
+.listaHilos{
+    margin-top: 2%;
     margin-bottom: 2%;
     width: 85%;
 }
@@ -79,10 +84,8 @@ h4{
     margin-left: 5%;
 }
 
-.listaHiloPrincipal h2{
-    padding-top: 30px;
-    padding-left: 45px;
-    padding-bottom: 50px;
+.listaHilos h2{
+    text-align: center;
 }
 
 .hiloFoto{

@@ -58,13 +58,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <ul>
             <?php
             for ($i = 0; $i < count($categoryArray); $i++) {
-                echo '<a href="tema.php?id=' . $categoryArray[$i]["tema_id"] . '"'.($categoryArray[$i]["tema_id"] == $threadArray[0]["idTema"] ? 'class="selected"' : '').'>
+                echo '<a href="categoria.php?id=' . $categoryArray[$i]["tema_id"] . '"'.($categoryArray[$i]["tema_id"] == $threadArray[0]["idTema"] ? 'class="selected"' : '').'>
                 <li><img src="./img/icons/'.($categoryArray[$i]['tema_id'] == $threadArray[0]["idTema"] ? 'wavyquestion.svg"' : 'compass.svg"').'class="listIcon">' . $categoryArray[$i]["tema_nombre"] . '</li></a>';
             } ?>
         </ul>
     </div>
 
-    <div class="listaHiloPrincipal">
+    <div class="listaHilos">
         <div class="hilo">
             <div class="hiloFoto">
                 <img src=<?php echo $threadArray[0]["userImg"]; ?> alt="">
