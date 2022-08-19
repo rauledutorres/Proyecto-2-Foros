@@ -75,7 +75,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="hiloTexto">
                     <h3 class="hiloTitulo"><?php echo $threadArray[0]["postTitle"]; ?></h3>
-                    <h6 class="hiloTime">Fecha de publicación: <?php echo $threadArray[0]["postDate"]; ?></h6>
+                    <h6 class="hiloTime">Fecha de publicación: <?php $dateHilo = strtotime($threadArray[0]["postDate"]);
+                            setlocale(LC_ALL, "es-ES");
+                            //$nuevoDateHilo = date("l, d M Y", strftime($dateHilo))
+    
+                            echo strftime("%a, %d de %B del %Y, %H:%M:%S", $dateHilo); ?></h6>
                 <div class="hiloDesc">
                     <?php echo $threadArray[0]["postDescription"]; ?>
                 </div>
