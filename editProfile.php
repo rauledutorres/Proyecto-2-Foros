@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $imagePath = 'img/profile/' . $_FILES['profilePic']['name'];
             if (is_uploaded_file($tmpFile)) {
                 if (move_uploaded_file($tmpFile, $imagePath)) {
-                    $imageSql = "UPDATE usuarios SET user_img = '$imagePath' WHERE $id = user_id";
+                    $imageSql = "UPDATE usuarios SET user_img = '$imagePath' WHERE $id = 'user_id'"; //Cambio aqui para que salga la imagen
                     $result = $mysqli->query($imageSql);
                     if ($result) {
                         unlink($userData[0]['user_img']);
