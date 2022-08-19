@@ -126,7 +126,7 @@ if (isset($_SESSION['signed_in']) == false) {
           <img src="img/icons/post.svg" class="icon" id="postIcon">
           <button class="button">Nuevo Hilo</button>
         </div>
-        <?php if (!isset($signedInError)) echo '<div id="profileIcon">
+        <?php if (!isset($signedInError)) echo '<div id="profileIcon" onclick="showMenu();">
         <img class="headerProfile" src="' . ($userData[0]["user_img"] ?? "") . '" alt="" srcset="">
         <img src="img/icons/down.svg" class="icon" id="profileMore">
         <div id="profileMenu">

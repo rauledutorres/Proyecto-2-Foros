@@ -110,6 +110,7 @@
 
 #buttonContainer {
     display: none;
+    margin-bottom: 6%;
 }
 
 .inputBox {
@@ -174,6 +175,12 @@ h2 {
     margin-left: 8%;   
 }
 
+#userThread a {
+    text-decoration: none;
+    color: var(--text);
+    cursor: default;
+}
+
 @media only screen and (max-width: 920px){
     #userThread {
         height: 50vh;
@@ -213,6 +220,7 @@ h2 {
     text-align: justify;
     font-weight: lighter;
     margin-left: 2%;
+    margin-right: 3%;
 }
 
 .threadButtons {

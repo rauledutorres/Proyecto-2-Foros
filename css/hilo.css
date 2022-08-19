@@ -230,3 +230,14 @@ h4{
 .selected{
     background-color: var(--btn) !important;
 }
+
+.emptyComments{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    box-shadow: 5px 5px 10px #cfcbbf;
+    border-radius: 1em;
+    width: 80%;
+    margin-left: 5%;
+}

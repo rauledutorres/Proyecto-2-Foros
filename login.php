@@ -10,24 +10,37 @@ if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['pass'];
-
-
-    $sql = mysqli_query($connect, ("SELECT * FROM usuarios where 
-                                                            user_correo ='$email' and 
-                                                            user_cont = '$password'"));
-    $ver = mysqli_num_rows($sql);
-    if ($ver == 1) {
-        $row = mysqli_fetch_array($sql);
-        $id = $row['user_id'];
-        if ($email == $row['user_correo'] && $password == $row['user_cont']) {
-            $_SESSION['id'] = $id;
-            $_SESSION['signed_in'] = true;
-            $acceso = date("Y-m-d H:i:s");
-            $int = mysqli_query($connect, "UPDATE `usuarios` SET `user_time`='$acceso' WHERE `user_id`='$id';");
-            header('Location: index.php');
+    try {
+        $sql = mysqli_query($connect, ("SELECT * FROM usuarios where 
+                                                                user_correo ='$email'"));
+        $ver = mysqli_num_rows($sql);
+        if ($ver == 1) {
+            $row = mysqli_fetch_array($sql);
+            $id = $row['user_id'];
+            if ($row['user_status'] == "active") {
+                if ($email == $row['user_correo']) {
+                    if ($password == $row['user_cont']) {
+                        $_SESSION['id'] = $id;
+                        $_SESSION['signed_in'] = true;
+                        $acceso = date("Y-m-d H:i:s");
+                        $int = mysqli_query($connect, "UPDATE `usuarios` SET `user_time`='$acceso' WHERE `user_id`='$id';");
+                        header('Location: index.php');
+                    } else {
+                        $message = "Contraseña incorrecta";
+                    }
+                }
+            } else {
+                $message = "Usuario desactivado.\nPara iniciar sesión contacte con un administrador";
+            }
+        } else {
+            $message = "No se encontró nigún usuario registrado con este correo electrónico";
         }
+    } catch (\Throwable $th) {
+        die($th->getMessage());
     }
 }
+
+
 
 ?>
 
@@ -36,7 +49,6 @@ if (isset($_POST['login'])) {
         <div class="title_log">
             <h2>Accede a Foro</h2>
             <h4>La Mayor comunidad de foros</h4>
-            <?php if ($error) echo '<p>$error</p>';?>
         </div>
         <form method="post" action="#">
             <label class="img_group img_log_email"><img src="img/icon_input_nom.png" alt=""></label>
@@ -48,6 +60,7 @@ if (isset($_POST['login'])) {
             <a class="form_te" href="">¿Has olvidado tu contraseña?</a>
             <button class="button btn_log" type="submit" name="login">Login</button>
         </form>
+        <p id="message"><?php echo $message?? "" ?></p>
     </div>
     <div class="cont_img">
         <img class="img" src="img/web/login.svg" alt="">
@@ -94,8 +107,7 @@ if (isset($_POST['login'])) {
                                                                                     '$email',
                                                                                     '$password')");
                 } else {
-            
-                    $error ="El correo ya se encuentra registrado";
+                    $error = "El correo ya se encuentra registrado";
                 }
             }
             ?>

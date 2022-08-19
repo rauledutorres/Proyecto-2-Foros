@@ -33,7 +33,7 @@ document.getElementById('profilePic').onchange = function (e) {
     if (reader) {
         reader.readAsDataURL(e.target.files[0]);
         reader.onload = function () {
-            var profilePic = document.getElementById('userProfilePic'); 
+            var profilePic = document.getElementById('userProfilePic');
             profilePic.src = reader.result;
         };
     }
@@ -58,21 +58,30 @@ function edit(event) {
     var select = document.getElementById("postCategory");
     select.setAttribute("disabled", "disabled");
     for (let option = 0; option < select.length; option++) {
-        if (select.options[option].value == category){
+        if (select.options[option].value == category) {
             select.options[option].selected = true;
         }
     }
     document.getElementById("publishButton").innerText = "Guardar";
 }
 
-function closePost(event){
+function closePost(event) {
     var id = event.target.parentNode.parentNode.id;
-    if(confirm("¿Estas seguro de eliminar el hilo seleccionado?")){
+    if (confirm("¿Quieres cerrar el hilo seleccionado?")) {
         event.target.value = id;
         var form = event.target.parentNode;
         form.submit();
-    }else{
-        
+    }
+}
+
+function deleteProfile(event) {
+    if (confirm("¿Quieres eliminar para siempre tu cuenta?")) {
+        var form = event.target.parentNode;
+        var hidden = document.createElement("input");
+        hidden.setAttribute("type", "hidden");
+        hidden.setAttribute("name", "deleteProfile");
+        form.appendChild(hidden);
+        form.submit();
     }
 
 }

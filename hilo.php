@@ -5,7 +5,7 @@ $idHilo = $_GET["id"];
 
 include 'components/header.php';
 
-if(isset($signedInError)){
+if (isset($signedInError)) {
     header('location: index.php');
 }
 
@@ -15,7 +15,7 @@ $threadQuery = "SELECT publicaciones.publi_titulo AS postTitle, publicaciones.pu
 FROM publicaciones
 JOIN usuarios ON usuarios.user_id = publicaciones.publi_user
 WHERE publi_id = $idHilo";
-try{
+try {
     $threadResult = $mysqli->query($threadQuery);
     while ($row = $threadResult->fetch_assoc()) {
         $threadArray[] = $row;
@@ -38,21 +38,21 @@ while ($row = $commentResult->fetch_assoc()) {
 
 //Guardar comentario en base de datos
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['comment'])){
+    if (isset($_POST['comment'])) {
         $sql = "INSERT INTO comentarios (com_coment, com_user, com_publi) 
         VALUES ('$_POST[comment]', '$id', '$idHilo')";
         try {
             $result = $mysqli->query($sql);
-            if (!$result){
-              $error = 'No se ha podido publicar tu comentario';
+            if (!$result) {
+                $error = 'No se ha podido publicar tu comentario';
             } else {
-            unset($_POST);
-            header('Location: '.$_SERVER["PHP_SELF"].'?id='.$idHilo.'');
-            die;
+                unset($_POST);
+                header('Location: ' . $_SERVER["PHP_SELF"] . '?id=' . $idHilo . '');
+                die;
             }
-          } catch (Exception $e) {
-            $error = "Algo ha salido mal. ".$e->getMessage();
-          }
+        } catch (Exception $e) {
+            $error = "Algo ha salido mal. " . $e->getMessage();
+        }
     }
 }
 
@@ -64,8 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <ul>
             <?php
             for ($i = 0; $i < count($categoryArray); $i++) {
-                echo '<a href="categoria.php?id=' . $categoryArray[$i]["tema_id"] . '"'.($categoryArray[$i]["tema_id"] == $threadArray[0]["idTema"] ? 'class="selected"' : '').'>
-                <li><img src="./img/icons/'.($categoryArray[$i]['tema_id'] == $threadArray[0]["idTema"] ? 'wavyquestion.svg"' : 'compass.svg"').'class="listIcon">' . $categoryArray[$i]["tema_nombre"] . '</li></a>';
+                echo '<a href="categoria.php?id=' . $categoryArray[$i]["tema_id"] . '"' . ($categoryArray[$i]["tema_id"] == $threadArray[0]["idTema"] ? 'class="selected"' : '') . '>
+                <li><img src="./img/icons/' . ($categoryArray[$i]['tema_id'] == $threadArray[0]["idTema"] ? 'wavyquestion.svg"' : 'compass.svg"') . 'class="listIcon">' . $categoryArray[$i]["tema_nombre"] . '</li></a>';
             } ?>
         </ul>
     </div>
@@ -77,19 +77,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <h5><?php echo $threadArray[0]["userName"]; ?></h5>
             </div>
             <div class="hiloTexto">
-                    <h3 class="hiloTitulo"><?php echo $threadArray[0]["postTitle"]; ?></h3>
-                    <h6 class="hiloTime">Fecha de publicación: <?php $dateHilo = strtotime($threadArray[0]["postDate"]);
-                            setlocale(LC_ALL, "es-ES");
-                            //$nuevoDateHilo = date("l, d M Y", strftime($dateHilo))
-    
-                            echo strftime("%a, %d de %B del %Y, %H:%M:%S", $dateHilo); ?></h6>
+                <h3 class="hiloTitulo"><?php echo $threadArray[0]["postTitle"]; ?></h3>
+                <h6 class="hiloTime">Fecha de publicación: <?php $dateHilo = strtotime($threadArray[0]["postDate"]);
+                                                            setlocale(LC_ALL, "es-ES");
+                                                            //$nuevoDateHilo = date("l, d M Y", strftime($dateHilo))
+
+                                                            echo strftime("%a, %d de %B del %Y, %H:%M:%S", $dateHilo); ?></h6>
                 <div class="hiloDesc">
                     <?php echo $threadArray[0]["postDescription"]; ?>
                 </div>
             </div>
         </div>
 
-        <div class="comentario" <?php echo($threadArray[0]["postStatus"] == "Cerrado" ? "style='display: none'" : "style='display: flex'");?>>
+        <div class="comentario" <?php echo ($threadArray[0]["postStatus"] == "Cerrado" ? "style='display: none'" : "style='display: flex'"); ?>>
             <form method="post" enctype="multipart/form-data">
                 <input type="hidden" name="comment">
                 <textarea name="comment" id="comment" placeholder="Introduzca aquí su comentario" rows=5 cols=40></textarea>
@@ -100,8 +100,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </form>
         </div>
 
-        <div id="closedPost" <?php echo($threadArray[0]["postStatus"] == "Cerrado" ? "style='display: block'" : "style='display: none'");?>>
-        <p>Publicación cerrada por el autor. No admite más respuestas.</p>
+        <div id="closedPost" <?php echo ($threadArray[0]["postStatus"] == "Cerrado" ? "style='display: block'" : "style='display: none'"); ?>>
+            <p>Publicación cerrada por el autor. No admite más respuestas.</p>
         </div>
 
         <div class="respuestas" <?php echo (empty($commentArray) ? 'style="display:none"' : 'style='); ?>>
@@ -120,9 +120,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>');
             } ?>
         </div>
-        <div class="respuestas" <?php echo (empty($commentArray) ? 'style="display:flex; flex-direction:column; align-items:center"' : 'style="display:none;"'); ?>>
-        <img src="img/web/surprise.svg" width="25%">
-        <p onclick=openModal()>Todavía no hay comentarios, <u>¡comenta algo!</u></p>
+        <div class="emptyComments" <?php echo (empty($commentArray) ? 'style="display:flex"' : 'style="display:none;"'); ?>>
+            <img src="img/web/surprise.svg" width="25%">
+            <p style="cursor:default">Todavía no respusetas, ¡sé el primero en contestar!</u></p>
+            <img src="img/web/arrowup.svg" width="25%">
         </div>
     </div>
 
