@@ -10,15 +10,18 @@ if(isset($signedInError)){
 }
 
 //Recuperar la publicación original con los datos del usuario
+$threadArray = [];
 $threadQuery = "SELECT publicaciones.publi_titulo AS postTitle, publicaciones.publi_descri AS postDescription, publicaciones.publi_date AS postDate, publicaciones.publi_tema AS idTema, publicaciones.publi_est AS postStatus, usuarios.user_id AS user_id, usuarios.user_nombre AS userName, usuarios.user_img AS userImg
 FROM publicaciones
 JOIN usuarios ON usuarios.user_id = publicaciones.publi_user
 WHERE publi_id = $idHilo";
-$threadResult = $mysqli->query($threadQuery);
-
-$threadArray = [];
-while ($row = $threadResult->fetch_assoc()) {
-    $threadArray[] = $row;
+try{
+    $threadResult = $mysqli->query($threadQuery);
+    while ($row = $threadResult->fetch_assoc()) {
+        $threadArray[] = $row;
+    }
+} catch (\Exception $e) {
+    die($e->getMessage());
 }
 
 // Recuperar los comentarios asociados a la publicación
@@ -37,14 +40,14 @@ while ($row = $commentResult->fetch_assoc()) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['comment'])){
         $sql = "INSERT INTO comentarios (com_coment, com_user, com_publi) 
-        VALUES ('$_POST[comment]', '$id', '$publiId')";
+        VALUES ('$_POST[comment]', '$id', '$idHilo')";
         try {
             $result = $mysqli->query($sql);
             if (!$result){
               $error = 'No se ha podido publicar tu comentario';
             } else {
             unset($_POST);
-            header('Location: '.$_SERVER["PHP_SELF"]);
+            header('Location: '.$_SERVER["PHP_SELF"].'?id='.$idHilo.'');
             die;
             }
           } catch (Exception $e) {
@@ -101,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <p>Publicación cerrada por el autor. No admite más respuestas.</p>
         </div>
 
-        <div class="respuestas" <?php echo (empty($commentArray) ? 'style="display:none"' : ''); ?>>
+        <div class="respuestas" <?php echo (empty($commentArray) ? 'style="display:none"' : 'style='); ?>>
             <?php for ($i = 0; $i < count($commentArray); $i++) {
                 print('<div class="reply">
                 <div class="replyFoto">
@@ -117,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>');
             } ?>
         </div>
-        <div class="respuestas" <?php echo (empty($commentArray) ? 'style="display:flex; flex-direction:column; align-items:center"' : ''); ?>>
+        <div class="respuestas" <?php echo (empty($commentArray) ? 'style="display:flex; flex-direction:column; align-items:center"' : 'style="display:none;"'); ?>>
         <img src="img/web/surprise.svg" width="25%">
         <p onclick=openModal()>Todavía no hay comentarios, <u>¡comenta algo!</u></p>
         </div>
