@@ -7,6 +7,28 @@ if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
     header('Location: index.php');
 }
 
+if (isset($_POST['login'])) {
+    $email = $_POST['email'];
+    $password = $_POST['pass'];
+
+
+    $sql = mysqli_query($connect, ("SELECT * FROM usuarios where 
+                                                            user_correo ='$email' and 
+                                                            user_cont = '$password'"));
+    $ver = mysqli_num_rows($sql);
+    if ($ver == 1) {
+        $row = mysqli_fetch_array($sql);
+        $id = $row['user_id'];
+        if ($email == $row['user_correo'] && $password == $row['user_cont']) {
+            $_SESSION['id'] = $id;
+            $_SESSION['signed_in'] = true;
+            $acceso = date("Y-m-d H:i:s");
+            $int = mysqli_query($connect, "UPDATE `usuarios` SET `user_time`='$acceso' WHERE `user_id`='$id';");
+            header('Location: index.php');
+        }
+    }
+}
+
 ?>
 
 <div id="login" class="caja">
@@ -24,29 +46,6 @@ if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
             <input id="log_pass" class="inp_log" type="password" name="pass" placeholder="Contraseña" required />
             <a class="form_te" href="">¿Has olvidado tu contraseña?</a>
             <button class="button btn_log" type="submit" name="login">Login</button>
-            <?php
-            if (isset($_POST['login'])) {
-                $email = $_POST['email'];
-                $password = $_POST['pass'];
-
-
-                $sql = mysqli_query($connect, ("SELECT * FROM usuarios where 
-                                                                        user_correo ='$email' and 
-                                                                        user_cont = '$password'"));
-                $ver = mysqli_num_rows($sql);
-                if ($ver == 1) {
-                    $row = mysqli_fetch_array($sql);
-                    $id = $row['user_id'];
-                    if ($email == $row['user_correo'] && $password == $row['user_cont']) {
-                        $_SESSION['id'] = $id;
-                        $_SESSION['signed_in'] = true;
-                        $acceso = date("Y-m-d H:i:s");
-                        $int = mysqli_query($connect, "UPDATE `usuarios` SET `user_time`='$acceso' WHERE `user_id`='$id';");
-                        header('location: index.php ');
-                    }
-                }
-            }
-            ?>
         </form>
     </div>
     <div class="cont_img">
