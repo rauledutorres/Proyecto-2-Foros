@@ -59,7 +59,7 @@ if (isset($_POST[''])) {
                             <h3>Lanzamiento Telescopio James Webb</h3>
                         </div>
                         <div class="hiloTime">
-                            <h6>vie, 29 de Julio del 2022, 13:31:35(GMT)</h6>
+                            <h6><?php echo strftime("%a, %d de %B del %Y, %H:%M:%S"); ?> vie, 29 de Julio del 2022, 13:31:35(GMT)</h6>
                         </div>
                         <div class="hiloDesc">
                             <p>Después de innumerables retrasos, el 25/12/2021 a las 12:20 UTC parece que va a ser la fecha definitiva para el lanzamiento del telescopio espacial James Webb, el telescopio mas potente y complejo de la historia que se espera revolucione el conocimiento en la astrofísica.</p>
