@@ -65,6 +65,7 @@ for($i=0;$i<count($categoryArray);$i++){
                     <?php
                     if (strtotime($newDate['user_time']) < strtotime($selecHilos[$i]['publi_date'])) {
                         echo gmdate("d-F-Y H:i:s ", time() + 3600*(1+date("I")));
+
                         $dateTwo['user_time']=gmdate("d-F-Y H:i:s ", time() + 3600*(1+date("I")));
                         $_SESSION['date']=$dateTwo;
                         //es una manera muy obligada de que muestre los mensajes nuevos hay q seguir buscando...
@@ -92,12 +93,12 @@ for($i=0;$i<count($categoryArray);$i++){
                         </div>
                         <div class="hiloTime">
                             
-                            <h6><?php $dateHilo = $selecHilos[$i]['publi_date'];
+                            <h6><?php $dateHilo = strtotime($selecHilos[$i]['publi_date']);
                             setlocale(LC_ALL, "es-ES");
-                            //$nuevoDateHilo = date("l, d M Y", strftime($dateHilo));
-
-                            echo strftime("%A %d de %B del %Y");
-                            ?>vie, 29 de Julio del 2022, 13:31:35(GMT)</h6>
+                            //$nuevoDateHilo = date("l, d M Y", strftime($dateHilo))
+    
+                            echo strftime("%a, %d de %B del %Y, %H:%M:%S", $dateHilo);
+                            ?> </h6>
                         </div>
                         <div class="hiloDesc">
                             <p><?php echo $selecHilos[$i]['publi_descri'];?></p>
