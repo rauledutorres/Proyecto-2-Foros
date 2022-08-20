@@ -31,7 +31,7 @@ header {
     align-items: center;
     box-shadow: 0 0 10px #cfcbbf;
     position: sticky;
-    z-index:999
+    z-index:500;
 }
 
 #logoContainer {
@@ -130,13 +130,14 @@ h1 {
     padding-left: 50px;
     padding-right: 20px;
     font-weight: 500;
+    z-index: 700;
 
 }
 
 .result{
     position: absolute;    
     background-color: #fff;    
-    z-index: 999;
+    z-index: 600;
     top: 100%;
     left: 0;
     width: 100%;
@@ -147,7 +148,6 @@ h1 {
     font-size: 0.7em;
         background: var(--btn-hover);
         border-radius: 9px;
-        /* padding: 4px; */
         height: 2em;
         line-height: 2em;
         margin-right: 2%;
@@ -159,8 +159,7 @@ h1 {
     justify-content: space-between;
     background: white;
     padding: 2%;
-    border-bottom: solid 0.1px;
-    color: black;
+    color: black; 
     text-decoration: none;
     padding-left: 5%;
     width: 100%;
@@ -230,7 +229,7 @@ h1 {
     }
 }
 
-#profileIcon {
+#profileIconMenu {
     cursor: pointer;
 }
 
@@ -238,26 +237,39 @@ h1 {
 #profileMenu {
     display: none;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-evenly;
     align-content: flex-start;
     position: absolute;
     z-index: 1;
     background-color: #fff;
-    width: 15vw;
+    width: 145px;
     height: 7em;
     border-radius: 10px;
     box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.2);
-    right: 0;
+    right: 1%;
 }
 
 #profileMenu a {
     color: var(--text);
     text-decoration: none;
+    position:relative;
+    margin-right: 25%;
 }
 
 #profileMenu a:hover {
     text-decoration: underline;
+}
+
+#profileIcon{
+    top: -36%;
+    right: -59%;
+}
+
+#logoutIcon{
+    top: -36%;
+    right: -39%;
+
 }
 
 @media only screen and (max-width: 768px) {
@@ -276,7 +288,7 @@ h1 {
 
 
 
-#profileMenu span {
+.separator {
     display: block;
     width: 100%;
     border-top: 1px solid #ccc;
@@ -359,7 +371,7 @@ h1 {
 .modal {
     display: none;
     position: fixed;
-    z-index: 50;
+    z-index: 700;
     padding-top: 1.5%;
     left: 0;
     top: 0;
@@ -494,4 +506,15 @@ h1 {
 
 #errorImg {
     width: 60%;
+}
+
+
+table.mceLayout, textarea.tinyMCE {
+    width: 100% !important;
+}
+
+@media only screen and (min-width: 600px) {
+    table.mceLayout, textarea.richEditor {
+       width: 600px !important;
+    }
 }

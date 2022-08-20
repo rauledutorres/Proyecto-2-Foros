@@ -128,13 +128,17 @@ if (isset($_SESSION['signed_in']) == false) {
           <img src="img/icons/post.svg" class="icon" id="postIcon">
           <button class="button">Nuevo Hilo</button>
         </div>
-        <?php if (!isset($signedInError)) echo '<div id="profileIcon" onclick="showMenu();">
+        <?php if (!isset($signedInError)) echo '<div id="profileMenuIcon" onclick="showMenu();">
         <img class="headerProfile" src="' . ($userData[0]["user_img"] ?? "") . '" alt="" srcset="">
         <img src="img/icons/down.svg" class="icon" id="profileMore">
         <div id="profileMenu">
-          <a href="profile.php?id=' . $id . '">Editar perfil</a>
-          <span></span>
-          <a href="logout.php">Cerrar sesión</a>
+          <a href="profile.php?id=' . $id . '">
+          <img src="img/icons/user-edit.svg" class="icon" id="profileIcon">
+          Mi perfil</a>
+          <span class="separator"></span>
+          <a href="logout.php">
+          <img src="img/icons/logout.svg" class="icon" id="logoutIcon">
+          Cerrar sesión</a>
         </div>
       </div>' ?>
       <?php endif; ?>
@@ -166,8 +170,6 @@ if (isset($_SESSION['signed_in']) == false) {
           <script>
             tinymce.init({
               selector: 'textarea#description',
-              max_width: 1000,
-              min_width: 300,
               height: 350,
               plugins: 'code lists',
               mobile: {

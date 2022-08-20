@@ -130,7 +130,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <script>
     tinymce.init({
         selector: 'textarea#comment',
-        width: 1000,
         height: 250,
         plugins: 'code lists',
         mobile: {
