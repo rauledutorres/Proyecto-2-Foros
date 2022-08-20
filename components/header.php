@@ -5,10 +5,13 @@ include './config.php';
 if (isset($_SESSION['welcome_usuario'])) {
   $user=$_SESSION['welcome_usuario'];
   $newDate=$_SESSION['date'];
+  $ver=true;
   //usuario selecciona dependiendo el login
   $selecUser=mysqli_fetch_assoc(mysqli_query($connect,"SELECT * FROM usuarios where user_id= $user"));
 }else{
-  echo 'no se inicio session';
+  $user=0;
+  $ver=false;
+  $newDate['user_time']=date("Y-m-d H:i:s");
 }
 include 'components/conector.php';
 
@@ -43,8 +46,11 @@ while ($row = mysqli_fetch_assoc($categoryQuery)) {
 // Habría que redirigir a otra página (la del nuevo post creado por ejemplo) para evitar esto
 $error = "";
 
-if($_SESSION['signed_in'] == false) {
-  $error = 'Para publicar <a href="signin.php">inicia sesión</a>.';
+if($ver == false) {
+  $error = 'Para publicar <a href="login-registro.php"><b>Inicia Sesión</b></a>.';
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    header('location:login-registro.php');
+  }
 } else {
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
     //solo coloque mi variable SESSION_usuario
