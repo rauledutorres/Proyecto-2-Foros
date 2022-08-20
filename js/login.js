@@ -7,6 +7,9 @@ const box_register=document.querySelector("#registro");
 const btn_vipass=document.querySelector(".img_reg_vipass");
 const btn_vitxt=document.querySelector(".img_reg_vitxt");
 
+const btn_vipass2=document.getElementById("iconSecondPass");
+const btn_vitxt2=document.getElementById("iconSecondPassTxt");
+
 const btn_logpass=document.querySelector(".img_log_vipass");
 const btn_logtxt=document.querySelector(".img_log_vitxt");
 
@@ -33,13 +36,22 @@ btn_vipass.addEventListener('click',()=>{
     btn_vipass.classList.toggle("txt");
     btn_vitxt.classList.toggle("pass");
     pass.setAttribute("type","text");
-    console.log(pass);
 });
 btn_vitxt.addEventListener('click',()=>{
     btn_vipass.classList.toggle("txt");
     btn_vitxt.classList.toggle("pass");
     pass.setAttribute("type","password");
-    console.log(pass);
+});
+
+btn_vipass2.addEventListener('click',()=>{
+    btn_vipass2.classList.toggle("txt");
+    btn_vitxt2.classList.toggle("pass");
+    valid.setAttribute("type","text");
+});
+btn_vitxt2.addEventListener('click',()=>{
+    btn_vipass2.classList.toggle("txt");
+    btn_vitxt2.classList.toggle("pass");
+    valid.setAttribute("type","password");
 });
 //--------------------------------------------------//
 //boton para vizualizar la contraseña en el form log//
@@ -47,24 +59,22 @@ btn_logpass.addEventListener('click',()=>{
     btn_logpass.classList.toggle("txt");
     btn_logtxt.classList.toggle("pass");
     logpass.setAttribute("type","text");
-    console.log(logpass);
 });
 btn_logtxt.addEventListener('click',()=>{
     btn_logpass.classList.toggle("txt");
     btn_logtxt.classList.toggle("pass");
     logpass.setAttribute("type","password");
-    console.log(logpass);
 });
 //-------------------------------------------------//
-valid.addEventListener('keyup',(event)=>{
-    let con = (pass.value);
-    let val_con = event.target.value;
-    if (con === val_con) {
-        console.log("las contraseña son iguales");
-    }else{
-        console.log("no son iguales");
-    }
-});
+// valid.addEventListener('keyup',(event)=>{
+//     let con = (pass.value);
+//     let val_con = event.target.value;
+//     if (con === val_con) {
+//         console.log("las contraseña son iguales");
+//     }else{
+//         console.log("no son iguales");
+//     }
+// });
 
 var button = document.getElementById("registerButton");
 button.onclick = function(event){

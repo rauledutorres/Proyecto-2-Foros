@@ -144,6 +144,10 @@ h4{
     padding-top: 2px;
 }
 
+.comentario form{
+    width: 95%;
+}
+
 .comentario input{
     display: flex;
     font-weight: bold;
@@ -245,13 +249,13 @@ h4{
     align-items: center;
     box-shadow: 5px 5px 10px #cfcbbf;
     border-radius: 1em;
-    width: 80%;
+    width: 90%;
     margin-left: 5%;
 }
 
-.tox-tinymce{
+/* .tox-tinymce{
     width: 1155px !important;
-}
+} */
 
 @media only screen and (max-width: 1024px) {
     .temasLista{
@@ -259,9 +263,6 @@ h4{
     }
     .listaHilos{
         width: 75%;
-    }
-    .tox-tinymce{
-        width: 113% !important;
     }
 }
 
@@ -273,9 +274,6 @@ h4{
     .listaHilos{
         width: 73%;
     }
-    .tox-tinymce{
-        width: 500px !important;
-    }
 }
 
 @media only screen and (max-width: 426px) {
@@ -286,8 +284,5 @@ h4{
         width: 100%;
     }
 
-    .tox-tinymce{
-        width: 300px !important;
-    }
 }
 

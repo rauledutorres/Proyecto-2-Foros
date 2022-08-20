@@ -19,7 +19,7 @@ function closeModal() {
 document.getElementById("searchBox").onkeyup = function (e) {
   var term = this.value;
   var resultDropdown = document.getElementById("searchResultContainer");
-  if (term.length > 4) {
+  if (term.length > 3) {
     fetch('./components/search.php?term=' + term).then((response) => response.json()).then((data) => {
       console.log(data);
       resultDropdown.innerHTML = "";
@@ -51,4 +51,14 @@ document.getElementById("searchBox").onkeyup = function (e) {
     }
     )
   }
+}
+
+function showSearch(){
+  var modal = document.getElementById("searchModal");
+  if(modal.style.display == "none"){
+    modal.style.display = "block";
+  } else {
+    modal.style.display = "none";
+  }
+
 }

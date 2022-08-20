@@ -86,8 +86,9 @@ if (isset($_POST['login'])) {
             <label class="img_group img_reg_vipass"><img src="img/icon_input_pass_text.png" alt=""></label>
             <input id="pass" class="inp_reg input_pass" type="password" name="pass" placeholder="Contraseña">
             <label class="img_group img_reg_pass1"><img src="img/icon_input_pass.png" alt=""></label>
-            <label class="img_group img_reg_vitxt pass"><img src="img/vector_eye.png" alt=""></label>
-            <input id="valid_pass" class="inp_reg" type="text" name="valid_pass" placeholder="Repite tu Contraseña">
+            <label class="img_group img_reg_vitxt pass iconSecondPass" id="iconSecondPassTxt"><img src="img/vector_eye.png" alt=""></label>
+            <label class="img_group img_reg_vipass iconSecondPass" id="iconSecondPass"><img src="img/icon_input_pass_text.png" alt=""></label>
+            <input id="valid_pass" class="inp_reg" type="password" name="valid_pass" placeholder="Repite tu Contraseña">
             <button class=" button btn_reg" type="submit" name="registrar" id="registerButton">Registrate</button>
             <span>¿Ya tienes Cuenta? <a class="form_et" href="">Inicia Sesion</a></span>
 

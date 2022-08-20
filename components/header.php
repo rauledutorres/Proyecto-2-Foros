@@ -118,11 +118,12 @@ if (isset($_SESSION['signed_in']) == false) {
     <?php else : ?>
       <div class="header perfil_hilo">
         <div class="header_search">
-          <img src="img/icons/search.svg" class="icon" id="searchIcon">
-          <input type="text" class="input" autocomplete="off" id="searchBox" placeholder="Buscar Temas...">
-          <div class="result" id="searchResultContainer">
+          <img src="img/icons/search.svg" class="icon" id="searchIcon" onclick="showSearch()">
+          <div id="searchModal">
+            <input type="text" class="input" autocomplete="off" id="searchBox" placeholder="Buscar Temas...">
+            <div class="result" id="searchResultContainer">
+            </div>
           </div>
-          <button id="searchButton" class="button">search</button>
         </div>
         <div class="nuevoHilo" onclick="openModal(event)">
           <img src="img/icons/post.svg" class="icon" id="postIcon">
@@ -160,7 +161,7 @@ if (isset($_SESSION['signed_in']) == false) {
               echo '<option value="' . $categoryArray[$i]["tema_id"] . '">' . $categoryArray[$i]["tema_nombre"] . '</option>"';
             } ?>
           </select>
-          <textarea name="postDescription" id="description"></textarea>
+          <div name="postDescription" id="description"></div>
 
           <div id="postButtons">
             <button type="reset" class="button cancel" id="cancelPost" onclick="closeModal()">Cancelar</button>
@@ -169,8 +170,10 @@ if (isset($_SESSION['signed_in']) == false) {
 
           <script>
             tinymce.init({
-              selector: 'textarea#description',
+              selector: 'div#description',
               height: 350,
+              body_class: 'description',
+              content_style: 'margin: 10px; border: 5px solid red; padding: 3px;',
               plugins: 'code lists',
               mobile: {
                 menubar: true,

@@ -35,7 +35,7 @@ header {
 }
 
 #logoContainer {
-    margin-right: 30%;
+    width: 30%;
 }
 
 @media only screen and (max-width: 920px) {
@@ -96,7 +96,7 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 50%;
+    width: 60%;
 }
 
 .loginButtons {
@@ -123,7 +123,9 @@ h1 {
 }
 .header_search{
     position: relative;
+    
 }
+
 
 .header_search input {
     width: 30vw;
@@ -188,39 +190,71 @@ h1 {
 } */
 
 #searchIcon {
-    margin-left: 0.5%;
-    margin-top: 0.5%;
+    margin-left: 2.8%;
+    margin-top: 2%;
+    z-index: 991;
 }
+
 
 @media only screen and (max-width: 426px) {
     #searchIcon {
-        margin-left: 2.5%;
+        background: var(--input-background);
+        border-radius: 1em;
+        width: 16vw;
+        top: -19px;
+        left: -21px;
     }
 }
-
-
-#searchButton {
-    color: transparent;
+.header_search img{
+    pointer-events: none;
 }
 
-#searchButton {
-    display: none;
-}
+
 
 @media only screen and (max-width: 768px) {
-    .header_search input {
-        display: none;
+    .header_search{
+        pointer-events: auto;
+        cursor: pointer;
+    }
+    .header_search img{
+        pointer-events: auto;
+    }
+    
+
+    #searchModal{
+        pointer-events: none;
+        position:relative;
+        z-index:700;
     }
 
-    #searchButton {
-        display: block;
-        background-color: var(--input-background);
+    #searchModal input{
+        pointer-events: auto;
+    }
+
+}
+
+@media only screen and (max-width: 426px){
+    #searchModal {
+        display:none;
+        width: 100%;
+        background: var(--light-background);
+        height: 33px;
+        position: fixed;
+        margin: 0;
+        margin-top: 10%;
+        left: 0;
+        height: auto;
+    }
+
+    #searchModal input{
+        width: 100%;
     }
 }
 
 #profileMore {
     margin-left: -3px;
     margin-top: 10px;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 426px) {
@@ -313,7 +347,14 @@ h1 {
     margin-right: 5px;
 }
 
+@media only screen and (max-width: 1024px) {
+    #postIcon {
+        margin-top: -0.5%;}
+    }
+
 @media only screen and (max-width: 920px) {
+
+ 
     #postIcon {
         margin-top: 0.2%;
         margin-left: 2.5%;
@@ -326,15 +367,22 @@ h1 {
 
 @media only screen and (max-width: 768px) {
     #postIcon {
-        margin-top: 0.5%;
-        margin-left: 2.5%;
+        margin-top: 0.3%;
+        margin-left: 3.2%;
+    }
+}
+
+
+@media only screen and (max-width: 426px) {
+    .nuevoHilo{
+        margin-left: 20%;
     }
 }
 
 
 .button {
     background-color: var(--btn);
-    width: 10vw;
+    width: 12vw;
     height: 3em;
     border: none;
     border-radius: 1em;
@@ -355,8 +403,15 @@ h1 {
     background-color: #DCE5E2;
 }
 
-@media only screen and (max-width: 920px) {
-    .header .button {
+@media only screen and (max-width: 1024px){
+    header .button{
+        width: 14vw;
+    }
+}
+
+@media only screen and (max-width: 820px) {
+
+    header .button {
         color: transparent;
     }
 }
@@ -513,8 +568,4 @@ table.mceLayout, textarea.tinyMCE {
     width: 100% !important;
 }
 
-@media only screen and (min-width: 600px) {
-    table.mceLayout, textarea.richEditor {
-       width: 600px !important;
-    }
-}
+
