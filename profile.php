@@ -4,6 +4,7 @@ $css = "css/profile.css";
 include("components/header.php");
 $errorMsg = "";
 $userThreads = [];
+$passPlaceholder = str_repeat("*", strlen($userData[0]['user_cont']));
 try {
     $userThreadsQuery = "SELECT * FROM publicaciones WHERE publi_user = $id";
     $userThreadsResult = $mysqli->query($userThreadsQuery);
@@ -100,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="inputBox">
                 <img src="./img/icons/lock.svg" class="icon" id="passIcon">
                 <img src="./img/icons/edit.svg" class="icon editIcon" id="editPass">
-                <input class="input" type="password" name="actualPass" id="actualPass" placeholder="Contraseña actual" readonly>
+                <input class="input" type="password" name="actualPass" id="actualPass" placeholder="<?php echo $passPlaceholder;?>" readonly>
             </div>
             <div id="message" style="<?php if ($errorMsg || $statusMsg) echo 'display:block'; ?>">
                 <?php if ($errorMsg) echo '<p id="errorMsg">Error: ' . $errorMsg . '</p>' ?>

@@ -9,6 +9,7 @@ editUser.onclick = function () {
 var editPass = document.getElementById('editPass');
 editPass.onclick = function () {
     document.getElementById("actualPass").value = "";
+    document.getElementById('actualPass').placeholder = "Contraseña actual";
     document.getElementById('actualPass').readOnly = false;
     document.getElementById("passContainer").style.display = "block";
     document.getElementById('message').style.display = "none";

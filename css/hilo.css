@@ -87,6 +87,8 @@ h4{
     margin-bottom: 2%;
 }
 
+
+
 .listaHilos h2{
     text-align: center;
 }
@@ -120,8 +122,14 @@ h4{
 }
 
 .hiloTexto h6{
+    margin-top: 2%;
     margin-bottom:0;
 }
+
+.hiloDesc{
+    margin-block: 5%;
+}
+
 
 .hiloTexto p{
     text-align: justify;
@@ -172,16 +180,17 @@ h4{
 /*PARTE DE LAS RESPUESTAS*/
 
 .reply{
-    display: flex;
     flex-direction: column;
-    margin-left: 50px;
-    margin-right: 100px;
-    padding: 20px;
     box-shadow: 1px 1px 1px 1px #cfcbbf;
-    padding-right: 40px;
-    margin-top: 15px;
     margin-bottom: 15px;
     border-radius: 1em;
+    width: 90%;
+    padding-block: 1%;
+    padding-inline: 3%;
+    border-radius: 1em;
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 2%;
 }
 
 .replyFoto{
@@ -196,6 +205,8 @@ h4{
 .replyTexto{
     text-align: justify;
     font-weight: lighter;
+    padding-inline: 2%;
+    margin-bottom: 3%
 }
 
 .replyTexto img{
@@ -276,6 +287,12 @@ h4{
     }
 }
 
+@media only screen and (max-width: 700px) {
+    .hilo {
+        padding-right: 6%;
+    }
+}
+
 @media only screen and (max-width: 426px) {
     .temasLista{
         display: none;
@@ -284,8 +301,29 @@ h4{
         width: 100%;
     }
 
+ 
 }
 
 .bord  {
     border: solid 2px var(--btn);
 }
+
+#scrollBackButton {
+    display: none; 
+    position: fixed;
+    bottom: 1%;
+    right: 0.5%;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: var(--light-background);
+    color: black;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+  
+  #scrollBackButton:hover {
+    background-color: #cfdbd566 
+  }

@@ -35,14 +35,16 @@ while ($cont = mysqli_fetch_assoc($categoryHilos)) {
     </div>
 
     <div class="listaHilos">
+        <div>
         <h2><?php echo ucwords($cat['tema_nombre']); ?></h2>
+        </div>
         <?php
         for ($i = 0; $i < count($selecHilos); $i++) {
             if ($selecHilos[$i]['publi_tema'] == $cat['tema_id']) {
         ?>
                 <a href="hilo.php?id=<?php echo $selecHilos[$i]["publi_id"] ?>">
                     <div class="hilo<?php
-                                    if (strtotime($_SESSION['date']['user_time']) < strtotime($selecHilos[$i]['publi_date'])) {
+                                    if (isset($_SESSION['date']) && strtotime($_SESSION['date']['user_time']) < strtotime($selecHilos[$i]['publi_date'])) {
                                         echo " bord";
                                         $dateTwo['user_time'] = gmdate("d-F-Y H:i:s ", time() + 3600 * (1 + date("I")));
                                         //es una manera muy obligada de que muestre los mensajes nuevos hay q seguir buscando...
@@ -81,7 +83,9 @@ while ($cont = mysqli_fetch_assoc($categoryHilos)) {
         </div>
     </div>
 </div>
+<button onclick="scrollBack()" id="scrollBackButton" title="Volver arriba">↑</button>
 <script src="js/postVisitControl.js"></script>
+<script src="js/scrollBack.js"></script>
 <script>
     var posts = document.querySelectorAll(".hilo");
     for (let post = 0; post < posts.length; post++) {

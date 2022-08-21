@@ -127,7 +127,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 
 </div>
+<button onclick="scrollBack()" id="scrollBackButton" title="Volver arriba">↑</button>
+
 <script src="js/postVisitControl.js"></script>
+<script src="js/scrollBack.js"></script>
 <script> 
     var post = document.querySelector(".hilo");
     var postId = post.id;
