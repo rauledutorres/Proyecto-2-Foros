@@ -52,12 +52,12 @@ if (isset($_POST['login'])) {
             <h4>La Mayor comunidad de foros</h4>
         </div>
         <form method="post" action="#">
-            <label class="img_group img_log_email"><img src="img/icon_input_nom.png" alt=""></label>
+            <label class="img_group img_log_email"><img src="img/icons/icon_input_nom.png" alt=""></label>
             <input class="inp_log" type="text" name="email" placeholder="Email" required />
             <div class="inputContainer">
-                <label class="img_group img_log_pass"><img src="img/icon_input_pass.png" alt=""></label>
-                <label class="img_group img_log_vitxt pass"><img src="img/vector_eye.png" alt=""></label>
-                <label class="img_group img_log_vipass"><img src="img/icon_input_pass_text.png" alt=""></label>
+                <label class="img_group img_log_pass"><img src="img/icons/icon_input_pass.png" alt=""></label>
+                <label class="img_group img_log_vitxt pass"><img src="img/icons/vector_eye.png" alt=""></label>
+                <label class="img_group img_log_vipass"><img src="img/icons/icon_input_pass_text.png" alt=""></label>
                 <input id="log_pass" class="inp_log" type="password" name="pass" placeholder="Contraseña" required />
             </div>
             <a class="form_te" href="">¿Has olvidado tu contraseña?</a>
@@ -80,20 +80,20 @@ if (isset($_POST['login'])) {
             <h4>La Mayor comunidad de foros</h4>
         </div>
         <form method="post" action="#" enctype='multipart/form-data'>
-            <label class="img_group img_reg_name"><img src="img/icon_input_name.png" alt=""></label>
+            <label class="img_group img_reg_name"><img src="img/icons/icon_input_name.png" alt=""></label>
             <input class="inp_reg" type="text" name="name" placeholder="Nombre de usuario">
-            <label class="img_group img_reg_email"><img src="img/icon_input_nom.png" alt=""></label>
+            <label class="img_group img_reg_email"><img src="img/icons/icon_input_nom.png" alt=""></label>
             <input class="inp_reg" type="text" name="email" placeholder="Email" required>
-            <label class="img_group img_reg_pass"><img src="img/icon_input_pass.png" alt=""></label>
+            <label class="img_group img_reg_pass"><img src="img/icons/icon_input_pass.png" alt=""></label>
             <div class="inputContainer">
-                <label class="img_group img_reg_vitxt pass"><img src="img/vector_eye.png" alt=""></label>
-                <label class="img_group img_reg_vipass"><img src="img/icon_input_pass_text.png" alt=""></label>
+                <label class="img_group img_reg_vitxt pass"><img src="img/icons/vector_eye.png" alt=""></label>
+                <label class="img_group img_reg_vipass"><img src="img/icons/icon_input_pass_text.png" alt=""></label>
                 <input id="pass" class="inp_reg input_pass" type="password" name="pass" placeholder="Contraseña">
             </div>
             <div class="inputContainer">
-                <label class="img_group img_reg_pass1"><img src="img/icon_input_pass.png" alt=""></label>
-                <label for="valid_pass" class="img_group img_reg_vitxt pass iconSecondPass" id="iconSecondPassTxt"><img src="img/vector_eye.png" alt=""></label>
-                <label for="valid_pass" class="img_group img_reg_vipass iconSecondPass" id="iconSecondPass"><img src="img/icon_input_pass_text.png" alt=""></label>
+                <label class="img_group img_reg_pass1"><img src="img/icons/icon_input_pass.png" alt=""></label>
+                <label for="valid_pass" class="img_group img_reg_vitxt pass iconSecondPass" id="iconSecondPassTxt"><img src="img/icons/vector_eye.png" alt=""></label>
+                <label for="valid_pass" class="img_group img_reg_vipass iconSecondPass" id="iconSecondPass"><img src="img/icons/icon_input_pass_text.png" alt=""></label>
             </div>
             <input id="valid_pass" class="inp_reg" type="password" name="valid_pass" placeholder="Repite tu Contraseña">
             <button class=" button btn_reg" type="submit" name="registrar" id="registerButton">Registrate</button>
