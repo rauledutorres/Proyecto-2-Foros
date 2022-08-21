@@ -286,3 +286,6 @@ h4{
 
 }
 
+.bord  {
+    border: solid 2px var(--btn);
+}

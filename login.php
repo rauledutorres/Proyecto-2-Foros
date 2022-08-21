@@ -22,6 +22,7 @@ if (isset($_POST['login'])) {
                     if ($password == $row['user_cont']) {
                         $_SESSION['id'] = $id;
                         $_SESSION['signed_in'] = true;
+                        $_SESSION['date'] = mysqli_fetch_assoc(mysqli_query($connect, "SELECT user_time FROM usuarios WHERE `user_id`='$id'"));
                         $acceso = date("Y-m-d H:i:s");
                         $int = mysqli_query($connect, "UPDATE `usuarios` SET `user_time`='$acceso' WHERE `user_id`='$id';");
                         header('Location: index.php');
@@ -53,14 +54,16 @@ if (isset($_POST['login'])) {
         <form method="post" action="#">
             <label class="img_group img_log_email"><img src="img/icon_input_nom.png" alt=""></label>
             <input class="inp_log" type="text" name="email" placeholder="Email" required />
-            <label class="img_group img_log_pass"><img src="img/icon_input_pass.png" alt=""></label>
-            <label class="img_group img_log_vitxt pass"><img src="img/vector_eye.png" alt=""></label>
-            <label class="img_group img_log_vipass"><img src="img/icon_input_pass_text.png" alt=""></label>
-            <input id="log_pass" class="inp_log" type="password" name="pass" placeholder="Contraseña" required />
+            <div class="inputContainer">
+                <label class="img_group img_log_pass"><img src="img/icon_input_pass.png" alt=""></label>
+                <label class="img_group img_log_vitxt pass"><img src="img/vector_eye.png" alt=""></label>
+                <label class="img_group img_log_vipass"><img src="img/icon_input_pass_text.png" alt=""></label>
+                <input id="log_pass" class="inp_log" type="password" name="pass" placeholder="Contraseña" required />
+            </div>
             <a class="form_te" href="">¿Has olvidado tu contraseña?</a>
             <button class="button btn_log" type="submit" name="login">Login</button>
         </form>
-        <p id="message"><?php echo $message?? "" ?></p>
+        <p id="message"><?php echo $message ?? "" ?></p>
     </div>
     <div class="cont_img">
         <img class="img" src="img/web/login.svg" alt="">
@@ -82,12 +85,16 @@ if (isset($_POST['login'])) {
             <label class="img_group img_reg_email"><img src="img/icon_input_nom.png" alt=""></label>
             <input class="inp_reg" type="text" name="email" placeholder="Email" required>
             <label class="img_group img_reg_pass"><img src="img/icon_input_pass.png" alt=""></label>
-            <label class="img_group img_reg_vitxt pass"><img src="img/vector_eye.png" alt=""></label>
-            <label class="img_group img_reg_vipass"><img src="img/icon_input_pass_text.png" alt=""></label>
-            <input id="pass" class="inp_reg input_pass" type="password" name="pass" placeholder="Contraseña">
-            <label class="img_group img_reg_pass1"><img src="img/icon_input_pass.png" alt=""></label>
-            <label class="img_group img_reg_vitxt pass iconSecondPass" id="iconSecondPassTxt"><img src="img/vector_eye.png" alt=""></label>
-            <label class="img_group img_reg_vipass iconSecondPass" id="iconSecondPass"><img src="img/icon_input_pass_text.png" alt=""></label>
+            <div class="inputContainer">
+                <label class="img_group img_reg_vitxt pass"><img src="img/vector_eye.png" alt=""></label>
+                <label class="img_group img_reg_vipass"><img src="img/icon_input_pass_text.png" alt=""></label>
+                <input id="pass" class="inp_reg input_pass" type="password" name="pass" placeholder="Contraseña">
+            </div>
+            <div class="inputContainer">
+                <label class="img_group img_reg_pass1"><img src="img/icon_input_pass.png" alt=""></label>
+                <label for="valid_pass" class="img_group img_reg_vitxt pass iconSecondPass" id="iconSecondPassTxt"><img src="img/vector_eye.png" alt=""></label>
+                <label for="valid_pass" class="img_group img_reg_vipass iconSecondPass" id="iconSecondPass"><img src="img/icon_input_pass_text.png" alt=""></label>
+            </div>
             <input id="valid_pass" class="inp_reg" type="password" name="valid_pass" placeholder="Repite tu Contraseña">
             <button class=" button btn_reg" type="submit" name="registrar" id="registerButton">Registrate</button>
             <span>¿Ya tienes Cuenta? <a class="form_et" href="">Inicia Sesion</a></span>

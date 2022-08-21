@@ -11,7 +11,7 @@ if (isset($signedInError)) {
 
 //Recuperar la publicación original con los datos del usuario
 $threadArray = [];
-$threadQuery = "SELECT publicaciones.publi_titulo AS postTitle, publicaciones.publi_descri AS postDescription, publicaciones.publi_date AS postDate, publicaciones.publi_tema AS idTema, publicaciones.publi_est AS postStatus, usuarios.user_id AS user_id, usuarios.user_nombre AS userName, usuarios.user_img AS userImg
+$threadQuery = "SELECT publicaciones.publi_id AS postId, publicaciones.publi_titulo AS postTitle, publicaciones.publi_descri AS postDescription, publicaciones.publi_date AS postDate, publicaciones.publi_tema AS idTema, publicaciones.publi_est AS postStatus, usuarios.user_id AS user_id, usuarios.user_nombre AS userName, usuarios.user_img AS userImg
 FROM publicaciones
 JOIN usuarios ON usuarios.user_id = publicaciones.publi_user
 WHERE publi_id = $idHilo";
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 
     <div class="listaHilos">
-        <div class="hilo">
+        <div class="hilo" id=<?php echo $threadArray[0]["postId"]; ?>>
             <div class="hiloFoto">
                 <img src=<?php echo $threadArray[0]["userImg"]; ?> alt="">
                 <h5><?php echo $threadArray[0]["userName"]; ?></h5>
@@ -127,7 +127,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 
 </div>
-<script>
+<script src="js/postVisitControl.js"></script>
+<script> 
+    var post = document.querySelector(".hilo");
+    var postId = post.id;
+    includePost(postId);
     tinymce.init({
         selector: 'textarea#comment',
         height: 250,

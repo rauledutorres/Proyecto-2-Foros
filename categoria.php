@@ -7,14 +7,13 @@ require 'components/config.php';
 include 'components/header.php';
 
 $cod = $_GET['id'];
-
 for ($i = 0; $i < count($categoryArray); $i++) {
     if ($categoryArray[$i]['tema_id'] == $cod) {
         $cat = $categoryArray[$i];
     }
 }
 
-$categoryConsulta = "SELECT publicaciones.publi_id, publicaciones.publi_titulo, publicaciones.publi_descri, publicaciones.publi_date, publicaciones.publi_tema, publicaciones.publi_user, usuarios.user_nombre, usuarios.user_img FROM publicaciones JOIN usuarios ON user_id = publi_user WHERE publi_tema = $cod";
+$categoryConsulta = "SELECT publicaciones.publi_id, publicaciones.publi_titulo, publicaciones.publi_descri, publicaciones.publi_date, publicaciones.publi_tema, publicaciones.publi_user, usuarios.user_nombre, usuarios.user_img FROM publicaciones JOIN usuarios ON user_id = publi_user WHERE publi_tema = $cod ORDER BY publicaciones.publi_date DESC";
 $categoryHilos = mysqli_query($connect, $categoryConsulta);
 $selecHilos = [];
 while ($cont = mysqli_fetch_assoc($categoryHilos)) {
@@ -43,13 +42,12 @@ while ($cont = mysqli_fetch_assoc($categoryHilos)) {
         ?>
                 <a href="hilo.php?id=<?php echo $selecHilos[$i]["publi_id"] ?>">
                     <div class="hilo<?php
-                                    if (isset($userData[0]) && strtotime($userData[0]['user_time']) < strtotime($selecHilos[$i]['publi_date'])) {
+                                    if (strtotime($_SESSION['date']['user_time']) < strtotime($selecHilos[$i]['publi_date'])) {
                                         echo " bord";
                                         $dateTwo['user_time'] = gmdate("d-F-Y H:i:s ", time() + 3600 * (1 + date("I")));
-                                        $_SESSION['date'] = $dateTwo;
                                         //es una manera muy obligada de que muestre los mensajes nuevos hay q seguir buscando...
-                                    } ?>">
-
+                                    } ?>" id="<?php echo $selecHilos[$i]["publi_id"] ?>">
+    
 
                         <div class="hiloFoto">
                             <img src="<?php echo $selecHilos[$i]['user_img'] ?>" alt="">
@@ -83,4 +81,14 @@ while ($cont = mysqli_fetch_assoc($categoryHilos)) {
         </div>
     </div>
 </div>
+<script src="js/postVisitControl.js"></script>
+<script>
+    var posts = document.querySelectorAll(".hilo");
+    for (let post = 0; post < posts.length; post++) {
+
+        if(checkVisitedPost(posts[post].id) && posts[post].classList[1]){
+            posts[post].classList.remove("bord");
+        }
+    }
+</script>
 <?php include 'components/footer.php'; ?>
