@@ -3,7 +3,7 @@ const btn_is=document.querySelector("#is");
 
 const box_login=document.querySelector("#login");
 const box_register=document.querySelector("#registro");
-
+document.getElementById
 const btn_vipass=document.querySelector(".img_reg_vipass");
 const btn_vitxt=document.querySelector(".img_reg_vitxt");
 
