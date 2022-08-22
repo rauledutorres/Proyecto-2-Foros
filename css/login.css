@@ -103,7 +103,8 @@ form{
     position: relative;
 }
 form input{
-    width: 295px;
+    max-width: 295px;
+    width: 100%;
     height: 45px;
     padding-left: 31px;
     border-radius: 5px;

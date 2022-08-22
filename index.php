@@ -14,7 +14,7 @@ require 'config.php';
     for ($i=0; $i < count($categoryArray); $i++) {?>
         <a href="paginaHilos.php?id=<?php echo $categoryArray[$i]["tema_id"]; ?>">
             <div class="category">
-                <?php echo $categoryArray[$i]["tema_img"];?>
+                <?php //echo $categoryArray[$i]["tema_img"];?>
                 <h3><?php echo $categoryArray[$i]["tema_nombre"];?></h3>
             </div>
         </a>

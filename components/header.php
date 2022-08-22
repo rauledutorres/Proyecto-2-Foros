@@ -4,7 +4,7 @@ include './config.php';
 
 if (isset($_SESSION['welcome_usuario'])) {
   $user=$_SESSION['welcome_usuario'];
-  $newDate=$_SESSION['date'];
+  $newDate=$_SESSION['data'];
   $ver=true;
   //usuario selecciona dependiendo el login
   $selecUser=mysqli_fetch_assoc(mysqli_query($connect,"SELECT * FROM usuarios where user_id= $user"));
@@ -24,7 +24,7 @@ $allUser[]=$x;
 $_SESSION['signed_in'] = true; // Variable de prueba, cambiar a true cuando un usuario inicie sesión
 $_SESSION['user'] = 1; // Variable inventada, a user_id cuando haya usuario con sesión iniciada
 
-$categoryHilos=mysqli_query($connect,"SELECT * FROM publicaciones");
+$categoryHilos=mysqli_query($connect,"SELECT * FROM publicaciones ORDER BY publi_date DESC");
 $selecHilos=[];
 while($cont = mysqli_fetch_assoc($categoryHilos)){
 $selecHilos[] = $cont;

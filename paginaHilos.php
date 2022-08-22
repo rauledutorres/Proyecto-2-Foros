@@ -39,9 +39,7 @@ for($i=0;$i<count($categoryArray);$i++){
                 <ul>
                     <?php
                     //El filtro de los temas
-                    for ($i=0;$i<count($categoryArray);$i++) {
-                        //colocar un if para verificar la imagen si esta seleccionado o  no.
-                        ?>
+                    for ($i=0;$i<count($categoryArray);$i++) {?>
                         <a href="paginaHilos.php?id=<?php echo $categoryArray[$i]["tema_id"]; ?>">
                         <button><li>
                            <img src="./img/<?php if ($categoryArray[$i]['tema_id'] == $cat['tema_id']) {
@@ -61,21 +59,18 @@ for($i=0;$i<count($categoryArray);$i++){
                     for ($i=0; $i <count($selecHilos) ; $i++) { 
                         if ($selecHilos[$i]['publi_tema'] == $cat['tema_id']) {
                     ?>
-                <div class="hilo">
+                <div id="<?php echo $i;?>" class="hilo <?php
+                    if (strtotime($newDate['user_time']) < strtotime($selecHilos[$i]['publi_date'])) { echo 'bord';?>">
                     <?php
-                    if (strtotime($newDate['user_time']) < strtotime($selecHilos[$i]['publi_date'])) {
                         echo gmdate("d-F-Y H:i:s ", time() + 3600*(1+date("I")));
 
                         $dateTwo['user_time']=gmdate("d-F-Y H:i:s ", time() + 3600*(1+date("I")));
                         $_SESSION['date']=$dateTwo;
-                        //es una manera muy obligada de que muestre los mensajes nuevos hay q seguir buscando...
-                        ?><script>
-                            document.querySelector(".hilo").classList.toggle("bord");
-                        </script><?php
                     }else{
-                        echo 'hola';
-                        ?><script>
-                            document.querySelector(".hilo").classList.remove("bord");
+                        ?>"><?php
+                        echo 'vistos';
+                        ?>"><script>
+                            document.querySelector(".<?php echo $i;?>").classList.remove("bord");
                         </script><?php
                     }
                     ?>
