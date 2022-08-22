@@ -65,16 +65,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $imagePath = 'img/profile/' . $_FILES['profilePic']['name'];
             if (is_uploaded_file($tmpFile)) {
                 if (move_uploaded_file($tmpFile, $imagePath)) {
-                    $imageSql = "UPDATE usuarios SET user_img = '$imagePath' WHERE $id = user_id";
-                    $result = $mysqli->query($imageSql);
-                    if ($result) {
+                    try{
                         unlink($userData[0]['user_img']);
-                        // $statusMsg = "Foto cambiada";
-                        header('Location: '. $_SERVER["PHP_SELF"].'?id='.$id);
-                        // echo "<meta http-equiv='refresh' content='0'>";
-                    } else {
-                        $errorMsg = 'No se puede subir el archivo';
-                    }
+                        $imageSql = "UPDATE usuarios SET user_img = '$imagePath' WHERE $id = user_id";
+                        $result = $mysqli->query($imageSql);
+                        if ($result) {
+                            // $statusMsg = "Foto cambiada";
+                            header('Location: '. $_SERVER["PHP_SELF"].'?id='.$id);
+                            // echo "<meta http-equiv='refresh' content='0'>";
+                        } else {
+                            $errorMsg = 'No se puede subir el archivo';
+                        }
+                    } catch (\Exception $e) {
+                        $errorMsg = 'Algo ha salido mal';
+                    };
                 }
             }
         }

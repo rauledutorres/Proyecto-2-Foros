@@ -158,7 +158,7 @@ if (isset($_SESSION['signed_in']) == false) {
           <option selected="true" disabled="disabled">Selecciona un tema</option>
           <?php
             for ($i = 0; $i < count($categoryArray); $i++) {
-              echo '<option value="'. $categoryArray[$i]["tema_id"] ?? "".'>.'.$categoryArray[$i]["tema_nombre"] ?? "".'</option>';
+              echo '<option value="'. $categoryArray[$i]["tema_id"].'">'.$categoryArray[$i]["tema_nombre"] ?? "".'</option>'; 
             }?>
         </select>
           <textarea name="postDescription" id="description"></textarea>
