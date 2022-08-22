@@ -148,21 +148,20 @@ if (isset($_SESSION['signed_in']) == false) {
   </header>
   <main id="main">
 
-    <div class="modal" id="newPostModal">
-      <div id="newPost" <?php if (isset($signedInError)) echo 'style="display:none"'; ?>>
-        <img src="img/icons/x.svg" class="icon" id="xIcon" onclick="closeModal()" alt="Cerrar">
-        <form id="postForm" method="POST" enctype='multipart/form-data'>
-          <input type="hidden" name="newPost" id="newPostInput">
-          <input type="text" class="input" name="postTitle" id="postTitle" placeholder="Título" required>
-          <select name="postCategory" id="postCategory" required>
-            <option selected="true" disabled="disabled">Selecciona un tema</option>
-            <?php
+  <div class="modal" id="newPostModal">
+    <div id="newPost" <?php if (isset($signedInError)){?> style="display:none" <?php }?>>
+      <img src="img/icons/x.svg" class="icon" id="xIcon" onclick="closeModal()" alt="Cerrar">
+      <form id="postForm" method="POST" enctype='multipart/form-data'> 
+        <input type="hidden" name="newPost">
+        <input type="text" class="input" name="postTitle" id="postTitle" placeholder="Título">
+        <select name="postCategory" id="postCategory">
+          <option selected="true" disabled="disabled">Selecciona un tema</option>
+          <?php
             for ($i = 0; $i < count($categoryArray); $i++) {
-              echo '<option value="' . $categoryArray[$i]["tema_id"] . '">' . $categoryArray[$i]["tema_nombre"] . '</option>"';
-            } ?>
-          </select>
-          <div name="postDescription" id="description"></div>
-
+              echo '<option value="'. $categoryArray[$i]["tema_id"] ?? "".'>.'.$categoryArray[$i]["tema_nombre"] ?? "".'</option>';
+            }?>
+        </select>
+          <textarea name="postDescription" id="description"></textarea>
           <div id="postButtons">
             <button type="reset" class="button cancel" id="cancelPost" onclick="closeModal()">Cancelar</button>
             <button type="submit" class="button" id="publishButton">Publicar</button>
@@ -170,7 +169,7 @@ if (isset($_SESSION['signed_in']) == false) {
 
           <script>
             tinymce.init({
-              selector: 'div#description',
+              selector: 'textarea#description',
               height: 350,
               body_class: 'description',
               content_style: 'margin: 10px; border: 5px solid red; padding: 3px;',
@@ -184,9 +183,14 @@ if (isset($_SESSION['signed_in']) == false) {
           </script>
         </form>
       </div>
-      <div id="modalError" <?php if (isset($signedInError)) echo 'style="display:block"'; ?>>
+      
+      <?php if (isset($signedInError)){
+        echo 
+        '<div id="modalError" style="display:none">
         <img src="img/icons/x.svg" class="icon" onclick="closeModal()" alt="Cerrar">
         <img src="img/web/signup.svg" id="errorImg">
-        <?php if (isset($signedInError)) echo '<p>¡Únete a nosotros! Para publicar <a href="login.php">regístrate</a> o <a href="login.php">inicia sesión</a>.</p>' ?>
-      </div>
+        <p>¡Únete a nosotros! Para publicar <a href="login.php">regístrate</a> o <a href="login.php">inicia sesión</a></p>
+      </div>';
+       } ?>
+
     </div>

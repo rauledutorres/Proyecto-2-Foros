@@ -60,7 +60,7 @@ if (isset($_POST['login'])) {
                 <label class="img_group img_log_vipass"><img src="img/icons/icon_input_pass_text.png" alt=""></label>
                 <input id="log_pass" class="inp_log" type="password" name="pass" placeholder="Contraseña" required />
             </div>
-            <a class="form_te" href="">¿Has olvidado tu contraseña?</a>
+            <!-- <a class="form_te" href="">¿Has olvidado tu contraseña?</a> -->
             <button class="button btn_log" type="submit" name="login">Login</button>
         </form>
         <p id="message"><?php echo $message ?? "" ?></p>

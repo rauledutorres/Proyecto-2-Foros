@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $error = 'No se ha podido publicar tu comentario';
             } else {
                 unset($_POST);
-                header('Location: ' . $_SERVER["PHP_SELF"] . '?id=' . $idHilo . '');
+                header('Location: '.$_SERVER["PHP_SELF"].'?id='.$idHilo);
                 die;
             }
         } catch (Exception $e) {

@@ -69,7 +69,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $result = $mysqli->query($imageSql);
                     if ($result) {
                         unlink($userData[0]['user_img']);
-                        header("Location: ".$_SERVER["PHP_SELF"]);
+                        // $statusMsg = "Foto cambiada";
+                        header('Location: '. $_SERVER["PHP_SELF"].'?id='.$id);
+                        // echo "<meta http-equiv='refresh' content='0'>";
                     } else {
                         $errorMsg = 'No se puede subir el archivo';
                     }

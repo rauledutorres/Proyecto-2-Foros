@@ -11,12 +11,18 @@ function openModal() {
   document.getElementById("newPostModal").style.display = "block"
 }
 
+
+function openErrorModal() {
+  document.getElementById("errorModal").style.display = "block"
+}
+
 function closeModal() {
   document.getElementById("newPostModal").style.display = "none"
 }
 
-
-document.getElementById("searchBox").onkeyup = function (e) {
+var searchBox = document.getElementById("searchBox");
+if (searchBox){
+searchBox.onkeyup = function (e) {
   var term = this.value;
   var resultDropdown = document.getElementById("searchResultContainer");
   if (term.length > 3) {
@@ -52,7 +58,7 @@ document.getElementById("searchBox").onkeyup = function (e) {
     )
   }
 }
-
+}
 function showSearch(){
   var modal = document.getElementById("searchModal");
   if(modal.style.display == "none"){

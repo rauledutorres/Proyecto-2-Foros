@@ -17,7 +17,10 @@ include 'components/header.php';
     </div>
 </div>
 <?php if (isset($signedInError)):?>
-    <script>openModal();</script>
+    <script>
+    openModal();
+    document.getElementById("modalError").style.display = "block";
+    </script>
 <?php endif; ?>
 <?php
 include 'components/footer.php';
